@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="style_base.css" type="text/css">
     <title>ToDoList</title>
 </head>
 <body>
@@ -52,6 +53,33 @@
         {% endblock %}
 
     </div><!-- /.container -->
+
+
+    <!-- Tableau tâches à effectuer-->
+    <table id="tableau_taches" cellspacing="0">
+		<thead>
+			<tr>
+				<td id="tache">Tâche</td>
+				<td id="echeance">Echéance</td>
+				<td id="actions">Actions</td>
+			</tr>
+		</thead>
+		<tbody>
+
+                <tr>
+                    <td>Faire la cuisine</td>
+                    <td>16h30</td>
+                    <td><div id="oui"><img src="icons/crayon_couleur.png" width="30%"><img src="icons/corbeille_rouge.png" width="30%"></div></td>
+                </tr>
+                <tr>
+                    <td>Faire la cuisine</td>
+                    <td>16h30</td>
+                    <td>Oui</td>
+                </tr>
+
+
+		</tbody>
+	</table>
 
     <!-- Chargement des fichier Javascript de Bootstrap à la fin pour ne pas retarder la page -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
