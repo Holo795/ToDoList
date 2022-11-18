@@ -33,6 +33,8 @@
         </div>
     </nav>
 
+
+
     <!-- Zone centrale de la page -->
     <div class="container">
 
@@ -55,6 +57,8 @@
     </div><!-- /.container -->
 
 
+    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche">
+
     <!-- Tableau tâches à effectuer-->
     <table id="tableau_taches" cellspacing="0">
 		<thead>
@@ -68,13 +72,28 @@
 
                 <tr>
                     <td>Faire la cuisine</td>
-                    <td>16h30</td>
-                    <td><div id="oui"><img src="icons/crayon_couleur.png" width="30%"><img src="icons/corbeille_rouge.png" width="30%"></div></td>
+                    <td>
+                        <div class="div_taches">
+                            <p>Dans 6 jours et 4 heures</p>
+                            <txt>Samedi 16 Novembre 2022 13h30</txt>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="div_actions">
+                            <img src="icons/crayon_couleur.png" width="30%" alt="Modifier" title="Modifier">
+                            <img src="icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>Faire la cuisine</td>
                     <td>16h30</td>
-                    <td>Oui</td>
+                    <td>
+                        <div class="div_actions">
+                            <img src="icons/crayon_couleur.png" width="30%" alt="Modifier" title="Modifier">
+                            <img src="icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
+                        </div>
+                    </td>
                 </tr>
 
 
