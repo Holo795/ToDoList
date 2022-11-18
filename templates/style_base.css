@@ -56,9 +56,3 @@
 #tableau_taches tbody tr {
 	background-color: white;
 }
-
-#oui {
-    display: flex;
-	flex-wrap: wrap;
-	text-align: center;
-}
