@@ -9,7 +9,7 @@ from flask import *
 
 
 # Création des objets Flask et Bdd
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates", static_folder="static")
 
 
 # Les routes associées aux fonctions
