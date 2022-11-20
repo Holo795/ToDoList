@@ -6,79 +6,6 @@
 }
 
 
-
-#tableau_taches {
-    margin: auto;
-	margin-top: 30px;
-    font-size: 17px;
-    font-family: sans-serif;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
-    border: 4px solid hsl(168, 100%, 30%);
-}
-
-#tableau_taches thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-}
-
-#tableau_taches th,
-#tableau_taches td {
-    padding: 12px 15px;
-}
-
-
-#tableau_taches thead #tache {
-	width: 600px;
-}
-
-#tableau_taches thead #echeance {
-	width: 300px;
-}
-
-#tableau_taches thead #actions {
-	width: 150px;
-}
-
-#tableau_taches tbody tr {
-    height: 100px;
-}
-
-#tableau_taches {
-	font-weight: bold;
-}
-
-#tableau_taches tbody tr td:not(:first-child) {
-	border-left: 2px solid var(--bordures_interieurs);
-}
-
-#tableau_taches tbody tr td {
-	border-bottom: 2px solid var(--bordures_interieurs);
-
-}
-
-#tableau_taches tbody tr {
-	background-color: var(--background_color_tableau);
-}
-
-#tableau_taches tbody tr {
-	background-color: var(--background_color_tableau);
-}
-
-.div_actions {
-    text-align: center;
-
-}
-
-.div_actions img {
-    margin: 0px 8px;
-    cursor: pointer;
-}
-
-txt {
-    color: rgb(177, 177, 177);
-}
-
 /* Bouton */
 
 #bouton_nouvelle_tache {
@@ -99,4 +26,96 @@ txt {
 #bouton_nouvelle_tache:hover {
     background: #00BCD4;
 }
+
+
+/* Tableau Tâches */
+#tableau_taches {
+    margin: auto;
+	margin-top: 30px;
+    font-size: 17px;
+    font-family: sans-serif;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+    border: 4px solid hsl(168, 100%, 30%);
+    width: 74%;
+    display: block;
+    max-height: 500px;
+    overflow-y: scroll;
+    font-weight: bold;
+}
+    /* Head */
+#tableau_taches thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+
+    /* th, td */
+#tableau_taches th,
+#tableau_taches td {
+    padding: 12px 15px;
+}
+
+    /* thead */
+#tableau_taches thead #tache {
+	width: 40%;
+}
+
+#tableau_taches thead #echeance {
+	width: 28%;
+}
+
+#tableau_taches thead #actions {
+	width: 11%;
+}
+
+    /* thbody tr */
+#tableau_taches tbody tr {
+    height: 100px;
+}
+
+    /* Bordures intérieurs */
+#tableau_taches tbody tr td:not(:first-child) {
+	border-left: 2px solid var(--bordures_interieurs);
+}
+
+#tableau_taches tbody tr td {
+	border-bottom: 2px solid var(--bordures_interieurs);
+
+}
+
+#tableau_taches tbody tr {
+	background-color: var(--background_color_tableau);
+}
+
+    /* Actions img */
+#tableau_taches .div_actions {
+    text-align: center;
+
+}
+
+#tableau_taches .div_actions img {
+    margin: 0px 8px;
+    cursor: pointer;
+}
+
+    /* Scrollbar */
+#tableau_taches::-webkit-scrollbar {
+    width: 12px;
+}
+  
+#tableau_taches::-webkit-scrollbar-track {
+    background-color: #d9d9d9;
+}
+
+#tableau_taches::-webkit-scrollbar-thumb {
+    background: hsl(168, 100%, 30%);
+    box-shadow: inset 0 0 5px rgb(62, 162, 119);
+}
+
+    /* Echéance date */
+#tableau_taches txt {
+    color: rgb(177, 177, 177);
+}
+
 
