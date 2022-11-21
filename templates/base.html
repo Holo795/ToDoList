@@ -9,9 +9,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <link rel="stylesheet" href="./static/styles/mainpage.css" type="text/css">
+
     <title>ToDoList</title>
 </head>
 <body>
+    <div id="login_form">
+        <h2>Se connecter à votre liste de tâches</h2>
+        <form action="" method="post">
+            <div class="input_box">
+                <input type="text" name="username" required="required" id="id" autocomplete="off" />
+                <label>Identifiant</label>
+                <span></span>
+            </div>
+
+            <input type="submit" id="btn" value="Connexion">
+
+        </form>
+    </div>
     <!-- Barre de navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">{ ToDoList }</a>
