@@ -77,7 +77,7 @@ class Tasks(Bdd):
 
 
 class Accounts(Bdd):
-    """Classe pour gérer les comptes"""
+    """Classe pour gérer les comptes dans la base de données"""
 
     def __init__(self, path):
         """Constructeur"""
