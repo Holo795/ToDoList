@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="login.css">
+<div id="login_form_parent">
+    <div id="login_form">
+        <h2>Se connecter à votre liste de tâches</h2>
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="input_box">
+                <input type="text" name="username" required="required" id="id" autocomplete="off" />
+                <label>Identifiant</label>
+                <span></span>
+            </div>
+
+            <div class="input_box">
+                <input type="password" name="password" required="required" id="mdp" autocomplete="off" />
+                <label>Mot de passe</label>
+                <span></span>
+            </div>
+
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                
+                {% for category, message in messages %}
+                    {%  if category == "error": %}
+                        <p id="error">{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+                
+            {% endif %}
+            {% endwith %}
+
+            <input type="submit" id="btn" value="Connexion" onclick="se_connecter()">
+
+        </form>
+    </div>
+</div>
