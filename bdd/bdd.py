@@ -8,13 +8,16 @@ from abc import abstractmethod
 class Database:
     """Classe principal de la gestion de la bdd"""
 
-    def __init__(self, path):
+    def __init__(self):
         """Constructeur"""
-        self.accounts = Accounts(path)
-        self.tasks = Tasks(path)
-        self.types = Types(path)
-        self.priorities = Priorities(path)
-        self.states = States(path)
+
+        self.path = "bdd/todo.sqlite"
+
+        self.accounts = Accounts_Table(self.path)
+        self.tasks = Tasks_Table(self.path)
+        self.types = Types_Table(self.path)
+        self.priorities = Priorities_Table(self.path)
+        self.states = States_Table(self.path)
 
 
 class BddManager:
@@ -23,7 +26,7 @@ class BddManager:
     def __init__(self, path):
         """Constructeur"""
         self.path = path
-        self.connection = sqlite3.connect(path)
+        self.connection = sqlite3.connect(path, check_same_thread=False)
         self.cursor = self.connection.cursor()
 
         self.create_table()
@@ -43,7 +46,7 @@ class BddManager:
         raise NotImplementedError("Méthode abstraite create_table non implémentée !")
 
 
-class Tasks(BddManager):
+class Tasks_Table(BddManager):
     """Classe pour gérer les tâches"""
 
     def __init__(self, path):
@@ -67,28 +70,29 @@ class Tasks(BddManager):
                      "FOREIGN KEY(idType) REFERENCES Types(idType), "
                      "FOREIGN KEY(idState) REFERENCES States(idState));")
 
-    def get_user_all_tasks(self, username):
+    def get_tasks(self, idAccount):
         """Récupère les tâches d'un utilisateur"""
-        return self.execute("SELECT * FROM Tasks INNER JOIN Accounts ON Accounts.idAccount = Tasks.idAccount WHERE "
-                            "Accounts.username = ?;", (username,))
+        return self.execute("SELECT * FROM Tasks WHERE idAccount = ?;", (idAccount,))
 
-    def add_user_task(self, username, name, description, deadline_date, success_date, idType, idPriority, idState):
+    def add_task(self, idAccount, name, description, deadline_date, success_date, idType, idPriority, idState):
         """Ajoute une tâche à un utilisateur"""
         return self.execute("INSERT INTO Tasks (idAccount, name, description, deadline_date, success_date, idType, "
-                            "idPriority, idState) VALUES ((SELECT idAccount FROM Accounts WHERE username = ?), ?, ?, "
-                            "?, ?, ?, ?, ?);",
-                            (username, name, description, deadline_date, success_date, idType, idPriority, idState))
+                            "idPriority, idState) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
+                            (idAccount, name, description, deadline_date, success_date, idType, idPriority, idState))
 
-    def edit_user_task(self, username, name, description, deadline_date, success_date, idType, idPriority, idState):
+    def edit_task(self, idTask, **kwargs):
         """Modifie une tâche d'un utilisateur"""
-        return self.execute("UPDATE Tasks SET name = ?, description = ?, deadline_date = ?, success_date = ?, "
-                            "idType = ?, idPriority = ?, idState = ? WHERE idAccount = (SELECT idAccount FROM Accounts "
-                            "WHERE username = ?) AND name = ?;",
-                            (name, description, deadline_date, success_date, idType, idPriority, idState, username,
-                             name))
+        request = "UPDATE Tasks SET "
+        parameters = []
+        for key, value in kwargs.items():
+            request += f"{key} = ?, "
+            parameters.append(value)
+        request = f"{request[:-2]} WHERE idTask = ?;"
+        parameters.append(idTask)
+        return self.execute(request, tuple(parameters))
 
 
-class Accounts(BddManager):
+class Accounts_Table(BddManager):
     """Classe pour gérer les comptes dans la base de données"""
 
     def __init__(self, path):
@@ -123,7 +127,7 @@ class Accounts(BddManager):
         return self.execute("DELETE FROM Accounts WHERE username = ?;", (username,))
 
 
-class Types(BddManager):
+class Types_Table(BddManager):
     """Classe pour gérer les types de tâches"""
 
     def __init__(self, path):
@@ -133,7 +137,8 @@ class Types(BddManager):
     def create_table(self):
         """Crée la table Types"""
         self.execute("CREATE TABLE IF NOT EXISTS Types (idType INTEGER NOT NULL UNIQUE, "
-                     "name TEXT NOT NULL UNIQUE, "
+                     "name TEXT NOT NULL, "
+                     "idAccount INTEGER NOT NULL, "
                      "PRIMARY KEY(idType AUTOINCREMENT));")
 
     def add_type(self, name):
@@ -157,7 +162,7 @@ class Types(BddManager):
         return self.execute("DELETE FROM Types WHERE name = ?;", (name,))
 
 
-class Priorities(BddManager):
+class Priorities_Table(BddManager):
     """Classe pour gérer les priorités de tâches"""
 
     def __init__(self, path):
@@ -191,7 +196,7 @@ class Priorities(BddManager):
         return self.execute("DELETE FROM Priorities WHERE name = ?;", (name,))
 
 
-class States(BddManager):
+class States_Table(BddManager):
     """Classe pour gérer les états de tâches"""
 
     def __init__(self, path):
@@ -228,5 +233,5 @@ class States(BddManager):
 if __name__ == "__main__":
     actual_milli_time = round(time.time() * 1000)
 
-    tache = Tasks("todo.sqlite")
+    tache = Tasks_Table("todo.sqlite")
     print(tache.get_user_all_tasks("Test1"))
