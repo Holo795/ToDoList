@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-
+:root {
+	--backgroundcolor: #2F2F2F;
+}
 
 /* Form */
 
@@ -15,7 +17,7 @@
     box-sizing: border-box;
 	width: 500px;
 	padding: 40px;
-	background: #2F2F2F;
+	background: var(--backgroundcolor);
 }
 
 #login_form_parent {
@@ -124,4 +126,31 @@
     font-weight: bold;
     margin: 30px 0px 20px 0px; 
 }
+
+
+
+
+.datetime {
+	position: relative;
+	margin-top: 30px;
+}
+
+.datetime input {
+	padding: 10px 5px;
+	border: none;
+	border-radius: 2px;
+	font-family: 'Poppins', sans-serif;
+	color: #555;
+	background-color: #333;
+}
+
+.datetime input:focus, .datetime input:valid {
+	color: white;
+}
+
+.datetime input:hover {
+	outline: none;
+}
+
+
 
