@@ -28,7 +28,7 @@ def accueil():
 
 @app.route("/login", methods=["post"])
 def login():
-    user = accounts_manager.AccountsManager()
+    user = accounts_manager.AccountsManager(path=bdd_path)
     return user.login(request)
 
 

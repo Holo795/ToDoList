@@ -6,9 +6,9 @@ import bcrypt  # for password hashing
 
 class AccountsManager:
     """Classe pour gérer les comptes"""
-    def __init__(self):
+    def __init__(self, path):
         """Constructeur"""
-        self.accounts = Accounts("todo.sqlite")
+        self.accounts = Accounts(path)
 
     def login(self, request):
         """Connecte un utilisateur"""
