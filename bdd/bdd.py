@@ -5,7 +5,19 @@ import time
 from abc import abstractmethod
 
 
-class Bdd:
+class Database:
+    """Classe principal de la gestion de la bdd"""
+
+    def __init__(self, path):
+        """Constructeur"""
+        self.accounts = Accounts(path)
+        self.tasks = Tasks(path)
+        self.types = Types(path)
+        self.priorities = Priorities(path)
+        self.states = States(path)
+
+
+class BddManager:
     """Classe pour faire le lien entre la base de données SQLite et le programme"""
 
     def __init__(self, path):
@@ -31,7 +43,7 @@ class Bdd:
         raise NotImplementedError("Méthode abstraite create_table non implémentée !")
 
 
-class Tasks(Bdd):
+class Tasks(BddManager):
     """Classe pour gérer les tâches"""
 
     def __init__(self, path):
@@ -76,7 +88,7 @@ class Tasks(Bdd):
                              name))
 
 
-class Accounts(Bdd):
+class Accounts(BddManager):
     """Classe pour gérer les comptes dans la base de données"""
 
     def __init__(self, path):
@@ -111,7 +123,7 @@ class Accounts(Bdd):
         return self.execute("DELETE FROM Accounts WHERE username = ?;", (username,))
 
 
-class Types(Bdd):
+class Types(BddManager):
     """Classe pour gérer les types de tâches"""
 
     def __init__(self, path):
@@ -145,7 +157,7 @@ class Types(Bdd):
         return self.execute("DELETE FROM Types WHERE name = ?;", (name,))
 
 
-class Priorities(Bdd):
+class Priorities(BddManager):
     """Classe pour gérer les priorités de tâches"""
 
     def __init__(self, path):
@@ -179,7 +191,7 @@ class Priorities(Bdd):
         return self.execute("DELETE FROM Priorities WHERE name = ?;", (name,))
 
 
-class States(Bdd):
+class States(BddManager):
     """Classe pour gérer les états de tâches"""
 
     def __init__(self, path):
