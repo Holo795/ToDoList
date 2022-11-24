@@ -1,16 +1,17 @@
 <link rel="stylesheet" type="text/css" href="login.css">
+{% if not user %}
 <div id="login_form_parent">
     <div id="login_form">
         <h2>Se connecter à votre liste de tâches</h2>
         <form action="{{ url_for('login') }}" method="POST">
             <div class="input_box">
-                <input type="text" name="username" required="required" id="id" autocomplete="off" />
+                <input type="text" name="username" id="id" autocomplete="off" required>
                 <label>Identifiant</label>
                 <span></span>
             </div>
 
             <div class="input_box">
-                <input type="password" name="password" required="required" id="mdp" autocomplete="off" />
+                <input type="password" name="password" id="mdp" autocomplete="off" required>
                 <label>Mot de passe</label>
                 <span></span>
             </div>
@@ -20,16 +21,19 @@
             {% if messages %}
                 
                 {% for category, message in messages %}
-                    {%  if category == "error": %}
+                    {%  if category == "error" %}
                         <p id="error">{{ message }}</p>
+                    {% elif category == "success" %}
+                        <p id="success">{{ message }}</p>
                     {% endif %}
                 {% endfor %}
                 
             {% endif %}
             {% endwith %}
 
-            <input type="submit" id="btn" value="Connexion" onclick="se_connecter()">
+            <input type="submit" id="btn" value="Connexion">
 
         </form>
     </div>
 </div>
+{% endif %}
