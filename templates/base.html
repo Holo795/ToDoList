@@ -13,24 +13,6 @@
     <title>ToDoList</title>
 </head>
 <body>
-    {% if not login %}
-        <div id="login_form_parent">
-            <div id="login_form">
-                <h2>Se connecter à votre liste de tâches</h2>
-                <form action="{{ url_for('connexion') }}" method="POST">
-                    <div class="input_box">
-                        <input type="text" name="username" required="required" id="id" autocomplete="off" />
-                        <label>Identifiant</label>
-                        <span></span>
-                    </div>
-
-                    <input type="submit" id="btn" value="Connexion" onclick="se_connecter()">
-
-                </form>
-            </div>
-        </div>
-    {% endif %}
-
     <!-- Barre de navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">{ ToDoList }</a>

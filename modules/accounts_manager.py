@@ -18,12 +18,12 @@ class AccountsManager:
             account = account[0]
             if bcrypt.checkpw(password.encode('utf8'), account[2].encode('utf8')):
                 session["username"] = username
-                return redirect(url_for("accueillir"))
+                return redirect(url_for("accueil"))
             else:
                 flash("Mot de passe incorrect", "error")
         else:
             flash("Cet utilisateur n'existe pas", "error")
-        return redirect(url_for("accueillir"))
+        return redirect(url_for("accueil"))
 
     def logout(self):
         """Déconnecte un utilisateur"""

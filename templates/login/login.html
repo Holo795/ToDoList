@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="login.css">
+{% if not login %}
 <div id="login_form_parent">
     <div id="login_form">
         <h2>Se connecter à votre liste de tâches</h2>
@@ -33,3 +34,4 @@
         </form>
     </div>
 </div>
+{% endif %}
