@@ -83,11 +83,11 @@ class Account:
 
         tasks = tasks_table.get_tasks(self.user_id)
         for task in tasks:
-            self.add_task(task[0], task)
+            self.add_task(task)
 
-    def add_task(self, id, task):
+    def add_task(self, task):
         """Ajoute une tâche à l'utilisateur"""
-        self.tasks.append((id, task))
+        self.tasks.append(task)
 
     def remove_task(self, id):
         """Supprime une tâche de l'utilisateur"""
