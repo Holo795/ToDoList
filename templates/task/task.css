@@ -5,6 +5,7 @@
 	--gris_input: #555;
 }
 
+
 /* Form */
 
 
@@ -31,7 +32,7 @@
 
 #login_form h2 {
 	color: #FFF;
-	margin-bottom: 45px;
+	margin-bottom: 70px;
 }
 
 .input_box {
@@ -133,7 +134,7 @@
 /* Echeance */
 #datetime {
 	position: relative;
-	margin-top: 30px;
+	margin-top: 42px;
 }
 
 #datetime input {
@@ -154,17 +155,29 @@
 }
 
 #datetime span {
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	left: 0;
 	display: block;
 	background: var(--gris_input);
-	width: 62%;
+	width: 65%;
 	height: 2px;
+	margin-top: 4px;
 }
 
 #datetime label {
+	position: absolute;
+	top: 0;
+	left: 0;
 	color: var(--gris_input);
+	pointer-events: none;
+	display: block;
+	transition: 0.5s;
+}
+
+#datetime input {
+	margin-left: 100px;
+	margin-top: -8px;
 }
 
 
@@ -195,46 +208,6 @@
 	background: #FF006A;
 	padding: 2px 6px;
 }
-
-
-/* Toute la journée */
-/* https://moderncss.dev/pure-css-custom-checkbox-style/ */
-/*
-#whole_day {
-	color: var(--gris_input);
-}
-
-
-#whole_day input[type="checkbox"] {
-	content: '';
-	-webkit-appearance: none;
-	font: inherit;
-	color: currentColor;
-	width: 20px;
-	height: 20px;
-	border: 0.15em solid currentColor;
-	border-radius: 0.15em;
-	transform: translateY(-0.075em);
-	display: grid;
-	place-content: center;
-}
-  
-#whole_day input[type="checkbox"]::before {
-	content: "";
-	width: 0.65em;
-	height: 0.65em;
-	clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-	transform: scale(0);
-	transform-origin: bottom left;
-	transition: 120ms transform ease-in-out;
-	box-shadow: inset 1em 1em var(--form-control-color);
-	background-color: white;
-}
-
-#whole_day input[type="checkbox"]:checked::before {
-	transform: scale(1);
-}
-/*
 
 
 /* Type de tache */
@@ -284,5 +257,5 @@
 	outline: none;
 	background-color: var(--backgroundcolor);
 	color: white;
-	  
+	font-size: 17px;
 }
