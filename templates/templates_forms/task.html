@@ -1,13 +1,16 @@
-<link rel="stylesheet" type="text/css" href="task.css">
+<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/task.css">
 <div id="login_form_parent">
     <div id="login_form">
         <h2>Ajouter une tâche</h2>
         <form action="{{ url_for('task') }}" method="POST">
+
+
             <div class="input_box">
                 <input type="text" name="nom" required="required" id="nom" autocomplete="off" />
                 <label>Nom</label>
                 <span></span>
             </div>
+
             <div class="input_box">
                 <input type="text" name="description" required="required" id="description" autocomplete="off" />
                 <label>Description</label>
@@ -24,7 +27,6 @@
             </div>
 
             <div id="datetime">
-                
                 <input type="datetime-local" name="echeance" required="required" id="hh" autocomplete="off" />
                 <label>Echéance :</label>
                 <span></span>
@@ -50,7 +52,7 @@
             {% endif %}
             {% endwith %}-->
 
-            <input type="submit" id="btn" value="Ajouter" onclick="se_connecter()">
+            <input type="submit" id="btn" value="Ajouter">
 
         </form>
     </div>

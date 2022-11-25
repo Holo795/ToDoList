@@ -22,9 +22,9 @@ class AccountsManager:
                 self.add_user(username)
                 return redirect(url_for("index"))
             else:
-                flash("Mot de passe incorrect", "error")
+                flash("Mot de passe et/ou identifiant incorrect", "error")
         else:
-            flash("Cet utilisateur n'existe pas", "error")
+            flash("Mot de passe et/ou identifiant incorrect", "error")
         return redirect(url_for("index"))
 
     def logout(self):
