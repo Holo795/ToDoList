@@ -6,6 +6,81 @@
 }
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Menu */
+nav {
+    width: 100%;
+    background-color: #424558;
+    height: 64px;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav > ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav > ul > li {
+    float: left;
+    position: relative;
+}
+
+nav > ul > li > a {
+    padding: 20px 30px;
+    color: white;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+nav a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #5f647f;
+}
+
+nav img {
+    margin-left: 10px;
+    margin-top: 3px;
+    position: absolute;
+}
+
+
+/* Alertes Flask */
+
+#alert {
+    font-family: sans-serif;
+    margin: auto;
+    background-color: rgb(216, 216, 216);
+    width: 70%;
+    border-radius: 3px;
+    border: 2px solid rgb(194, 194, 194);
+}
+
+#alert p {
+    padding: 0px;
+    line-height: 22px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+
+/* Info */
+
+#info {
+    font-family: sans-serif;
+    margin: 0 13% 0 13%;
+}
+
+
 
 
 /* Bouton */
