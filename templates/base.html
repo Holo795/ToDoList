@@ -49,8 +49,7 @@
 
         <!-- Bloc de contenu géré par les pages héritant de cette page "mère" -->
         <br />
-        {% block contenu %}
-        {% endblock %}
+
 
     </div><!-- /.container -->
 
@@ -59,78 +58,8 @@
         <p>Bienvenue sur l'application <strong>ToDoList</strong> gérant vos tâches</p>
     </div>
 
-    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche">
-
-    <!-- Tableau tâches à effectuer-->
-    <table id="tableau_taches" cellspacing="0">
-		<thead>
-			<tr>
-				<td id="tache">Tâche</td>
-				<td id="echeance">Echéance</td>
-				<td id="actions">Actions</td>
-			</tr>
-		</thead>
-		<tbody>
-
-                <tr>
-                    <td>Faire la cuisine</td>
-                    <td>
-                        <div class="div_taches">
-                            <p>Dans 6 jours et 4 heures</p>
-                            <txt>Samedi 16 Novembre 2022 13h30</txt>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="div_actions">
-                            <img src="./static/icons/crayon_couleur.png" width="30%" alt="Modifier" title="Modifier">
-                            <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Faire la cuisine</td>
-                    <td>16h30</td>
-                    <td>
-                        <div class="div_actions">
-                            <img src="./static/icons/crayon_couleur.png" width="30%" alt="Modifier" title="Modifier">
-                            <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Faire la cuisine</td>
-                    <td>16h30</td>
-                    <td>
-                        <div class="div_actions">
-                            <img src="./static/icons/crayon_couleur.png" width="30%" alt="Modifier" title="Modifier">
-                            <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Faire la cuisine</td>
-                    <td>16h30</td>
-                    <td>
-                        <div class="div_actions">
-                            <img src="./static/icons/crayon_couleur.png" width="30%" alt="Modifier" title="Modifier">
-                            <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Faire la cuisine</td>
-                    <td>16h30</td>
-                    <td>
-                        <div class="div_actions">
-                            <img src="./static/icons/crayon_couleur.png" width="30%" alt="Modifier" title="Modifier">
-                            <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
-                        </div>
-                    </td>
-                </tr>
-
-
-		</tbody>
-	</table>
+    {% block contenu %}
+    {% endblock %}
 
     <!-- Chargement des fichier Javascript de Bootstrap à la fin pour ne pas retarder la page -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -4,6 +4,39 @@
 
 <!-- On ajoute notre propre contenu -->
 {% block contenu %}
+
+    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche">
+
+    <!-- Tableau tâches à effectuer-->
+    <table id="tableau_taches" cellspacing="0">
+		<thead>
+			<tr>
+				<td id="tache">Tâche</td>
+				<td id="echeance">Echéance</td>
+				<td id="actions">Actions</td>
+			</tr>
+		</thead>
+		<tbody>
+               {% for task in tasks %}
+                    <tr>
+                    <td>{{ task["title"] }}, {{ task["description"] }}</td>
+                    <td>
+                        <div class="div_taches">
+                            <p>{{ task["time_left"] }}</p>
+                            <txt>{{ task["date"] }}</txt>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="div_actions">
+                            <img src="./static/icons/crayon_couleur.png" width="30%" alt="Modifier" title="Modifier">
+                            <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
+                        </div>
+                    </td>
+                </tr>
+               {% endfor %}
+		</tbody>
+	</table>
+
 {% endblock %}
 
 {% include "/templates_forms/login.html" %}

@@ -12,6 +12,7 @@ from flask import *
 
 from bdd.bdd import Database
 from modules import accounts_manager
+from modules.tasks_utils import TasksUtils
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = secrets.token_urlsafe(16)
@@ -37,8 +38,10 @@ def check_login():
 def index():
     """Page d'accueil"""
     user = accounts_manager.get_account(session.get("username"))
+    tasks = user.get_tasks() if user else []
+    print(tasks)
 
-    return render_template("accueil.html", user=user)
+    return render_template("accueil.html", user=user, tasks=tasks)
 
 
 @app.route("/login", methods=["post"])
@@ -56,10 +59,9 @@ def register():
     return accounts_manager.register(request)
 
 
-def show_task():
-    """Affiche les tâches dans le tableau"""
+def show_task() -> list:
+    """Affiche les tâches"""
     pass
-
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=1664, threaded=True, debug=True)
