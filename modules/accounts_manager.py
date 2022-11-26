@@ -3,6 +3,8 @@ from flask import *  # for flash messages
 from bdd.bdd import Database  # Accounts database gestion
 import bcrypt  # for password hashing
 
+from modules.tasks_utils import TasksUtils
+
 
 class AccountsManager:
     """Classe pour gérer les comptes"""
@@ -103,7 +105,7 @@ class Account:
 
     def get_tasks(self) -> list:
         """Renvoie la liste des tâches de l'utilisateur"""
-        return self.tasks
+        return TasksUtils(self.tasks).get_formatted_tasks()
 
     def get_username(self) -> str:
         """Renvoie le nom d'utilisateur"""
