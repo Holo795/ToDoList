@@ -58,12 +58,12 @@ class TasksTimeUtils:
         difference = abs(difference)
         if difference.days > 0:
             text += f"{difference.days} jour(s) "
-        if difference.seconds > 0:
+        if difference.seconds > 3600:
             text += f"{difference.seconds // 3600} heure(s) "
-        if difference.seconds % 3600 > 0:
-            text += f"{(difference.seconds % 3600) // 60} minute(s) "
-        if difference.seconds % 60 > 0:
-            text += f"{difference.seconds % 60} seconde(s) "
+        if difference.seconds > 60:
+            text += f"{difference.seconds % 3600 // 60} minute(s) "
+        if difference.seconds > 0:
+            text += f"{difference.seconds % 60} seconde(s)"
         return text
 
     def get_microseconds(self):
