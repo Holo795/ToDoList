@@ -83,6 +83,8 @@ class Account:
 
         self.set_user_id(accounts_table.get_account(self.username)[0][0])
 
+        self.tasks.clear()
+
         tasks = tasks_table.get_tasks(self.user_id)
         for task in tasks:
             self.add_task(task)

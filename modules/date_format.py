@@ -35,12 +35,23 @@ class DateMillis:
         """Renvoie la date sous forme de texte"""
         return self.date.strftime("%A %d %B %Y %Hh%M")
 
-    def get_difference(self, date=datetime.now()) -> timedelta:
+    def get_difference(self, date=None) -> timedelta:
         """Renvoie la différence entre deux dates"""
+        if date is None:
+            date = datetime.now()
         return self.date - date
 
-    def get_difference_text(self, date=datetime.now()) -> str:
+    def get_difference_text(self, date=None) -> str:
         """Renvoie la différence entre deux dates sous forme de texte"""
+        if date is None:
+            date = datetime.now()
         difference = self.get_difference(date)
-        return f"{difference.days} jours, {difference.seconds // 3600} heures, {difference.seconds % 3600 // 60}" \
-               f" minutes et {difference.seconds % 60} secondes"
+        text = "" + ("Il y a " if self.date.microsecond < date.microsecond else "Dans ")
+        difference = abs(difference)
+        if difference.days > 0:
+            text += f"{difference.days} jour(s) "
+        if difference.seconds > 0:
+            text += f"{difference.seconds // 3600} heure(s) "
+            text += f"{(difference.seconds // 60) % 60} minute(s) "
+
+        return text
