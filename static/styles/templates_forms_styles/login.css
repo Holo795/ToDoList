@@ -113,6 +113,11 @@
 	margin-top: 80px;
 }
 
+#login_form #boutons input:last-child {
+	position: absolute;
+	right: 8%;
+}
+
 
 
 #login_form #boutons input:hover {

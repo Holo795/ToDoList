@@ -2,6 +2,8 @@
 
 <div id="task_form_parent">
     <div id="task_form">
+        <img src="../../static/icons/close_blanc.png" alt="Fermer" title="Fermer" onclick="document.getElementById('task_form_parent').style.display = 'none'">
+        
         <h2>Ajouter une tâche</h2>
         <form action="{{ url_for('add_task') }}" method="POST">
 
@@ -29,7 +31,7 @@
 
             <div id="datetime">
                 <input type="datetime-local" name="echeance" required="required" id="hh" autocomplete="off" />
-                <label>Echéance :</label>
+                <label>Echéance</label>
                 <span></span>
             </div>
 
