@@ -1,4 +1,4 @@
-from modules.date_format import DateMillis
+from modules.date_format import DateMicros
 
 
 class TasksUtils:
@@ -13,9 +13,9 @@ class TasksUtils:
             "id": task[0],
             "title": task[2],
             "description": task[3],
-            "date": DateMillis(task[4]).get_date_text(),
-            "done": DateMillis(task[5]).get_date_text(),
-            "time_left": DateMillis(task[4]).get_difference_text(),
+            "date": DateMicros(task[4]).get_date_text(),
+            "done": DateMicros(task[5]).get_date_text() if task[5] else None,
+            "time_left": DateMicros(task[4]).get_difference_text(),
             "type": task[6],
             "priority": task[7],
             "category": task[8]

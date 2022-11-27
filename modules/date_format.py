@@ -21,11 +21,11 @@ class DateFormat:
         return self.date - date
 
 
-class DateMillis:
+class DateMicros:
     """Classe permettant de formater les dates en millisecondes"""
-    def __init__(self, mills: int):
-        self.mills = mills
-        self.date = datetime.fromtimestamp(mills / 1000)
+    def __init__(self, micros: int):
+        self.micros = micros
+        self.date = datetime.fromtimestamp(micros)
 
     def get_date(self) -> datetime:
         """Renvoie la date"""
@@ -46,7 +46,7 @@ class DateMillis:
         if date is None:
             date = datetime.now()
         difference = self.get_difference(date)
-        text = "" + ("Il y a " if self.date.microsecond < date.microsecond else "Dans ")
+        text = "" + ("Il y a " if self.date.timestamp() < date.timestamp() else "Dans ")
         difference = abs(difference)
         if difference.days > 0:
             text += f"{difference.days} jour(s) "
