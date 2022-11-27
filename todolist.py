@@ -10,9 +10,10 @@ from datetime import timedelta
 # Librairie(s) utilisée(s)
 from flask import *
 
-from bdd.bdd import Database
+import bdd.bdd
 from modules import accounts_manager
 from modules.tasks_utils import TasksUtils
+from modules.date_format import DateFormat
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = secrets.token_urlsafe(16)
@@ -62,11 +63,17 @@ def register():
 @app.route("/add_task", methods=["post"])
 def add_task() -> list:
     """Ajoute une tâche"""
-    name_task = session.get("nom")
-    description = session.get("description")
-    echeance = session.get("echeance")
-    print(name_task)
+    name_task = request.form["nom"]
+    description = request.form["description"]
+    echeance = request.form["echeance"]
+
+    user = accounts_manager.get_account(session.get("username"))
+    user.get_user_id()
+
+    bdd.bdd.TasksTable.add_task(user, name_task, description, echeance, None, 1, 1, 1)
+
     pass
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=1664, threaded=True, debug=True)
