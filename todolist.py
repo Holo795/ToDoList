@@ -13,6 +13,7 @@ from flask import *
 from bdd.bdd import Database
 from modules import accounts_manager
 from modules.tasks_utils import *
+
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = secrets.token_urlsafe(16)
 
@@ -29,7 +30,7 @@ def not_found(error):
 def check_login():
     """Vérifie si l'utilisateur est connecté"""
     if request.endpoint not in ["index", "logout", "login", "register", "static", None] and \
-            accounts_manager.get_account(session["username"]) is None:
+            not accounts_manager.get_account(session.get("username")):
         return redirect(url_for("index"))
 
 
@@ -69,6 +70,21 @@ def add_task():
 
     tasks_table = Database().tasks
     tasks_table.add_task(user.get_user_id(), name_task, description, echeance, 1, 1, 1)
+
+    user.refresh()
+
+    return redirect(url_for("index"))
+
+
+@app.route("/delete_task", methods=["get"])
+def delete_task():
+    """Supprime une tâche"""
+    user = accounts_manager.get_account(session.get("username"))
+
+    add_task_id = request.args.get("id")
+
+    tasks_table = Database().tasks
+    tasks_table.delete_task(add_task_id)
 
     user.refresh()
 

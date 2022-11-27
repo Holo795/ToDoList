@@ -92,6 +92,10 @@ class Tasks_Table(BddManager):
         parameters.append(idTask)
         return self.execute(request, tuple(parameters))
 
+    def delete_task(self, idTask: int) -> list:
+        """Supprime une tâche d'un utilisateur"""
+        return self.execute("DELETE FROM Tasks WHERE idTask = ?;", (idTask,))
+
 
 class Accounts_Table(BddManager):
     """Classe pour gérer les comptes dans la base de données"""
