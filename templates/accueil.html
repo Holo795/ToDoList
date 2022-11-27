@@ -5,7 +5,7 @@
 <!-- On ajoute notre propre contenu -->
 {% block contenu %}
 
-    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche">
+    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('login_form_parent').display = 'block'">
 
     <!-- Tableau tâches à effectuer-->
     <table id="tableau_taches" cellspacing="0">
@@ -40,3 +40,5 @@
 {% endblock %}
 
 {% include "/templates_forms/login.html" %}
+
+{% include "/templates_forms/task.html" %}
