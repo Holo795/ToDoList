@@ -74,12 +74,12 @@ class Tasks_Table(BddManager):
         """Récupère les tâches d'un utilisateur"""
         return self.execute("SELECT * FROM Tasks WHERE idAccount = ?;", (idAccount,))
 
-    def add_task(self, idAccount: int, name: str, description: str, deadline_date: int, success_date: int, idType: int,
+    def add_task(self, idAccount: int, name: str, description: str, deadline_date: int, idType: int,
                  idPriority: int, idState: int) -> list:
         """Ajoute une tâche à un utilisateur"""
         return self.execute("INSERT INTO Tasks (idAccount, name, description, deadline_date, success_date, idType, "
                             "idPriority, idState) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
-                            (idAccount, name, description, deadline_date, success_date, idType, idPriority, idState))
+                            (idAccount, name, description, deadline_date, None, idType, idPriority, idState))
 
     def edit_task(self, idTask: int, **kwargs: dict) -> list:
         """Modifie une tâche d'un utilisateur"""
