@@ -1,11 +1,12 @@
+import locale
 from datetime import datetime, timedelta
 
 
 class DateFormat:
     """Classe permettant de formater les dates"""
     def __init__(self, date_text: str):
+        """Constructeur"""
         self.date_text = date_text
-
         self.date = datetime.strptime(date_text, "%Y-%m-%dT%H:%M")
 
     def get_date(self) -> datetime:
@@ -24,6 +25,9 @@ class DateFormat:
 class DateMicros:
     """Classe permettant de formater les dates en millisecondes"""
     def __init__(self, micros: int):
+        """Constructeur"""
+        locale.setlocale(locale.LC_TIME, "fr_FR") # Permet d'avoir les jours et les mois en français
+
         self.micros = micros
         self.date = datetime.fromtimestamp(micros)
 
@@ -33,7 +37,7 @@ class DateMicros:
 
     def get_date_text(self) -> str:
         """Renvoie la date sous forme de texte"""
-        return self.date.strftime("%A %d %B %Y %Hh%M")
+        return self.date.strftime("%A %d %B %Y %Hh%M").capitalize()
 
     def get_difference(self, date=None) -> timedelta:
         """Renvoie la différence entre deux dates"""
