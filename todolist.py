@@ -29,7 +29,8 @@ def not_found(error):
 @app.before_request
 def check_login():
     """Vérifie si l'utilisateur est connecté"""
-    if request.endpoint not in ["index", "logout", "login", "register", "static", None] and \
+    if request.endpoint not in ["index", "static", None] and \
+            request.method != "POST" and \
             not accounts_manager.get_account(session.get("username")):
         return redirect(url_for("index"))
 
