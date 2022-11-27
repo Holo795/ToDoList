@@ -59,8 +59,13 @@ def register():
     return accounts_manager.register(request)
 
 
-def show_task() -> list:
-    """Affiche les tâches"""
+@app.route("/add_task", methods=["post"])
+def add_task() -> list:
+    """Ajoute une tâche"""
+    name_task = session.get("nom")
+    description = session.get("description")
+    echeance = session.get("echeance")
+    print(name_task)
     pass
 
 if __name__ == '__main__':
