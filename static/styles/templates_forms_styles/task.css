@@ -9,7 +9,7 @@
 /* Form */
 
 
-#login_form {
+#task_form {
 	top: 50%;
 	left: 50%;
     transform: translate(-50%, -50%);
@@ -22,7 +22,7 @@
 	background: var(--backgroundcolor);
 }
 
-#login_form_parent {
+#task_form_parent {
 	z-index: 2;
 	position: absolute;
 	width: 100%;
@@ -31,7 +31,7 @@
 	display: none;
 }
 
-#login_form h2 {
+#task_form h2 {
 	color: #FFF;
 	margin-bottom: 70px;
 }
@@ -106,7 +106,7 @@
 
 /* Bouton */
 
-#login_form #btn {
+#task_form #btn {
 	margin-top: 80px;
 	border: none;
 	box-shadow: none;
@@ -118,12 +118,12 @@
     transition: all 0.06s ease-in;
 }
 
-#login_form #btn:hover {
+#task_form #btn:hover {
     background: #00BCD4;
 }
 
 /* Error */
-#login_form #error {
+#task_form #error {
     position: absolute;
     color: red;
     font-weight: bold;
