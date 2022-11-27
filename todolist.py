@@ -12,9 +12,7 @@ from flask import *
 
 import bdd.bdd
 from modules import accounts_manager
-from modules.tasks_utils import TasksUtils
-from modules.date_format import DateFormat
-
+from modules.tasks_utils import *
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = secrets.token_urlsafe(16)
 
@@ -65,14 +63,17 @@ def add_task() -> list:
     """Ajoute une tâche"""
     name_task = request.form["nom"]
     description = request.form["description"]
-    echeance = request.form["echeance"]
-
+    echeance = TasksTimeUtils(request.form["echeance"]).get_microseconds()
     user = accounts_manager.get_account(session.get("username"))
     user.get_user_id()
 
-    bdd.bdd.TasksTable.add_task(user, name_task, description, echeance, None, 1, 1, 1)
+    commande = bdd.bdd.Tasks_Table("bdd/todo.sqlite")
 
-    pass
+    commande.add_task(user, name_task, description, echeance, 1, 1, 1)
+
+    user.refresh()
+
+    return redirect(url_for("index"))
 
 
 if __name__ == '__main__':
