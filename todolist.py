@@ -82,10 +82,10 @@ def delete_task():
     """Supprime une tâche"""
     user = accounts_manager.get_account(session.get("username"))
 
-    add_task_id = request.args.get("id")
+    task_id = request.args.get("id")
 
     tasks_table = Database().tasks
-    tasks_table.delete_task(add_task_id)
+    tasks_table.delete_task(task_id)
 
     user.refresh()
 
