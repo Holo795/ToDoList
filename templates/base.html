@@ -14,21 +14,24 @@
 <body>
     <!-- Barre de navigation -->
     <nav id="header">
+        <label for="menu-mobile" class="menu-mobile" title="Dérouler le menu">Menu ⬇</label>
+        <input type="checkbox" id="menu-mobile" role="button" title="Dérouler le menu">
         <ul>
-            <li>
-                <a href="#">{ ToDoList }</a>
+            <li class="menu1">
+                <a href="#">{ ToDo List }</a>
             </li>
-            <li>
+            <li class="menu2">
                 <a href="#">Calendrier</a>
             </li>
-            <li>
+            <li class="menu3">
                 <a href="#">A propos</a>
             </li>
-            <li>
-                <a href="{{ url_for('logout') }}">Se déconnecter<img src="../static/icons/logout_blanc.png" width="10%"></a>
+            <li class="menu4">
+                <a href="{{ url_for('logout') }}">Se déconnecter</a>
             </li>
         </ul>
     </nav>
+
 
 
     <!-- Zone centrale de la page -->
