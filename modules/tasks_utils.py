@@ -28,7 +28,7 @@ class TasksTimeUtils:
     def __init__(self, date):
         """Constructeur"""
 
-        locale.setlocale(locale.LC_TIME, "fr_FR")  # Permet d'avoir les jours et les mois en français
+        locale.setlocale(locale.LC_ALL, "fr_FR.UTF-8")  # Permet d'avoir les jours et les mois en français
 
         if type(date) == str:
             self.date = datetime.strptime(date, "%Y-%m-%dT%H:%M")
@@ -68,6 +68,3 @@ class TasksTimeUtils:
 
     def get_microseconds(self):
         return int(self.date.timestamp())
-
-
-
