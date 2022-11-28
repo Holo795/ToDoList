@@ -18,15 +18,15 @@
 		</thead>
 		<tbody>
                {% for task in tasks %}
-                    <tr>
-                    <td>{{ task["title"] }}, {{ task["description"] }}</td>
-                    <td>
+                <tr>
+                    <td data-label="Tâche">{{ task["title"] }}, {{ task["description"] }}</td>
+                    <td data-label="Echéance">
                         <div class="div_taches">
                             <p>{{ task["time_left"] }}</p>
                             <txt>{{ task["date"] }}</txt>
                         </div>
                     </td>
-                    <td>
+                    <td data-label="Actions">
                         <div class="div_actions">
                             <img src="./static/icons/crayon_couleur.png" width="30%" alt="Modifier" title="Modifier">
                             <a href="/delete_task?id={{ task["id"] }}"><img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer"></a>

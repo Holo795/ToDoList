@@ -167,6 +167,43 @@ nav input[type=checkbox]:checked ~ ul {
         padding: 5px 0px 10px 0px;
     }
 
+    #tableau_taches {
+        font-size: 10px !important; 
+        width: 90% !important;
+    }
+    #tableau_taches thead {
+        display: none;
+    }
+        
+    #tableau_taches tr:not(:first-child){
+        display: block;
+        margin-bottom: 40px;
+        border-top: 2px solid var(--bordures_interieurs);
+    }
+    
+    
+    #tableau_taches td {
+    display: block;
+    text-align: right;
+    border: none !important;
+    font-weight: normal !important;
+    }
+    
+    
+    
+    #tableau_taches td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-decoration: underline;
+    }
+
+
+    #tableau_taches img {
+        width: 3% !important;
+        height: auto;
+    }
+
 }
 /*
 nav {
