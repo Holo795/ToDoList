@@ -75,23 +75,21 @@ class Account:
         self.user_id = None
 
         self.tasks = []
+        self.types = []
 
     def refresh(self):
         """Rafraîchit les données de l'utilisateur"""
         accounts_table = Database().accounts
         tasks_table = Database().tasks
+        types_table = Database().types
 
         self.set_user_id(accounts_table.get_account(self.username)[0][0])
 
         self.tasks.clear()
+        self.tasks = tasks_table.get_tasks(self.user_id)
 
-        tasks = tasks_table.get_tasks(self.user_id)
-        for task in tasks:
-            self.add_task(task)
-
-    def add_task(self, task: tuple):
-        """Ajoute une tâche à l'utilisateur"""
-        self.tasks.append(task)
+        self.types.clear()
+        self.types = types_table.get_all_types(self.user_id)
 
     def remove_task(self, id: int):
         """Supprime une tâche de l'utilisateur"""
@@ -105,9 +103,19 @@ class Account:
         tasks_table = Database().tasks
         tasks_table.edit_user_task(self.user_id, id, **kwargs)
 
+        self.tasks = tasks_table.get_tasks(self.user_id)
+
+    def get_html_tasks(self) -> list:
+        """Renvoie la liste des tâches formattées de l'utilisateur"""
+        return TasksUtils(self.tasks).get_formatted_tasks()
+
     def get_tasks(self) -> list:
         """Renvoie la liste des tâches de l'utilisateur"""
-        return TasksUtils(self.tasks).get_formatted_tasks()
+        return self.tasks
+
+    def get_types(self) -> list:
+        """Renvoie la liste des types de l'utilisateur"""
+        return self.types
 
     def get_username(self) -> str:
         """Renvoie le nom d'utilisateur"""
