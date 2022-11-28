@@ -92,6 +92,10 @@ class Tasks_Table(BddManager):
         parameters.append(idTask)
         return self.execute(request, tuple(parameters))
 
+    def delete_task(self, idTask: int) -> list:
+        """Supprime une tâche d'un utilisateur"""
+        return self.execute("DELETE FROM Tasks WHERE idTask = ?;", (idTask,))
+
 
 class Accounts_Table(BddManager):
     """Classe pour gérer les comptes dans la base de données"""
@@ -146,9 +150,9 @@ class Types_Table(BddManager):
         """Ajoute un type de tâche"""
         return self.execute("INSERT INTO Types (name, idAccount) VALUES (?, ?);", (name, idAccount))
 
-    def get_type(self, name: str, idAccount: int) -> list:
+    def get_type(self, idType: int) -> list:
         """Récupère un type de tâche"""
-        return self.execute("SELECT * FROM Types WHERE name = ? AND idAccount = ?;", (name, idAccount))
+        return self.execute("SELECT * FROM Types WHERE idType = ?;", (idType,))
 
     def get_all_types(self, idAccount: int) -> list:
         """Récupère tous les types de tâche"""
