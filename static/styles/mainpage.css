@@ -350,14 +350,11 @@ nav img {
 	border-left: 2px solid var(--bordures_interieurs);
 }
 
-#tableau_taches tbody tr td {
+#tableau_taches tbody tr:not(:last-child) td {
 	border-bottom: 2px solid var(--bordures_interieurs);
 
 }
 
-#tableau_taches tbody tr {
-	background-color: var(--background_color_tableau);
-}
 
     /* Actions img */
 #tableau_taches .div_actions {
