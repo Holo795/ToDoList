@@ -40,13 +40,12 @@
         <!-- Message(s) de notification (si il y en a) -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <div id="alert">
+                <script src="../static/scripts/notification.js"></script>
                 {% for message in messages %}
-                
-                    <p>{{ message }}</p>
-                
+                    <script>
+                        notifier('{{ message }}');
+                    </script>
                 {% endfor %}
-                </div>
             {% endif %}
         {% endwith %}
 
@@ -63,6 +62,7 @@
 
     {% block contenu %}
     {% endblock %}
+
 
     <!-- Chargement des fichier Javascript de Bootstrap à la fin pour ne pas retarder la page -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
