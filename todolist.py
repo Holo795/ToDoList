@@ -39,7 +39,7 @@ def check_login():
 def index():
     """Page d'accueil"""
     user = accounts_manager.get_account(session.get("username"))
-    tasks = user.get_tasks() if user else []
+    tasks = user.get_html_tasks() if user else []
     print(tasks)
 
     return render_template("accueil.html", user=user, tasks=tasks)
@@ -82,12 +82,12 @@ def delete_task():
     """Supprime une tâche"""
     user = accounts_manager.get_account(session.get("username"))
 
-    task_id = request.args.get("id")
+    task_id = int(request.args.get("id"))
 
     tasks_table = Database().tasks
     tasks_table.delete_task(task_id)
 
-    user.refresh()
+    user.remove_task(task_id)
 
     return redirect(url_for("index"))
 

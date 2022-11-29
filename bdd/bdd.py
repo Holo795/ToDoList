@@ -184,9 +184,9 @@ class Priorities_Table(BddManager):
         """Ajoute une priorité de tâche"""
         return self.execute("INSERT INTO Priorities (name) VALUES (?);", (name,))
 
-    def get_priority(self, name: str) -> list:
+    def get_priority(self, idPriority: int) -> list:
         """Récupère une priorité de tâche"""
-        return self.execute("SELECT * FROM Priorities WHERE name = ?;", (name,))
+        return self.execute("SELECT * FROM Priorities WHERE idPriority = ?;", (idPriority,))
 
     def get_all_priorities(self) -> list:
         """Récupère toutes les priorités de tâche"""
@@ -214,25 +214,13 @@ class States_Table(BddManager):
                      "name TEXT NOT NULL UNIQUE, "
                      "PRIMARY KEY(idState AUTOINCREMENT));")
 
-    def add_state(self, name: str) -> list:
-        """Ajoute un état de tâche"""
-        return self.execute("INSERT INTO States (name) VALUES (?);", (name,))
-
-    def get_state(self, name: str) -> list:
+    def get_state(self, idState: int) -> list:
         """Récupère un état de tâche"""
-        return self.execute("SELECT * FROM States WHERE name = ?;", (name,))
+        return self.execute("SELECT * FROM States WHERE idState = ?;", (idState,))
 
     def get_all_states(self) -> list:
         """Récupère tous les états de tâche"""
         return self.execute("SELECT * FROM States;")
-
-    def edit_state(self, name: str, new_name: str) -> list:
-        """Modifie un état de tâche"""
-        return self.execute("UPDATE States SET name = ? WHERE name = ?;", (new_name, name))
-
-    def delete_state(self, name: str) -> list:
-        """Supprime un état de tâche"""
-        return self.execute("DELETE FROM States WHERE name = ?;", (name,))
 
 
 if __name__ == "__main__":
