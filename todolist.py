@@ -39,8 +39,9 @@ def check_login():
 def index():
     """Page d'accueil"""
     user = accounts_manager.get_account(session.get("username"))
-
-    return render_template("accueil.html", user=user)
+    tasks = user.get_html_tasks() if user else []
+    print(tasks)
+    return render_template("accueil.html", user=user, tasks=tasks)
 
 
 @app.route("/login", methods=["post"])
@@ -89,6 +90,15 @@ def delete_task():
     tasks_table.delete_task(task_id)
 
     user.remove_task(task_id)
+
+    return redirect(url_for("index"))
+
+
+@app.route("/show_tasks", methods=["get"])
+def show_tasks():
+    """Affiche les tâches"""
+    user = accounts_manager.get_account(session.get("username"))
+    user.setfilter(request.form["filter"])
 
     return redirect(url_for("index"))
 
