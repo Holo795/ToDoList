@@ -17,7 +17,8 @@
 			</tr>
 		</thead>
 		<tbody>
-               {% for task in tasks %}
+            {% if user %}
+                {% for task in user.get_html_tasks() %}
                 <tr>
                     <td data-label="Tâche">{{ task["title"] }}, {{ task["description"] }}</td>
                     <td data-label="Echéance">
@@ -33,12 +34,15 @@
                         </div>
                     </td>
                 </tr>
-               {% endfor %}
+                {% endfor %}
+            {% endif %}
 		</tbody>
 	</table>
 
 {% endblock %}
 
-{% include "/templates_forms/login.html" %}
-
-{% include "/templates_forms/task.html" %}
+{% if not user %}
+    {% include "/templates_forms/login.html" %}
+{% else %}
+    {% include "/templates_forms/task.html" %}
+{% endif %}

@@ -39,10 +39,8 @@ def check_login():
 def index():
     """Page d'accueil"""
     user = accounts_manager.get_account(session.get("username"))
-    tasks = user.get_html_tasks() if user else []
-    print(tasks)
 
-    return render_template("accueil.html", user=user, tasks=tasks)
+    return render_template("accueil.html", user=user)
 
 
 @app.route("/login", methods=["post"])
@@ -67,10 +65,13 @@ def add_task():
 
     name_task = request.form["nom"]
     description = request.form["description"]
-    echeance = TasksTimeUtils(request.form["echeance"]).get_microseconds()
+    echeance = request.form["echeance"]
+    type_tache = request.form["type_tache"]
+
+    echeance_micro = TasksTimeUtils(echeance).get_microseconds()
 
     tasks_table = Database().tasks
-    tasks_table.add_task(user.get_user_id(), name_task, description, echeance, 1, 1, 1)
+    tasks_table.add_task(user.get_user_id(), name_task, description, echeance_micro, type_tache, 1, 1)
 
     user.refresh()
 

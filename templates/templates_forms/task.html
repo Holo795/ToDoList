@@ -23,8 +23,9 @@
             <div id="type">
                 <label>Type</label>
                 <select name="type_tache" id="type_tache">
-                    <option value="maison">Maison</option>
-                    <option value="travail">Travail</option>
+                    {% for type in user.get_types() %}
+                        <option value="{{ type[0] }}">{{ type[1] }}</option>
+                    {% endfor %}
                 </select>
                 <span></span>
             </div>
