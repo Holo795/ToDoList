@@ -7,6 +7,19 @@
 
     <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('task_form_parent').style.display = 'block'">
 
+    <div id="categories">
+
+            <input name="categories" type="radio" id="afficher_tout">
+            <label for="afficher_tout">Toutes les tâches</label>
+
+            {% for type in user.get_types() %}
+
+            <input name="categories" type="radio" id="{{type[1]}}">
+            <a href="/show_tasks?filter=type[0])"><label for="{{type[1]}}">{{ type[1] }}</label></a>
+                
+            {% endfor %}
+    </div>
+
     <!-- Tableau tâches à effectuer-->
     <table id="tableau_taches" cellspacing="0">
 		<thead>

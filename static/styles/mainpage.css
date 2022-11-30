@@ -385,3 +385,33 @@ nav img {
 #tableau_taches txt {
     color: rgb(177, 177, 177);
 }
+
+
+
+/* Trier catégories */
+
+#categories input[type="radio"] + label {
+	margin-top: 20px;
+	border: none;
+    border-radius: 4px;
+	box-shadow: none;
+	padding: 10px 25px;
+	background: #333;
+	color: #FFF;
+	font-size: 16px;
+	cursor: pointer;
+    transition: all 0.06s ease-in;
+}
+
+#categories input[type="radio"]:hover + label{
+    background: #00BCD4;
+}
+
+#categories input[type="radio"]:checked + label{
+    background: #00BCD4;
+}
+
+#categories input[type="radio"] {
+    display: none;
+}
+
