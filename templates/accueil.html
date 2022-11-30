@@ -6,7 +6,7 @@
 {% block contenu %}
 
 {% if user %}    
-    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('task_form_parent').style.display = 'block'">
+    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('task_add_parent').style.display = 'block'">
 
 
 
@@ -41,7 +41,7 @@
 		<tbody>
             
             {% for task in user.get_html_tasks() %}
-            <tr>
+            <tr id="task_priority_{{ task['priority'][1] }}">
                 <td data-label="Tâche">{{ task["title"] }}, {{ task["description"] }}</td>
                 <td data-label="Echéance">
                     <div class="div_taches">
@@ -51,7 +51,7 @@
                 </td>
                 <td data-label="Actions">
                     <div class="div_actions">
-                        <a href="/edit_task?id={{ task['id'] }}"></a><input type="image" id="Edit tâche" src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="document.getElementById('task_form_parent').style.display = 'block'"></a>
+                        <input type="image" id="Edit tâche" src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="edit_task({{ task['id'] }})">
                         <a href="/delete_task?id={{ task['id'] }}"><img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer"></a>
                     </div>
                 </td>
@@ -59,12 +59,25 @@
             {% endfor %}
 		</tbody>
 	</table>
-{% endif %} 
+
+
+{% endif %}
+
+    <script>
+    window.onclick = function(event) {
+       if (event.target.id === "close_task") {
+           document.getElementById("task_add_parent").style.display = "none";
+           document.getElementById("task_edit_parent").style.display = "none";
+       }
+    }
+    </script>
+
 {% endblock %}
 
 
 {% if not user %}
     {% include "/templates_forms/login.html" %}
 {% else %}
-    {% include "/templates_forms/task.html" %}
+    {% include "/templates_forms/task_add.html" %}
+    {% include "/templates_forms/task_edit.html" %}
 {% endif %}

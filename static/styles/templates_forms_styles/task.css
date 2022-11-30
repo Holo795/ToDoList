@@ -8,7 +8,7 @@
 
 /* Form */
 
-#task_form img {
+#task_add img, #task_edit img {
 	position: absolute;
 	right: 6%;
 	cursor: pointer;
@@ -18,13 +18,13 @@
 	transition: transform 0.2s;
 }
 
-#task_form img:hover {
+#task_add img:hover, #task_edit img:hover {
 	transform: scale(1.1);
 }
 
 
 
-#task_form {
+#task_add, #task_edit {
 	top: 50%;
 	left: 50%;
     transform: translate(-50%, -50%);
@@ -37,7 +37,7 @@
 	background: var(--backgroundcolor);
 }
 
-#task_form_parent {
+#task_add_parent, #task_edit_parent {
 	z-index: 2;
 	position: absolute;
 	width: 100%;
@@ -46,7 +46,7 @@
 	display: none;
 }
 
-#task_form h2 {
+#task_add h2, #task_edit h2 {
 	color: #FFF;
 	margin-bottom: 70px;
 }
@@ -121,7 +121,7 @@
 
 /* Bouton */
 
-#task_form #btn {
+#task_add #btn, #task_edit #btn {
 	margin-top: 80px;
 	border: none;
 	box-shadow: none;
@@ -133,12 +133,12 @@
     transition: all 0.06s ease-in;
 }
 
-#task_form #btn:hover {
+#task_add #btn:hover, #task_edit #btn:hover {
     background: #00BCD4;
 }
 
 /* Error */
-#task_form #error {
+#task_add #error, #task_edit #error {
     position: absolute;
     color: red;
     font-weight: bold;

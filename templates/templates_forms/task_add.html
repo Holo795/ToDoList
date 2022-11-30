@@ -1,8 +1,8 @@
 <link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/task.css">
 
-<div id="task_form_parent">
-    <div id="task_form">
-        <img src="../../static/icons/close_blanc.png" alt="Fermer" title="Fermer" onclick="document.getElementById('task_form_parent').style.display = 'none'">
+<div id="task_add_parent">
+    <div id="task_add">
+        <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer">
         
         <h2>Ajouter une tâche</h2>
         <form action="{{ url_for('add_task') }}" method="POST">
@@ -61,11 +61,3 @@
         </form>
     </div>
 </div>
-
-<script>
-    window.onclick = function(event) {
-       if (event.target.id === "task_form_parent") {
-          document.getElementById("task_form_parent").style.display = "none";
-       }
-    }
-</script>

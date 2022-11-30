@@ -1,0 +1,89 @@
+<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/task.css">
+
+<div id="task_edit_parent">
+    <div id="task_edit">
+        <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer">
+
+        <h2>Modifier une tâche</h2>
+        <form action="{{ url_for('edit_task') }}" method="POST">
+
+            <input type="hidden" name="task_id">
+
+            <div class="input_box">
+                <input type="text" name="nom" required="required" id="nom" autocomplete="off" />
+                <label>Nom</label>
+                <span></span>
+            </div>
+
+            <div class="input_box">
+                <input type="text" name="description" required="required" id="description" autocomplete="off" />
+                <label>Description</label>
+                <span></span>
+            </div>
+
+            <div id="type">
+                <label>Type</label>
+                <select name="type_tache" id="type_tache">
+                    {% for type in user.get_types() %}
+                        <option value="{{ type[0] }}">{{ type[1] }}</option>
+                    {% endfor %}
+                </select>
+                <span></span>
+            </div>
+
+            <div id="datetime">
+                <input type="datetime-local" name="echeance" required="required" id="hh" autocomplete="off" />
+                <label>Echéance</label>
+                <span></span>
+            </div>
+
+            <input type="submit" id="btn" value="Modifier">
+
+        </form>
+    </div>
+</div>
+
+<script>
+
+    function edit_task(id) {
+
+            let task = {{ user.get_tasks()|tojson }};
+            let task_to_edit;
+
+            for (let i = 0; i < task.length; i++) {
+                if (task[i][0] === id) {
+                    task_to_edit = task[i];
+                    break;
+                }
+            }
+
+            let date = new Date(task_to_edit[4] * 1000);
+            let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            let year = date.getFullYear();
+            let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+            let minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+
+            //"%Y-%m-%dT%H:%M"
+
+            let date_str = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
+
+            document.getElementById("task_edit_parent").style.display = "block";
+
+            let form = document.querySelector("#task_edit form");
+            form.elements["task_id"].value = task_to_edit[0];
+            form.elements["nom"].value = task_to_edit[2];
+            form.elements["description"].value = task_to_edit[3];
+            form.elements["echeance"].value = date_str;
+
+            var select = form.elements["type_tache"];
+            for (var i = 0; i < select.options.length; i++) {
+                console.log(select.options[i].value);
+                console.log(task_to_edit[6]);
+                if (select.options[i].value === `${task_to_edit[6]}`) {
+                    select.options[i].selected = true;
+                    break;
+                }
+            }
+        }
+</script>
