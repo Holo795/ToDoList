@@ -93,6 +93,28 @@ def delete_task():
 
     return redirect(url_for("index"))
 
+@app.route("/edit_task", methods=(["post","get"]))
+def edit_task():
+    """Modifie une tâche"""
+    user = accounts_manager.get_account(session.get("username"))
+
+    task_id = int(request.args.get("id"))
+
+    user.get_task(task_id)
+
+    name_task = request.form["nom"]
+    description = request.form["description"]
+    echeance = request.form["echeance"]
+    type_tache = request.form["type_tache"]
+
+    echeance_micro = TasksTimeUtils(echeance).get_microseconds()
+
+    tasks_table = Database().tasks
+    tasks_table.add_task(user.get_user_id(), name_task, description, echeance_micro, type_tache, 1, 1)
+
+    user.refresh()
+
+    return redirect(url_for("index"))
 
 @app.route("/show_tasks", methods=["get"])
 def show_tasks():
