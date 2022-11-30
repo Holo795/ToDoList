@@ -5,12 +5,10 @@ gérant une liste de tâches à faire
 """
 
 import secrets
-from datetime import timedelta
 
 # Librairie(s) utilisée(s)
 from flask import *
 
-from bdd.bdd import Database
 from modules import accounts_manager
 from modules.tasks_utils import *
 
