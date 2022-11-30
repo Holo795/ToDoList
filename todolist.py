@@ -67,10 +67,7 @@ def add_task():
 
     deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
-    tasks_table = Database().tasks
-    tasks_table.add_task(user.get_user_id(), name_task, description, deadline_micro, type_tache, 1, 1)
-
-    user.refresh()
+    user.add_task(name_task, description, deadline_micro, type_tache, 1, 1)
 
     return redirect(url_for("index"))
 
@@ -112,6 +109,7 @@ def edit_task():
 def show_tasks():
     """Affiche les tâches"""
     user = accounts_manager.get_account(session.get("username"))
+
     filter_id = request.args.get("filter")
     user.set_filter(int(filter_id))
 
@@ -124,11 +122,7 @@ def add_type():
     user = accounts_manager.get_account(session.get("username"))
 
     type_name = request.form["type_name"]
-
-    types_table = Database().types
-    types_table.add_type(type_name, user.get_user_id())
-
-    user.refresh()
+    user.add_type(type_name)
 
     return redirect(url_for("index"))
 

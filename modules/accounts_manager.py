@@ -93,6 +93,13 @@ class Account:
         self.types.clear()
         self.types = types_table.get_all_types(self.user_id)
 
+    def add_task(self, name: str, description: str, deadline_date: str, idType: int, idPriority: int, idState: int):
+        """Ajoute une tâche à l'utilisateur"""
+        tasks_table = Database().tasks
+        tasks_table.add_task(self.user_id, name, description, deadline_date, idType, idPriority, idState)
+
+        self.tasks = tasks_table.get_tasks(self.user_id)
+
     def remove_task(self, id: int):
         """Supprime une tâche de l'utilisateur"""
         for task in self.tasks:
@@ -126,10 +133,17 @@ class Account:
         """Renvoie la liste des types de l'utilisateur"""
         return self.types
 
+    def add_type(self, name: str):
+        """Ajoute un type à l'utilisateur"""
+        types_table = Database().types
+        types_table.add_type(name, self.user_id)
+
+        self.types = types_table.get_all_types(self.user_id)
+
     def set_filter(self, filter: int):
         """Définit le filtre"""
         self.filter = filter
-        
+
     def get_filter(self) -> int:
         """Renvoie le filtre actuel"""
         return self.filter
