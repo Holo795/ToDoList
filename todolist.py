@@ -41,7 +41,7 @@ def index():
     user = accounts_manager.get_account(session.get("username"))
     tasks = user.get_html_tasks() if user else []
     print(tasks)
-    return render_template("accueil.html", user=user, tasks=tasks)
+    return render_template("accueil.html", user=user)
 
 
 @app.route("/login", methods=["post"])
@@ -98,7 +98,8 @@ def delete_task():
 def show_tasks():
     """Affiche les tâches"""
     user = accounts_manager.get_account(session.get("username"))
-    user.setfilter(request.form["filter"])
+    filter = request.args.get("filter")
+    user.set_filter(int(filter))
 
     return redirect(url_for("index"))
 

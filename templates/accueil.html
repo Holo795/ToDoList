@@ -5,7 +5,7 @@
 <!-- On ajoute notre propre contenu -->
 {% block contenu %}
 
-    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('task_form_parent').style.display = 'block'">
+{% if user %}    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('task_form_parent').style.display = 'block'">
 
     <div id="categories">
 
@@ -16,7 +16,8 @@
 
             <input name="categories" type="radio" id="{{type[1]}}">
             <a href="/show_tasks?filter=type[0])"><label for="{{type[1]}}">{{ type[1] }}</label></a>
-                
+              
+             
             {% endfor %}
     </div>
 
@@ -30,7 +31,8 @@
 			</tr>
 		</thead>
 		<tbody>
-            {% for task in tasks %}
+            
+            {% for task in user.get_html_tasks() %}
             <tr>
                 <td data-label="Tâche">{{ task["title"] }}, {{ task["description"] }}</td>
                 <td data-label="Echéance">
@@ -49,8 +51,9 @@
             {% endfor %}
 		</tbody>
 	</table>
-
+{% endif %} 
 {% endblock %}
+
 
 {% if not user %}
     {% include "/templates_forms/login.html" %}
