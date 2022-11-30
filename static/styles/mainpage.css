@@ -391,7 +391,7 @@ nav img {
 /* Trier catégories */
 
 #tache #categories {
-    position: absolute;
+    position: static;
     margin-left: 70px;
     margin-top: -45px;
 }
