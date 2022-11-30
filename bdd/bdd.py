@@ -81,16 +81,11 @@ class Tasks_Table(BddManager):
                             "idPriority, idState) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
                             (idAccount, name, description, deadline_date, None, idType, idPriority, idState))
 
-    def edit_task(self, idTask: int, **kwargs: dict) -> list:
+    def edit_task(self, idTask: int, name: str, description: str, deadline_date: int, idType: int, idPriority: int, idState: int) -> list:
         """Modifie une tâche d'un utilisateur"""
-        request = "UPDATE Tasks SET "
-        parameters = []
-        for key, value in kwargs.items():
-            request += f"{key} = ?, "
-            parameters.append(value)
-        request = f"{request[:-2]} WHERE idTask = ?;"
-        parameters.append(idTask)
-        return self.execute(request, tuple(parameters))
+        return self.execute("UPDATE Tasks SET name = ?, description = ?, deadline_date = ?, idType = ?, "
+                            "idPriority = ?, idState = ? WHERE idTask = ?;",
+                            (name, description, deadline_date, idType, idPriority, idState, idTask))
 
     def delete_task(self, idTask: int) -> list:
         """Supprime une tâche d'un utilisateur"""

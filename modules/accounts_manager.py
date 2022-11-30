@@ -100,10 +100,11 @@ class Account:
                 self.tasks.remove(task)
                 break
 
-    def update_task(self, id: int, **kwargs: dict):
+    def update_task(self, idTask: int, name: str, description: str, deadline_date: str, idType: int, idPriority: int,
+                    idState: int):
         """Met à jour une tâche"""
         tasks_table = Database().tasks
-        tasks_table.edit_user_task(self.user_id, id, **kwargs)
+        tasks_table.edit_task(idTask, name, description, deadline_date, idType, idPriority, idState)
 
         self.tasks = tasks_table.get_tasks(self.user_id)
 
@@ -120,10 +121,6 @@ class Account:
             return [task for task in self.tasks if task[6] == self.filter]
         else:
             return []
-
-    def get_task(self, id: int) -> tuple:
-        """Renvoie une tâche de l'utilisateur"""
-        return next((task for task in self.tasks if task[0] == id), False)
 
     def get_types(self) -> list:
         """Renvoie la liste des types de l'utilisateur"""

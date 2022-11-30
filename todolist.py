@@ -39,8 +39,6 @@ def check_login():
 def index():
     """Page d'accueil"""
     user = accounts_manager.get_account(session.get("username"))
-    tasks = user.get_html_tasks() if user else []
-    print(tasks)
     return render_template("accueil.html", user=user)
 
 
@@ -66,13 +64,13 @@ def add_task():
 
     name_task = request.form["nom"]
     description = request.form["description"]
-    echeance = request.form["echeance"]
+    deadline = request.form["echeance"]
     type_tache = request.form["type_tache"]
 
-    echeance_micro = TasksTimeUtils(echeance).get_microseconds()
+    deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
     tasks_table = Database().tasks
-    tasks_table.add_task(user.get_user_id(), name_task, description, echeance_micro, type_tache, 1, 1)
+    tasks_table.add_task(user.get_user_id(), name_task, description, deadline_micro, type_tache, 1, 1)
 
     user.refresh()
 
@@ -93,35 +91,46 @@ def delete_task():
 
     return redirect(url_for("index"))
 
-@app.route("/edit_task", methods=(["post","get"]))
+
+@app.route("/edit_task", methods=["post"])
 def edit_task():
     """Modifie une tâche"""
     user = accounts_manager.get_account(session.get("username"))
 
-    task_id = int(request.args.get("id"))
-
-    user.get_task(task_id)
-
+    task_id = request.form["task_id"]
     name_task = request.form["nom"]
     description = request.form["description"]
-    echeance = request.form["echeance"]
+    deadline = request.form["echeance"]
     type_tache = request.form["type_tache"]
 
-    echeance_micro = TasksTimeUtils(echeance).get_microseconds()
+    deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
-    tasks_table = Database().tasks
-    tasks_table.add_task(user.get_user_id(), name_task, description, echeance_micro, type_tache, 1, 1)
-
-    user.refresh()
+    user.update_task(task_id, name_task, description, deadline_micro, type_tache, 1, 1)
 
     return redirect(url_for("index"))
+
 
 @app.route("/show_tasks", methods=["get"])
 def show_tasks():
     """Affiche les tâches"""
     user = accounts_manager.get_account(session.get("username"))
-    filter = request.args.get("filter")
-    user.set_filter(int(filter))
+    filter_id = request.args.get("filter")
+    user.set_filter(int(filter_id))
+
+    return redirect(url_for("index"))
+
+
+@app.route("/add_type", methods=["post"])
+def add_type():
+    """Ajoute un type de tâche"""
+    user = accounts_manager.get_account(session.get("username"))
+
+    type_name = request.form["type_name"]
+
+    types_table = Database().types
+    types_table.add_type(type_name, user.get_user_id())
+
+    user.refresh()
 
     return redirect(url_for("index"))
 
