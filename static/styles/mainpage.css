@@ -390,28 +390,21 @@ nav img {
 
 /* Trier catégories */
 
-#categories input[type="radio"] + label {
-	margin-top: 20px;
+#tache #categories {
+    position: absolute;
+    margin-left: 70px;
+    margin-top: -45px;
+}
+
+#tache #categories select {
+	width: 180px;
+	margin-left: 8px;
+	border-radius: 3px;
 	border: none;
-    border-radius: 4px;
-	box-shadow: none;
-	padding: 10px 25px;
-	background: #333;
-	color: #FFF;
-	font-size: 16px;
+	padding: 7px 10px;
 	cursor: pointer;
-    transition: all 0.06s ease-in;
+	outline: none;
+	background-color: #009879;
+	color: white;
+	font-size: 17px;
 }
-
-#categories input[type="radio"]:hover + label{
-    background: #00BCD4;
-}
-
-#categories input[type="radio"]:checked + label{
-    background: #00BCD4;
-}
-
-#categories input[type="radio"] {
-    display: none;
-}
-

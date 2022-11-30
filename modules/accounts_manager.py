@@ -132,6 +132,10 @@ class Account:
     def set_filter(self, filter: int):
         """Définit le filtre"""
         self.filter = filter
+        
+    def get_filter(self) -> int:
+        """Renvoie le filtre actuel"""
+        return self.filter
 
     def get_username(self) -> str:
         """Renvoie le nom d'utilisateur"""

@@ -5,27 +5,35 @@
 <!-- On ajoute notre propre contenu -->
 {% block contenu %}
 
-{% if user %}    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('task_form_parent').style.display = 'block'">
+{% if user %}    
+    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('task_form_parent').style.display = 'block'">
 
-    <div id="categories">
 
-            <input name="categories" type="radio" id="afficher_tout">
-            <label for="afficher_tout">Toutes les tâches</label>
-
-            {% for type in user.get_types() %}
-
-            <input name="categories" type="radio" id="{{type[1]}}">
-            <a href="/show_tasks?filter=type[0])"><label for="{{type[1]}}">{{ type[1] }}</label></a>
-              
-             
-            {% endfor %}
-    </div>
 
     <!-- Tableau tâches à effectuer-->
     <table id="tableau_taches" cellspacing="0">
 		<thead>
 			<tr>
-				<td id="tache">Tâche</td>
+				<td id="tache"><p>Tâche</p> 
+                    <div id="categories">
+                        <select name="categories" id="type_tache" onchange="location=this.value">
+                            {% if user.get_filter() != -1 %}
+                                {% for type in user.get_types() %}
+                                    {% if type[0] == user.get_filter() %}
+                                        <option value="/show_tasks?filter={{user.get_filter()}}">{{ type[1] }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <option value="/show_tasks?filter=-1">Toutes les tâches</option>
+                            
+                            {% for type in user.get_types() %}
+                                {% if user.get_filter() != type[0] %}
+                                    <option value="/show_tasks?filter={{ type[0] }}">{{ type[1] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </td>
 				<td id="echeance">Echéance</td>
 				<td id="actions">Actions</td>
 			</tr>
