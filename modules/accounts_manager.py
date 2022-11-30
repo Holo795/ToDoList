@@ -77,6 +77,8 @@ class Account:
         self.tasks = []
         self.types = []
 
+        self.filter = -1
+
     def refresh(self):
         """Rafraîchit les données de l'utilisateur"""
         accounts_table = Database().accounts
@@ -107,15 +109,29 @@ class Account:
 
     def get_html_tasks(self) -> list:
         """Renvoie la liste des tâches formattées de l'utilisateur"""
-        return TasksUtils(self.tasks).get_formatted_tasks()
+        return TasksUtils(self.get_tasks()).get_formatted_tasks()
 
     def get_tasks(self) -> list:
         """Renvoie la liste des tâches de l'utilisateur"""
-        return self.tasks
+        if self.filter == -1:
+            print(self.tasks)
+            return self.tasks
+        elif self.filter in [type[0] for type in self.types]:
+            return [task for task in self.tasks if task[6] == self.filter]
+        else:
+            return []
+
+    def get_task(self, id: int) -> tuple:
+        """Renvoie une tâche de l'utilisateur"""
+        return next((task for task in self.tasks if task[0] == id), False)
 
     def get_types(self) -> list:
         """Renvoie la liste des types de l'utilisateur"""
         return self.types
+
+    def set_filter(self, filter: int):
+        """Définit le filtre"""
+        self.filter = filter
 
     def get_username(self) -> str:
         """Renvoie le nom d'utilisateur"""
