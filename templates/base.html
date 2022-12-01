@@ -45,13 +45,15 @@
     <div class="container">
 
         <!-- Message(s) de notification (si il y en a) -->
-        {% with messages = get_flashed_messages() %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <script src="../static/scripts/notification.js"></script>
-                {% for message in messages %}
-                    <script>
-                        notifier('{{ message }} {{ user.get_username() }}');
-                    </script>
+                {% for category, message in messages %}
+                    {% if category == 'notifier' %}
+                        <script>
+                            notifier('{{ message }} {{ user.get_username() }}');
+                        </script>
+                    {% endif %}
                 {% endfor %}
             {% endif %}
         {% endwith %}

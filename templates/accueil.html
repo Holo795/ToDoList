@@ -42,11 +42,20 @@
             
             {% for task in user.get_html_tasks() %}
             <tr id="task_priority_{{ task['priority'][1] }}">
-                <td data-label="Tâche">{{ task["title"] }}, {{ task["description"] }}</td>
+                {% if task["done"] %}
+                    <td data-label="Tâche"><s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s></td>
+                {% else %}
+                    <td data-label="Tâche">{{ task["title"] }}, {{ task["description"] }}</td>
+                {% endif %}
                 <td data-label="Echéance">
                     <div class="div_taches">
+
+                        {% if task["done"] %}
+                            <p>Terminé le {{ task["done"] }}</p>
+                        {% else %}
                         <p>{{ task["time_left"] }}</p>
                         <txt>{{ task["date"] }}</txt>
+                        {% endif %}
                     </div>
                 </td>
                 <td data-label="Actions">
@@ -69,6 +78,14 @@
            document.getElementById("task_add_parent").style.display = "none";
            document.getElementById("task_edit_parent").style.display = "none";
        }
+    }
+
+    function toggleField(hideObj,showObj){
+        hideObj.disabled=true;
+        hideObj.style.display='none';
+        showObj.disabled=false;
+        showObj.style.display='inline';
+        showObj.focus();
     }
     </script>
 

@@ -17,7 +17,7 @@ class TasksUtils:
             "title": task[2],
             "description": task[3],
             "date": TasksTimeUtils(task[4]).get_date_text(),
-            "done": TasksTimeUtils(task[5]).get_date_text() if task[5] else None,
+            "done": TasksTimeUtils(task[5]).get_date_text() if task[5] else False,
             "time_left": TasksTimeUtils(task[4]).get_difference_text(),
             "type": self.get_type(task[6]),
             "priority": self.get_priority(task[7]),
