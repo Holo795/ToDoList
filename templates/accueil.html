@@ -87,7 +87,7 @@
                 <td data-label="Actions">
                     <div class="div_actions">
                         <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="edit_task({{ task['id'] }})">
-                        <a href="/delete_task?id={{ task['id'] }}"><img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer"></a>
+                        <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer" onclick="location='/delete_task?id={{ task['id'] }}'">
                     </div>
                 </td>
             </tr>
@@ -105,15 +105,6 @@
            document.getElementById("task_edit_parent").style.display = "none";
        }
     }
-
-    function toggleField(hideObj,showObj){
-        hideObj.disabled=true;
-        hideObj.style.display='none';
-        showObj.disabled=false;
-        showObj.style.display='inline';
-        showObj.focus();
-    }
-    </script>
 
 {% endblock %}
 
