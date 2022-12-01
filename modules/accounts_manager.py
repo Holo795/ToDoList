@@ -39,7 +39,11 @@ class AccountsManager:
         """Enregistre un utilisateur"""
         username = request.form.get("username")
         password = request.form.get("password")
-        if self.accounts_table.get_account(username):
+        if len(password) < 3:
+            flash("Le mot de passe doit faire au moins 3 caractères", "error")
+        elif len(username) > 20:
+            flash("Le nom d'utilisateur ne doit pas depasser 20 caractères", "error")
+        elif self.accounts_table.get_account(username):
             flash("Cet utilisateur existe déjà", "error")
         else:
             self.accounts_table.add_account(username,
@@ -57,7 +61,7 @@ class AccountsManager:
             self.accounts.remove(self.get_account(username))
 
         self.accounts.append(account)
-        flash("Vous êtes connecté", "success")
+        flash("Vous êtes connecté", "notifier")
 
     def remove_user(self, username: str):
         self.accounts.remove(self.get_account(username))
@@ -133,12 +137,21 @@ class Account:
         """Renvoie la liste des types de l'utilisateur"""
         return self.types
 
+    def get_type_by_id(self, idType: int) -> str:
+        """Renvoie le nom d'un type"""
+        return next((type[1] for type in self.types if type[0] == idType), False)
+
+    def get_type_by_name(self, name: str) -> int:
+        """Renvoie l'id d'un type"""
+        return next((type[0] for type in self.types if type[1] == name), False)
+
     def add_type(self, name: str):
         """Ajoute un type à l'utilisateur"""
         types_table = Database().types
         types_table.add_type(name, self.user_id)
 
         self.types = types_table.get_all_types(self.user_id)
+        return self.get_type_by_name(name)
 
     def set_filter(self, filter: int):
         """Définit le filtre"""

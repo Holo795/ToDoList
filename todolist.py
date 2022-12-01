@@ -67,6 +67,9 @@ def add_task():
 
     deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
+    #if not user.get_type_by_id(type_tache):
+    #    type_tache = user.add_type(type_tache)
+
     user.add_task(name_task, description, deadline_micro, type_tache, 1, 1)
 
     return redirect(url_for("index"))
