@@ -22,7 +22,7 @@
 
             <div id="type">
                 <label>Type</label>
-                <select name="type_tache" id="type_tache">
+                <select name="type_tache" id="type_tache" required>
                     {% for type in user.get_types() %}
                         <option value="{{ type[0] }}">{{ type[1] }}</option>
                     {% endfor %}
