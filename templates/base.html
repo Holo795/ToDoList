@@ -49,9 +49,9 @@
             {% if messages %}
                 <script src="../static/scripts/notification.js"></script>
                 {% for category, message in messages %}
-                    {% if category == 'notifier' %}
+                    {% if category == 'notifier-' + user.get_username() %}
                         <script>
-                            notifier('{{ message }} {{ user.get_username() }}');
+                            notifier('{{ message }}');
                         </script>
                     {% endif %}
                 {% endfor %}

@@ -59,11 +59,12 @@ class AccountsManager:
         account = Account(username)
         account.refresh()
 
+        account.send_notification(f"Vous êtes connecté ! {account.get_username()}")
+
         if self.get_account(username):
             self.accounts.remove(self.get_account(username))
 
         self.accounts.append(account)
-        flash("Vous êtes connecté", "notifier")
 
     def remove_user(self, username: str):
         self.accounts.remove(self.get_account(username))
@@ -99,6 +100,9 @@ class Account:
 
         self.types.clear()
         self.types = types_table.get_all_types(self.user_id)
+
+    def send_notification(self, msg):
+        flash(msg, f"notifier-{self.get_username()}")
 
     def add_task(self, name: str, description: str, deadline_date: str, idType: int, idPriority: int, idState: int):
         """Ajoute une tâche à l'utilisateur"""
