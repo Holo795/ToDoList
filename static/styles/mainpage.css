@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root {
     --background_color_tableau: white;
     --bordures_interieurs: #dddddd;
 }
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 body {
     margin: 0;
@@ -407,4 +407,16 @@ nav img {
 	background-color: #009879;
 	color: white;
 	font-size: 17px;
+}
+
+#task_priority_high {
+    background-color: #ff0000;
+}
+
+#task_priority_medium {
+    background-color: #ff9900;
+}
+
+#task_priority_low {
+    background-color: #00ff00;
 }
