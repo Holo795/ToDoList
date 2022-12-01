@@ -81,11 +81,11 @@ class Tasks_Table(BddManager):
                             "idPriority, idState) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
                             (idAccount, name, description, deadline_date, None, idType, idPriority, idState))
 
-    def edit_task(self, idTask: int, name: str, description: str, deadline_date: int, idType: int, idPriority: int, idState: int) -> list:
+    def edit_task(self, idTask: int, name: str, description: str, deadline_date: int, idType: int, idPriority: int, idState: int, success_date=None) -> list:
         """Modifie une tâche d'un utilisateur"""
-        return self.execute("UPDATE Tasks SET name = ?, description = ?, deadline_date = ?, idType = ?, "
-                            "idPriority = ?, idState = ? WHERE idTask = ?;",
-                            (name, description, deadline_date, idType, idPriority, idState, idTask))
+        return self.execute("UPDATE Tasks SET name = ?, description = ?, deadline_date = ?, success_date = ?, "
+                            "idType = ?, idPriority = ?, idState = ? WHERE idTask = ?;",
+                            (name, description, deadline_date, success_date, idType, idPriority, idState, idTask))
 
     def delete_task(self, idTask: int) -> list:
         """Supprime une tâche d'un utilisateur"""

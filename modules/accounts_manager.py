@@ -108,10 +108,10 @@ class Account:
                 break
 
     def update_task(self, idTask: int, name: str, description: str, deadline_date: str, idType: int, idPriority: int,
-                    idState: int):
+                    idState: int, success_date=None):
         """Met à jour une tâche"""
         tasks_table = Database().tasks
-        tasks_table.edit_task(idTask, name, description, deadline_date, idType, idPriority, idState)
+        tasks_table.edit_task(idTask, name, description, deadline_date, idType, idPriority, idState, success_date)
 
         self.tasks = tasks_table.get_tasks(self.user_id)
 
