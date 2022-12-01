@@ -409,14 +409,14 @@ nav img {
 	font-size: 17px;
 }
 
-#task_priority_high {
+#task_priority_1{
     background-color: #ff0000;
 }
 
-#task_priority_medium {
+#task_priority_2 {
     background-color: #ff9900;
 }
 
-#task_priority_low {
+#task_priority_3 {
     background-color: #00ff00;
 }

@@ -17,22 +17,42 @@
 				<td id="tache"><p>Tâche</p> 
                     <div id="categories">
                         <select name="categories" id="type_tache" onchange="location=this.value">
-                            {% if user.get_filter() != -1 %}
+                            {% if user.get_filter_type() != -1 %}
                                 {% for type in user.get_types() %}
-                                    {% if type[0] == user.get_filter() %}
-                                        <option value="/show_tasks?filter={{user.get_filter()}}">{{ type[1] }}</option>
+                                    {% if type[0] == user.get_filter_type() %}
+                                        <option value="/type_filter?filter={{user.get_filter_type()}}">{{ type[1] }}</option>
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
-                            <option value="/show_tasks?filter=-1">Toutes les tâches</option>
+                            <option value="/type_filter?filter=-1">Toutes les tâches</option>
                             
                             {% for type in user.get_types() %}
-                                {% if user.get_filter() != type[0] %}
-                                    <option value="/show_tasks?filter={{ type[0] }}">{{ type[1] }}</option>
+                                {% if user.get_filter_type() != type[0] %}
+                                    <option value="/type_filter?filter={{ type[0] }}">{{ type[1] }}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
                     </div>
+
+                    <div id="priority">
+                        <select name="priority" id="priority_tache" onchange="location=this.value">
+                            {% if user.get_filter_priority() != -1 %}
+                                {% for priority in user.get_priorities() %}
+                                    {% if priority[0] == user.get_filter_priority() %}
+                                        <option value="/priority_filter?filter={{user.get_filter_priority()}}">{{ priority[1] }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <option value="/priority_filter?filter=-1">Toutes les tâches</option>
+
+                            {% for priority in user.get_priorities() %}
+                                {% if user.get_filter_priority() != priority[0] %}
+                                    <option value="/priority_filter?filter={{ priority[0] }}">{{ priority[1] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
                 </td>
 				<td id="echeance">Echéance</td>
 				<td id="actions">Actions</td>
@@ -41,11 +61,17 @@
 		<tbody>
             
             {% for task in user.get_html_tasks() %}
-            <tr id="task_priority_{{ task['priority'][1] }}">
+            <tr id="task_priority_{{ task['priority'][0] }}">
                 {% if task["done"] %}
-                    <td data-label="Tâche"><s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s></td>
+                    <td data-label="Tâche">
+                        <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}" onclick="location=this.value" checked>
+                        <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
+                    </td>
                 {% else %}
-                    <td data-label="Tâche">{{ task["title"] }}, {{ task["description"] }}</td>
+                    <td data-label="Tâche">
+                        <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}&validate=True" onclick="location=this.value">
+                        {{ task["title"] }}, {{ task["description"] }}
+                    </td>
                 {% endif %}
                 <td data-label="Echéance">
                     <div class="div_taches">

@@ -67,9 +67,6 @@ def add_task():
 
     deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
-    #if not user.get_type_by_id(type_tache):
-    #    type_tache = user.add_type(type_tache)
-
     user.add_task(name_task, description, deadline_micro, type_tache, 1, 1)
 
     return redirect(url_for("index"))
@@ -108,13 +105,37 @@ def edit_task():
     return redirect(url_for("index"))
 
 
-@app.route("/show_tasks", methods=["get"])
-def show_tasks():
-    """Affiche les tâches"""
+@app.route("/validate_task", methods=["get"])
+def validate_task():
+    """Valide une tâche"""
+    user = accounts_manager.get_account(session.get("username"))
+
+    task_id = int(request.args.get("task_id"))
+    validate = request.args.get("validate", False, type=bool)
+
+    user.validate_task(task_id, validate)
+
+    return redirect(url_for("index"))
+
+
+@app.route("/type_filter", methods=["get"])
+def type_filter():
+    """Filtre les tâches par type"""
     user = accounts_manager.get_account(session.get("username"))
 
     filter_id = request.args.get("filter")
-    user.set_filter(int(filter_id))
+    user.set_filter_type(int(filter_id))
+
+    return redirect(url_for("index"))
+
+
+@app.route("/priority_filter", methods=["get"])
+def priority_filter():
+    """Filtre les tâches par priorité"""
+    user = accounts_manager.get_account(session.get("username"))
+
+    filter_id = request.args.get("filter")
+    user.set_filter_priority(int(filter_id))
 
     return redirect(url_for("index"))
 
@@ -126,6 +147,17 @@ def add_type():
 
     type_name = request.form["type_name"]
     user.add_type(type_name)
+
+    return redirect(url_for("index"))
+
+
+@app.route("/delete_type", methods=["get"])
+def delete_type():
+    """Supprime un type de tâche"""
+    user = accounts_manager.get_account(session.get("username"))
+
+    type_id = int(request.args.get("id"))
+    user.remove_type(type_id)
 
     return redirect(url_for("index"))
 

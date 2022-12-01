@@ -81,11 +81,15 @@ class Tasks_Table(BddManager):
                             "idPriority, idState) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
                             (idAccount, name, description, deadline_date, None, idType, idPriority, idState))
 
-    def edit_task(self, idTask: int, name: str, description: str, deadline_date: int, idType: int, idPriority: int, idState: int, success_date=None) -> list:
-        """Modifie une tâche d'un utilisateur"""
-        return self.execute("UPDATE Tasks SET name = ?, description = ?, deadline_date = ?, success_date = ?, "
-                            "idType = ?, idPriority = ?, idState = ? WHERE idTask = ?;",
-                            (name, description, deadline_date, success_date, idType, idPriority, idState, idTask))
+    def edit_task(self, idTask: int, **kwargs) -> list:
+        """Modifie une tâche"""
+        if kwargs:
+            request = "UPDATE Tasks SET "
+            for key in kwargs:
+                request += f"{key} = ?, "
+            request = f"{request[:-2]} WHERE idTask = ?;"
+            return self.execute(request, tuple(kwargs.values()) + (idTask,))
+        return []
 
     def delete_task(self, idTask: int) -> list:
         """Supprime une tâche d'un utilisateur"""
@@ -157,9 +161,9 @@ class Types_Table(BddManager):
         """Modifie un type de tâche"""
         return self.execute("UPDATE Types SET name = ? WHERE name = ? AND idAccount = ?;", (new_name, name, idAccount))
 
-    def delete_type(self, name: str, idAccount: int) -> list:
+    def delete_type(self, idType: str) -> list:
         """Supprime un type de tâche"""
-        return self.execute("DELETE FROM Types WHERE name = ? AND idAccount = ?;", (name, idAccount))
+        return self.execute("DELETE FROM Types WHERE idType = ?;", (idType,))
 
 
 class Priorities_Table(BddManager):

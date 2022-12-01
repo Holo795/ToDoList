@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import *  # for flash messages
 
 from bdd.bdd import Database  # Accounts database gestion
@@ -81,7 +83,8 @@ class Account:
         self.tasks = []
         self.types = []
 
-        self.filter = -1
+        self.filter_type = -1
+        self.filter_priority = -1
 
     def refresh(self):
         """Rafraîchit les données de l'utilisateur"""
@@ -112,38 +115,40 @@ class Account:
                 break
 
     def update_task(self, idTask: int, name: str, description: str, deadline_date: str, idType: int, idPriority: int,
-                    idState: int, success_date=None):
+                    idState: int):
         """Met à jour une tâche"""
         tasks_table = Database().tasks
-        tasks_table.edit_task(idTask, name, description, deadline_date, idType, idPriority, idState, success_date)
+        tasks_table.edit_task(idTask=idTask, name=name, description=description, deadline_date=deadline_date,
+                              idType=idType, idPriority=idPriority, idState=idState)
+
+        self.tasks = tasks_table.get_tasks(self.user_id)
+
+    def validate_task(self, idTask: int, validate: bool):
+        """Valide une tâche"""
+        tasks_table = Database().tasks
+        tasks_table.edit_task(idTask=idTask, success_date=datetime.now().timestamp() if validate else None)
 
         self.tasks = tasks_table.get_tasks(self.user_id)
 
     def get_html_tasks(self) -> list:
         """Renvoie la liste des tâches formattées de l'utilisateur"""
+        print(TasksUtils(self.get_tasks()).get_formatted_tasks())
         return TasksUtils(self.get_tasks()).get_formatted_tasks()
 
     def get_tasks(self) -> list:
         """Renvoie la liste des tâches de l'utilisateur"""
-        if self.filter == -1:
-            print(self.tasks)
+        if self.filter_type == -1 and self.filter_priority == -1:
             return self.tasks
-        elif self.filter in [type[0] for type in self.types]:
-            return [task for task in self.tasks if task[6] == self.filter]
+        elif self.filter_type == -1:
+            return [task for task in self.tasks if task[7] == self.filter_priority]
+        elif self.filter_priority == -1:
+            return [task for task in self.tasks if task[6] == self.filter_type]
         else:
-            return []
+            return [task for task in self.tasks if task[6] == self.filter_type and task[7] == self.filter_priority]
 
     def get_types(self) -> list:
         """Renvoie la liste des types de l'utilisateur"""
         return self.types
-
-    def get_type_by_id(self, idType: int) -> str:
-        """Renvoie le nom d'un type"""
-        return next((type[1] for type in self.types if type[0] == idType), False)
-
-    def get_type_by_name(self, name: str) -> int:
-        """Renvoie l'id d'un type"""
-        return next((type[0] for type in self.types if type[1] == name), False)
 
     def add_type(self, name: str):
         """Ajoute un type à l'utilisateur"""
@@ -151,15 +156,34 @@ class Account:
         types_table.add_type(name, self.user_id)
 
         self.types = types_table.get_all_types(self.user_id)
-        return self.get_type_by_name(name)
 
-    def set_filter(self, filter: int):
+    def remove_type(self, idType: int):
+        """Supprime un type de l'utilisateur"""
+        types_table = Database().types
+        types_table.delete_type(idType)
+
+        self.types = types_table.get_all_types(self.user_id)
+
+    def set_filter_type(self, filter: int):
         """Définit le filtre"""
-        self.filter = filter
+        self.filter_type = filter
 
-    def get_filter(self) -> int:
+    def get_filter_type(self) -> int:
         """Renvoie le filtre actuel"""
-        return self.filter
+        return self.filter_type
+
+    def set_filter_priority(self, filter: int):
+        """Définit le filtre"""
+        self.filter_priority = filter
+
+    def get_priorities(self) -> list:
+        """Renvoie la liste des priorités"""
+        priorities_table = Database().priorities
+        return priorities_table.get_all_priorities()
+
+    def get_filter_priority(self) -> int:
+        """Renvoie le filtre actuel"""
+        return self.filter_priority
 
     def get_username(self) -> str:
         """Renvoie le nom d'utilisateur"""
