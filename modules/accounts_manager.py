@@ -61,6 +61,8 @@ class AccountsManager:
 
         account.send_notification(f"Vous êtes connecté ! {account.get_username()}")
 
+        account.notify_late_tasks()
+
         if self.get_account(username):
             self.accounts.remove(self.get_account(username))
 
@@ -102,7 +104,13 @@ class Account:
         self.types = types_table.get_all_types(self.user_id)
 
     def send_notification(self, msg):
-        flash(msg, f"notifier-{self.get_username()}")
+        print(f"Notification envoyée à {self.username}: {msg}")
+        flash(msg, f"notifier-{self.username}")
+
+    def notify_late_tasks(self):
+        for task in self.tasks:
+            if task[4] < datetime.now().timestamp() and task[7] == 1:
+                self.send_notification(f"La tâche {task[2]} est en retard !")
 
     def add_task(self, name: str, description: str, deadline_date: str, idType: int, idPriority: int, idState: int):
         """Ajoute une tâche à l'utilisateur"""
@@ -130,7 +138,8 @@ class Account:
     def validate_task(self, idTask: int, validate: bool):
         """Valide une tâche"""
         tasks_table = Database().tasks
-        tasks_table.edit_task(idTask=idTask, success_date=datetime.now().timestamp() if validate else None)
+        tasks_table.edit_task(idTask=idTask, success_date=datetime.now().timestamp() if validate else None,
+                              idState=2 if validate else 1)
 
         self.tasks = tasks_table.get_tasks(self.user_id)
 
@@ -140,15 +149,18 @@ class Account:
         return TasksUtils(self.get_tasks()).get_formatted_tasks()
 
     def get_tasks(self) -> list:
-        """Renvoie la liste des tâches de l'utilisateur"""
+        """Renvoie la liste des tâches de l'utilisateur triées par date d'échéance croissante"""
         if self.filter_type == -1 and self.filter_priority == -1:
-            return self.tasks
+            return sorted(self.tasks, key=lambda task: task[3], reverse=True)
         elif self.filter_type == -1:
-            return [task for task in self.tasks if task[7] == self.filter_priority]
+            return sorted([task for task in self.tasks if task[7] == self.filter_priority], key=lambda task: task[3],
+                          reverse=True)
         elif self.filter_priority == -1:
-            return [task for task in self.tasks if task[6] == self.filter_type]
+            return sorted([task for task in self.tasks if task[6] == self.filter_type], key=lambda task: task[3],
+                          reverse=True)
         else:
-            return [task for task in self.tasks if task[6] == self.filter_type and task[7] == self.filter_priority]
+            return sorted([task for task in self.tasks if task[6] == self.filter_type and task[7] ==
+                           self.filter_priority], key=lambda task: task[3], reverse=True)
 
     def get_types(self) -> list:
         """Renvoie la liste des types de l'utilisateur"""
