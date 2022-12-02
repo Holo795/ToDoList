@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+
+/* Form */
+
+
+#account_form {
+	top: 50%;
+	left: 50%;
+    transform: translate(-50%, -50%);
+	position: absolute;
+	z-index: 1;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+	width: 500px;
+    height: auto;
+	padding: 40px;
+	background: #2F2F2F;
+}
+
+#account_form_parent {
+	z-index: 2;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backdrop-filter: blur(8px);
+}
+
+#account_form h2 {
+	color: #FFF;
+	margin-bottom: 45px;
+}
+
+.input_box {
+	position: relative;
+	height: 40px;
+	width: 100%;
+	margin-top: 50px;
+}
+
+.input_box input {
+	position: absolute;
+	background: transparent;
+	border:none;
+	box-shadow: none;
+	font-size: 16px;
+	color: #FFF;
+	width: 100%;
+	outline: none;
+}
+
+.input_box label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: #555;
+	pointer-events: none;
+	display: block;
+	transition: 0.5s;
+}
+
+.input_box input:focus + label, .input_box input:valid + label {
+	transform: translateY(-35px);
+	font-size: 14px;
+	color: #FFF;
+	background: #FF006A;
+	padding: 2px 6px;
+}
+
+.input_box span {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	display: block;
+	background: #555;
+	width: 100%;
+	height: 2px;
+}
+
+.input_box span:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #00B0FF;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.5s ease-in-out;
+}
+
+.input_box input:focus ~ span:before,
+.input_box input:valid ~ span:before {
+	transform: scaleX(1);
+	transform-origin: left;
+	transition: transform 0.5s ease-in-out;
+}
+
+
+
+/* Bouton */
+
+#account_form input[type="submit"] {
+	border: none;
+	box-shadow: none;
+	padding: 10px 25px;
+	background: #333;
+	color: #FFF;
+	font-size: 16px;
+    cursor: pointer;
+    transition: all 0.06s ease-in;
+    margin-top: 60px;
+}
+
+
+
+#account_form input[type="submit"]:hover {
+    background: #00BCD4;
+}
+
+
+
+#account_form input[type="button"] {
+    border: none;
+    box-shadow: none;
+    padding: 8px 18px;
+    margin-left: 20px;
+    background: #333;
+    color: #FFF;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.06s ease-in;
+}
+
+#account_form input[type="button"]:hover {
+    background: #00BCD4;
+}
+
+
+/* Error */
+#account_form #error {
+    position: absolute;
+    color: red;
+    font-weight: bold;
+    margin: 30px 0px 20px 0px; 
+}
+
+
+/* Catégories */
+#account_form #categories {
+    color: white;
+}
+
+#account_form #categories input[type="text"] {
+    outline: none;
+    border: none;
+    background-color: #333;
+    color: white;
+}
+

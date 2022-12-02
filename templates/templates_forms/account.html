@@ -1,0 +1,61 @@
+<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/account.css" />
+<div id="account_form_parent">
+    <div id="account_form">
+        <h2>Informations du compte</h2>
+        <form action="/" method="POST">
+            <div class="input_box">
+                <input type="text" name="username" id="id" autocomplete="off" value="idCompte" required>
+                <label>Identifiant</label>
+                <span></span>
+            </div>
+
+            <div class="input_box">
+                <input type="password" name="password" id="mdp" autocomplete="off" value="mdpCompte" required>
+                <label>Mot de passe</label>
+                <span></span>
+            </div>
+
+			<div id="categories">
+				<h3>Catégories :</h3>
+				<ul>
+					<li>Maison</li>
+					<li>Travail</li>
+				</ul>
+				
+			<input type="button" id="oui" value="Nouvelle catégorie" onclick="nouvelle_categorie()"/>
+				
+			
+
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                
+                {% for category, message in messages %}
+                    {%  if category == "error" %}
+                        <p id="error">{{ message }}</p>
+                    {% elif category == "success" %}
+                        <p id="success">{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+                
+            {% endif %}
+            {% endwith %}
+
+            <div id="boutons">
+                <input type="submit" value="Connexion" onclick="change_data()"/>
+            </div>
+            <script>
+                function change_data() {
+                    document.querySelector("form").action = ""
+                }
+
+				function nouvelle_categorie() {
+					console.log("oui")
+					document.getElementById("categories").querySelector("ul").innerHTML += "<li><input type='text'/></li>" 
+				}
+            </script>
+
+        </form>
+    </div>
+</div>
+
