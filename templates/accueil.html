@@ -61,36 +61,38 @@
 		<tbody>
             
             {% for task in user.get_html_tasks() %}
-            <tr id="task_priority_{{ task['priority'][0] }}">
-                {% if task["done"] %}
-                    <td data-label="Tâche">
-                        <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}" onclick="location=this.value" checked>
-                        <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
-                    </td>
-                {% else %}
-                    <td data-label="Tâche">
-                        <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}&validate=True" onclick="location=this.value">
-                        {{ task["title"] }}, {{ task["description"] }}
-                    </td>
-                {% endif %}
-                <td data-label="Echéance">
-                    <div class="div_taches">
-
+                {% if not task["stats"][0] == 3 %}
+                    <tr id="task_priority_{{ task['priority'][0] }}">
                         {% if task["done"] %}
-                            <p>Terminé le {{ task["done"] }}</p>
+                            <td data-label="Tâche">
+                                <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}" onclick="location=this.value" checked>
+                                <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
+                            </td>
                         {% else %}
-                        <p>{{ task["time_left"] }}</p>
-                        <txt>{{ task["date"] }}</txt>
+                            <td data-label="Tâche">
+                                <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}&validate=True" onclick="location=this.value">
+                                {{ task["title"] }}, {{ task["description"] }}
+                            </td>
                         {% endif %}
-                    </div>
-                </td>
-                <td data-label="Actions">
-                    <div class="div_actions">
-                        <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="edit_task({{ task['id'] }})">
-                        <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer" onclick="location='/delete_task?id={{ task['id'] }}'">
-                    </div>
-                </td>
-            </tr>
+                        <td data-label="Echéance">
+                            <div class="div_taches">
+
+                                {% if task["done"] %}
+                                    <p>Terminé le {{ task["done"] }}</p>
+                                {% else %}
+                                <p>{{ task["time_left"] }}</p>
+                                <txt>{{ task["date"] }}</txt>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td data-label="Actions">
+                            <div class="div_actions">
+                                <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="edit_task({{ task['id'] }})">
+                                <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer" onclick="location='/delete_task?id={{ task['id'] }}'">
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
 		</tbody>
 	</table>
