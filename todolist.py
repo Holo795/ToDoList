@@ -68,6 +68,7 @@ def add_task():
     deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
     user.add_task(name_task, description, deadline_micro, type_tache, 1, 1)
+    user.send_notification("Tâche ajoutée !")
 
     return redirect(url_for("index"))
 
@@ -83,6 +84,7 @@ def delete_task():
     tasks_table.delete_task(task_id)
 
     user.remove_task(task_id)
+    user.send_notification("Tâche supprimée !")
 
     return redirect(url_for("index"))
 
@@ -101,6 +103,7 @@ def edit_task():
     deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
     user.update_task(task_id, name_task, description, deadline_micro, type_tache, 1, 1)
+    user.send_notification("Tâche modifiée !")
 
     return redirect(url_for("index"))
 
