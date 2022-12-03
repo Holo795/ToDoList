@@ -5,7 +5,7 @@ from flask import *  # for flash messages
 from bdd.bdd import Database  # Accounts database gestion
 import bcrypt  # for password hashing
 
-from modules.tasks_utils import TasksUtils
+from modules.tasks_utils import TasksUtils  # for tasks gestion
 
 
 class AccountsManager:
@@ -22,7 +22,7 @@ class AccountsManager:
         password = request.form.get("password")
         if account_bdd := self.accounts_table.get_account(username):
             account_bdd = account_bdd[0]
-            if bcrypt.checkpw(password.encode('utf8'), account_bdd[2].encode('utf8')):
+            if bcrypt.checkpw(password.encode('utf8'), account_bdd[2].encode('utf8')):  # Check password
                 self.add_user(username)
                 return redirect(url_for("index"))
             else:
@@ -33,8 +33,8 @@ class AccountsManager:
 
     def logout(self) -> Response:
         """Déconnecte un utilisateur"""
-        self.remove_user(session["username"])
-        session.pop("username", None)
+        self.remove_user(session["username"])  # Remove user from accounts list
+        session.pop("username", None)  # remove the username from the session
         return redirect(url_for("index"))
 
     def register(self, request: Request) -> Response:
@@ -50,28 +50,36 @@ class AccountsManager:
         else:
             self.accounts_table.add_account(username,
                                             bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt()).decode('utf8'))
-            self.add_user(username)
+            self.add_user(username)  # Connect user
+
+            # Add default categories
+            self.get_account(username).add_type("Maison")
+            self.get_account(username).add_type("Travail")
+
         return redirect(url_for("index"))
 
     def add_user(self, username: str):
+        """Add user to accounts list"""
         session["username"] = username
 
-        account = Account(username)
-        account.refresh()
+        account = Account(username)  # Create account
+        account.refresh()  # Refresh tasks, categories, etc...
 
         account.send_notification(f"Vous êtes connecté ! {account.get_username()}")
 
         account.notify_late_tasks()
 
-        if self.get_account(username):
-            self.accounts.remove(self.get_account(username))
+        if self.get_account(username):  # If user already exists
+            self.accounts.remove(self.get_account(username))  # Remove old account
 
         self.accounts.append(account)
 
     def remove_user(self, username: str):
+        """Remove user from accounts list"""
         self.accounts.remove(self.get_account(username))
 
     def get_account(self, username: str):
+        """Return account from username"""
         return next((account for account in self.accounts if account.username == username), False)
 
 
@@ -104,13 +112,16 @@ class Account:
         self.types = types_table.get_all_types(self.user_id)
 
     def send_notification(self, msg):
+        """Envoie une notification a l'utilisateur"""
         print(f"Notification envoyée à {self.username}: {msg}")
         flash(msg, f"notifier-{self.username}")
 
     def notify_late_tasks(self):
-        for task in self.tasks:
-            if task[4] < datetime.now().timestamp() and task[7] == 1:
-                self.send_notification(f"La tâche {task[2]} est en retard !")
+        """Notifie des taches en retard"""
+        late_tasks = sum(task[4] < datetime.now().timestamp() and task[7] == 1 for task in self.tasks)
+        if late_tasks > 0:
+            self.send_notification(f"Vous avez {late_tasks} " + ("taches" if late_tasks != 1 else "tache") + " en "
+                                                                                                             "retard")
 
     def add_task(self, name: str, description: str, deadline_date: str, idType: int, idPriority: int, idState: int):
         """Ajoute une tâche à l'utilisateur"""
@@ -149,18 +160,15 @@ class Account:
         return TasksUtils(self.get_tasks()).get_formatted_tasks()
 
     def get_tasks(self) -> list:
-        """Renvoie la liste des tâches de l'utilisateur triées par date d'échéance croissante"""
+        """Renvoie la liste des tâches de l'utilisateur filtrées"""
         if self.filter_type == -1 and self.filter_priority == -1:
-            return sorted(self.tasks, key=lambda task: task[3], reverse=True)
+            return self.tasks
         elif self.filter_type == -1:
-            return sorted([task for task in self.tasks if task[7] == self.filter_priority], key=lambda task: task[3],
-                          reverse=True)
+            return [task for task in self.tasks if task[7] == self.filter_priority]
         elif self.filter_priority == -1:
-            return sorted([task for task in self.tasks if task[6] == self.filter_type], key=lambda task: task[3],
-                          reverse=True)
+            return [task for task in self.tasks if task[6] == self.filter_type]
         else:
-            return sorted([task for task in self.tasks if task[6] == self.filter_type and task[7] ==
-                           self.filter_priority], key=lambda task: task[3], reverse=True)
+            return [task for task in self.tasks if task[6] == self.filter_type and task[7] == self.filter_priority]
 
     def get_types(self) -> list:
         """Renvoie la liste des types de l'utilisateur"""
