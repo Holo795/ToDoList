@@ -12,15 +12,15 @@
                     {% if user.get_filter_type() != -1 %}
                         {% for type in user.get_types() %}
                             {% if type[0] == user.get_filter_type() %}
-                                <option value="/type_filter?filter={{user.get_filter_type()}}">{{ type[1] }}</option>
+                                <option value="{{ url_for('type_filter') }}?filter={{user.get_filter_type()}}">{{ type[1] }}</option>
                             {% endif %}
                         {% endfor %}
                     {% endif %}
-                    <option value="/type_filter?filter=-1">Toutes les tâches</option>
+                    <option value="{{ url_for('type_filter') }}?filter=-1">Toutes les tâches</option>
 
                     {% for type in user.get_types() %}
                         {% if user.get_filter_type() != type[0] %}
-                            <option value="/type_filter?filter={{ type[0] }}">{{ type[1] }}</option>
+                            <option value="{{ url_for('type_filter') }}?filter={{ type[0] }}">{{ type[1] }}</option>
                         {% endif %}
                     {% endfor %}
                 </select>
@@ -30,14 +30,14 @@
                     {% if user.get_filter_priority() != -1 %}
                         {% for priority in user.get_priorities() %}
                             {% if priority[0] == user.get_filter_priority() %}
-                                <option value="/priority_filter?filter={{user.get_filter_priority()}}">{{ priority[1] }}</option>
+                                <option value="{{ url_for('priority_filter') }}?filter={{user.get_filter_priority()}}">{{ priority[1] }}</option>
                             {% endif %}
                         {% endfor %}
                     {% endif %}
-                    <option value="/priority_filter?filter=-1">Toutes les tâches</option>
+                    <option value="{{ url_for('priority_filter') }}?filter=-1">Toutes les tâches</option>
                     {% for priority in user.get_priorities() %}
                         {% if user.get_filter_priority() != priority[0] %}
-                            <option value="/priority_filter?filter={{ priority[0] }}">{{ priority[1] }}</option>
+                            <option value="{{ url_for('priority_filter') }}?filter={{ priority[0] }}">{{ priority[1] }}</option>
                         {% endif %}
                     {% endfor %}
                 </select>
@@ -54,12 +54,12 @@
             <tr id="task_priority_{{ task['priority'][0] }}">
                 {% if task["done"] %}
                     <td data-label="Tâche">
-                        <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}" onclick="location=this.value" checked>
+                        <input type="checkbox" id="state_task" name="state_task" value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}" onclick="location=this.value" checked>
                         <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
                     </td>
                 {% else %}
                     <td data-label="Tâche">
-                        <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}&validate=True" onclick="location=this.value">
+                        <input type="checkbox" id="state_task" name="state_task" value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True" onclick="location=this.value">
                         {{ task["title"] }}, {{ task["description"] }}
                     </td>
                 {% endif %}
@@ -76,9 +76,9 @@
                 <td data-label="Actions">
                     <div class="div_actions">
                         <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="edit_task({{ task['id'] }})">
-                        <a href="/archive_task?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ?')">
+                        <a href="{{ url_for('archive_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ?')">
                             <img src="./static/icons/archiver.png" width="30%" alt="Archiver" title="Archiver">
-                        <a href="/delete_task?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">
+                        <a href="{{ url_for('delete_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">
                             <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
                     </div>
                 </td>
