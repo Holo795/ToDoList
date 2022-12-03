@@ -24,8 +24,6 @@
                         {% endif %}
                     {% endfor %}
                 </select>
-            </div>
-            <div id="priority">
                 <select name="priority" id="priority_tache" onchange="location=this.value">
                     {% if user.get_filter_priority() != -1 %}
                         {% for priority in user.get_priorities() %}
@@ -41,7 +39,7 @@
                         {% endif %}
                     {% endfor %}
                 </select>
-            </div>
+
         </td>
         <td id="echeance">Echéance</td>
         <td id="actions">Actions</td>
@@ -51,16 +49,18 @@
 
     {% for task in user.get_html_tasks() %}
         {% if not task["stats"][0] == 3 %}
-            <tr id="task_priority_{{ task['priority'][0] }}">
+            <tr>
                 {% if task["stats"][0] == 2 %}
                     <td data-label="Tâche">
-                        <input type="checkbox" id="state_task" name="state_task" value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}" onclick="location=this.value" checked>
+                        <div class="priority" id="task_priority_{{ task['priority'][0] }}" title="Priorité {{ task['priority'][1] }}"></div><input type="checkbox" id="state_task" name="state_task" title="État : Terminé" value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}" onclick="location=this.value" checked>
                         <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
+                        
                     </td>
                 {% else %}
                     <td data-label="Tâche">
-                        <input type="checkbox" id="state_task" name="state_task" value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True" onclick="location=this.value">
+                        <div class="priority" id="task_priority_{{ task['priority'][0] }}" title="Priorité : {{ task['priority'][1] }}"></div><input type="checkbox" id="state_task" name="state_task" title="État : En cours" value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True" onclick="location=this.value">
                         {{ task["title"] }}, {{ task["description"] }}
+                        
                     </td>
                 {% endif %}
                 <td data-label="Echéance">
@@ -78,8 +78,10 @@
                         <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="edit_task({{ task['id'] }})">
                         <a href="{{ url_for('archive_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ?')">
                             <img src="./static/icons/archiver.png" width="30%" alt="Archiver" title="Archiver">
+                        </a>
                         <a href="{{ url_for('delete_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">
                             <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
+                        </a>
                     </div>
                 </td>
             </tr>
