@@ -402,6 +402,7 @@ nav img {
     display: grid;
     place-content: center;
     float: right;
+    cursor: pointer;
 }
 
 #tableau_taches input[type="checkbox"]::before {
