@@ -149,8 +149,20 @@ class Account:
     def validate_task(self, idTask: int, validate: bool):
         """Valide une tâche"""
         tasks_table = Database().tasks
-        tasks_table.edit_task(idTask=idTask, success_date=datetime.now().timestamp() if validate else None,
+        tasks_table.edit_task(idTask=idTask, success_date=int(datetime.now().timestamp()) if validate else None,
                               idState=2 if validate else 1)
+
+        self.tasks = tasks_table.get_tasks(self.user_id)
+
+    def archive_task(self, idTask: int):
+        """Archive une tâche"""
+        task = self.get_task(idTask)
+
+        tasks_table = Database().tasks
+        if task[7] == 2:
+            tasks_table.edit_task(idTask=idTask, idState=3)
+        else:
+            tasks_table.edit_task(idTask=idTask, idState=3, success_date=int(datetime.now().timestamp()))
 
         self.tasks = tasks_table.get_tasks(self.user_id)
 
@@ -169,6 +181,10 @@ class Account:
             return [task for task in self.tasks if task[6] == self.filter_type]
         else:
             return [task for task in self.tasks if task[6] == self.filter_type and task[7] == self.filter_priority]
+
+    def get_task(self, idTask: int) -> list:
+        """Renvoie la tâche correspondant à l'id"""
+        return [task for task in self.tasks if task[0] == idTask][0]
 
     def get_types(self) -> list:
         """Renvoie la liste des types de l'utilisateur"""

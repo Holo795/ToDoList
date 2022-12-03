@@ -78,13 +78,26 @@ def delete_task():
     """Supprime une tâche"""
     user = accounts_manager.get_account(session.get("username"))
 
-    task_id = int(request.args.get("id"))
+    task_id = int(request.args.get("task_id"))
 
     tasks_table = Database().tasks
     tasks_table.delete_task(task_id)
 
     user.remove_task(task_id)
     user.send_notification("Tâche supprimée !")
+
+    return redirect(url_for("index"))
+
+
+@app.route("/archive_task", methods=["get"])
+def archive_task():
+    """Archive une tâche"""
+    user = accounts_manager.get_account(session.get("username"))
+
+    task_id = int(request.args.get("task_id"))
+
+    user.archive_task(task_id)
+    user.send_notification("Tâche archivée !")
 
     return redirect(url_for("index"))
 

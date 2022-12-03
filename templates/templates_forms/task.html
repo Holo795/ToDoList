@@ -76,7 +76,10 @@
                 <td data-label="Actions">
                     <div class="div_actions">
                         <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="edit_task({{ task['id'] }})">
-                        <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer" onclick="location='/delete_task?id={{ task['id'] }}'">
+                        <a href="/archive_task?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ?')">
+                            <img src="./static/icons/archiver.png" width="30%" alt="Archiver" title="Archiver">
+                        <a href="/delete_task?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">
+                            <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
                     </div>
                 </td>
             </tr>
