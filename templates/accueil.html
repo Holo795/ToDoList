@@ -4,111 +4,20 @@
 
 <!-- On ajoute notre propre contenu -->
 {% block contenu %}
+    {% if user %}
+        {% include "/templates_forms/task.html" %}
+    {% endif %}
+{% endblock %}
 
-{% if user %}    
-    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('task_add_parent').style.display = 'block'">
-
-
-
-    <!-- Tableau tâches à effectuer-->
-    <table id="tableau_taches" cellspacing="0">
-		<thead>
-			<tr>
-				<td id="tache"><p>Tâche</p> 
-                    <div id="categories">
-                        <select name="categories" id="type_tache" onchange="location=this.value">
-                            {% if user.get_filter_type() != -1 %}
-                                {% for type in user.get_types() %}
-                                    {% if type[0] == user.get_filter_type() %}
-                                        <option value="/type_filter?filter={{user.get_filter_type()}}">{{ type[1] }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                            <option value="/type_filter?filter=-1">Toutes les tâches</option>
-                            
-                            {% for type in user.get_types() %}
-                                {% if user.get_filter_type() != type[0] %}
-                                    <option value="/type_filter?filter={{ type[0] }}">{{ type[1] }}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div id="priority">
-                        <select name="priority" id="priority_tache" onchange="location=this.value">
-                            {% if user.get_filter_priority() != -1 %}
-                                {% for priority in user.get_priorities() %}
-                                    {% if priority[0] == user.get_filter_priority() %}
-                                        <option value="/priority_filter?filter={{user.get_filter_priority()}}">{{ priority[1] }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                            <option value="/priority_filter?filter=-1">Toutes les tâches</option>
-
-                            {% for priority in user.get_priorities() %}
-                                {% if user.get_filter_priority() != priority[0] %}
-                                    <option value="/priority_filter?filter={{ priority[0] }}">{{ priority[1] }}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                </td>
-				<td id="echeance">Echéance</td>
-				<td id="actions">Actions</td>
-			</tr>
-		</thead>
-		<tbody>
-            
-            {% for task in user.get_html_tasks() %}
-                {% if not task["stats"][0] == 3 %}
-                    <tr id="task_priority_{{ task['priority'][0] }}">
-                        {% if task["done"] %}
-                            <td data-label="Tâche">
-                                <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}" onclick="location=this.value" checked>
-                                <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
-                            </td>
-                        {% else %}
-                            <td data-label="Tâche">
-                                <input type="checkbox" id="state_task" name="state_task" value="/validate_task?task_id={{ task['id'] }}&validate=True" onclick="location=this.value">
-                                {{ task["title"] }}, {{ task["description"] }}
-                            </td>
-                        {% endif %}
-                        <td data-label="Echéance">
-                            <div class="div_taches">
-
-                                {% if task["done"] %}
-                                    <p>Terminé le {{ task["done"] }}</p>
-                                {% else %}
-                                <p>{{ task["time_left"] }}</p>
-                                <txt>{{ task["date"] }}</txt>
-                                {% endif %}
-                            </div>
-                        </td>
-                        <td data-label="Actions">
-                            <div class="div_actions">
-                                <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="edit_task({{ task['id'] }})">
-                                <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer" onclick="location='/delete_task?id={{ task['id'] }}'">
-                            </div>
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-		</tbody>
-	</table>
-
-
-{% endif %}
-
+{% block script %}
     <script>
-    window.onclick = function(event) {
-        if (event.target.id === "close_task") {
-            document.getElementById("task_add_parent").style.display = "none";
-            document.getElementById("task_edit_parent").style.display = "none";
+        window.onclick = function(event) {
+            if (event.target.id === "close_task") {
+                document.getElementById("task_add_parent").style.display = "none";
+                document.getElementById("task_edit_parent").style.display = "none";
+            }
         }
-    }
     </script>
-
 {% endblock %}
 
 
