@@ -1,5 +1,4 @@
-import sqlite3
-import time
+import sqlite3  # Import the SQLite3 module
 
 # abc library for abstract base classes
 from abc import abstractmethod
@@ -57,7 +56,7 @@ class Tasks_Table(BddManager):
         """Crée la table Taches"""
         self.execute("CREATE TABLE IF NOT EXISTS Tasks (idTask INTEGER NOT NULL UNIQUE, "
                      "idAccount INTEGER NOT NULL, "
-                     "name TEXT NOT NULL, "
+                     "name TEXT NOT NULL CHECK (length(name) < 50), "
                      "description TEXT, "
                      "deadline_date	INTEGER NOT NULL, "
                      "success_date INTEGER, "
@@ -72,7 +71,7 @@ class Tasks_Table(BddManager):
 
     def get_tasks(self, idAccount) -> list:
         """Récupère les tâches d'un utilisateur"""
-        return self.execute("SELECT * FROM Tasks WHERE idAccount = ?;", (idAccount,))
+        return self.execute("SELECT * FROM Tasks WHERE idAccount = ? ORDER BY deadline_date ASC;", (idAccount,))
 
     def add_task(self, idAccount: int, name: str, description: str, deadline_date: int, idType: int,
                  idPriority: int, idState: int) -> list:
@@ -157,10 +156,6 @@ class Types_Table(BddManager):
         """Récupère tous les types de tâche"""
         return self.execute("SELECT * FROM Types WHERE idAccount = ?;", (idAccount,))
 
-    def edit_type(self, name: str, new_name: str, idAccount: int) -> list:
-        """Modifie un type de tâche"""
-        return self.execute("UPDATE Types SET name = ? WHERE name = ? AND idAccount = ?;", (new_name, name, idAccount))
-
     def delete_type(self, idType: str) -> list:
         """Supprime un type de tâche"""
         return self.execute("DELETE FROM Types WHERE idType = ?;", (idType,))
@@ -220,10 +215,3 @@ class States_Table(BddManager):
     def get_all_states(self) -> list:
         """Récupère tous les états de tâche"""
         return self.execute("SELECT * FROM States;")
-
-
-if __name__ == "__main__":
-    actual_milli_time = round(time.time() * 1000)
-
-    tache = Tasks_Table("todo.sqlite")
-    print(tache.get_user_all_tasks("Test1"))
