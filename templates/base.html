@@ -49,7 +49,7 @@
             {% if messages %}
                 <script src="../static/scripts/notification.js"></script>
                 {% for category, message in messages %}
-                    {% if category == 'notifier-' + user.get_username() %}
+                    {% if user and category == 'notifier-' + user.get_username() %}
                         <script>
                             notifier('{{ message }}');
                         </script>
