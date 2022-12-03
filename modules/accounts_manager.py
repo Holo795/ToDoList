@@ -118,7 +118,7 @@ class Account:
 
     def notify_late_tasks(self):
         """Notifie des taches en retard"""
-        late_tasks = sum(task[4] < datetime.now().timestamp() and task[7] == 1 for task in self.tasks)
+        late_tasks = sum(task[4] < datetime.now().timestamp() and task[8] == 1 for task in self.tasks)
         if late_tasks > 0:
             self.send_notification(f"Vous avez {late_tasks} " + ("taches" if late_tasks != 1 else "tache") + " en "
                                                                                                              "retard")
@@ -159,7 +159,7 @@ class Account:
         task = self.get_task(idTask)
 
         tasks_table = Database().tasks
-        if task[7] == 2:
+        if task[8] == 2:
             tasks_table.edit_task(idTask=idTask, idState=3)
         else:
             tasks_table.edit_task(idTask=idTask, idState=3, success_date=int(datetime.now().timestamp()))
