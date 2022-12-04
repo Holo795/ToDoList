@@ -111,9 +111,21 @@ class Account:
         self.types.clear()
         self.types = types_table.get_all_types(self.user_id)
 
+    def update_username(self, new_username):
+        """Change l'username de l'utilisateur"""
+        account_table = Database().accounts
+        account_table.edit_account(self.user_id, username=new_username)
+        self.username = new_username
+
+    def update_password(self, new_password):
+        """Change le mot de passe de l'utilisateur"""
+        account_table = Database().accounts
+        password_crypt = bcrypt.hashpw(new_password.encode('utf8'), bcrypt.gensalt()).decode('utf8')
+
+        account_table.edit_account(self.user_id, password=password_crypt)
+
     def send_notification(self, msg):
         """Envoie une notification a l'utilisateur"""
-        print(f"Notification envoyée à {self.username}: {msg}")
         flash(msg, f"notifier-{self.username}")
 
     def notify_late_tasks(self):
@@ -168,7 +180,6 @@ class Account:
 
     def get_html_tasks(self) -> list:
         """Renvoie la liste des tâches formattées de l'utilisateur"""
-        print(TasksUtils(self.get_tasks()).get_formatted_tasks())
         return TasksUtils(self.get_tasks()).get_formatted_tasks()
 
     def get_tasks(self) -> list:
