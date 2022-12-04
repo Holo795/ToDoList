@@ -78,8 +78,6 @@
 
             var select = form.elements["type_tache"];
             for (var i = 0; i < select.options.length; i++) {
-                console.log(select.options[i].value);
-                console.log(task_to_edit[6]);
                 if (select.options[i].value === `${task_to_edit[6]}`) {
                     select.options[i].selected = true;
                     break;
