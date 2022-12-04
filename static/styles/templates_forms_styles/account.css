@@ -169,10 +169,31 @@
     color: white;
 }
 
+#account_form ul {
+	max-height: 150px;
+	overflow-y: auto;
+}
+
 #account_form #categories input[type="text"] {
     outline: none;
     border: none;
     background-color: #333;
     color: white;
 }
+
+    /* Scrollbar */
+#categories ul::-webkit-scrollbar {
+	width: 10px;
+}
+	
+#categories ul::-webkit-scrollbar-track {
+	background-color: #333;
+	border-radius: 10px;
+}
+
+#categories ul::-webkit-scrollbar-thumb {
+	background: hsl(0, 0%, 31%);
+	border-radius: 5px;
+}
+
 

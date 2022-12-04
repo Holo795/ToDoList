@@ -279,9 +279,14 @@ nav img {
 
 /* Bouton */
 
-#bouton_nouvelle_tache {
+#upper_buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#upper_buttons #bouton_nouvelle_tache, #upper_buttons #settings {
     display: block;
-    margin: auto;
 	margin-top: 20px;
 	border: none;
     border-radius: 4px;
@@ -292,9 +297,17 @@ nav img {
 	font-size: 16px;
 	cursor: pointer;
     transition: all 0.06s ease-in;
+
 }
 
-#bouton_nouvelle_tache:hover {
+#upper_buttons #settings {
+    width: 30px;
+    height: auto;
+    padding: 4px 7px !important;
+    margin-left: 20px;
+}
+
+#upper_buttons #bouton_nouvelle_tache:hover, #upper_buttons #settings:hover {
     background: #00BCD4;
 }
 
