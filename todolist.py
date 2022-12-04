@@ -68,10 +68,10 @@ def add_task():
     """Ajoute une tâche"""
     user = accounts_manager.get_account(session.get("username"))
 
-    name_task = request.form["nom"]
-    description = request.form["description"]
-    deadline = request.form["echeance"]
-    type_tache = request.form["type_tache"]
+    name_task = request.form.get("nom")
+    description = request.form.get("description")
+    deadline = request.form.get("echeance")
+    type_tache = request.form.get("type_tache")
 
     deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
@@ -115,11 +115,11 @@ def edit_task():
     """Modifie une tâche"""
     user = accounts_manager.get_account(session.get("username"))
 
-    task_id = request.form["task_id"]
-    name_task = request.form["nom"]
-    description = request.form["description"]
-    deadline = request.form["echeance"]
-    type_tache = request.form["type_tache"]
+    task_id = request.form.get("task_id")
+    name_task = request.form.get("nom")
+    description = request.form.get("description")
+    deadline = request.form.get("echeance")
+    type_tache = request.form.get("type_tache")
 
     deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
@@ -169,14 +169,14 @@ def update_user():
     """Ajoute un type de tâche"""
     user = accounts_manager.get_account(session.get("username"))
 
-    username = request.form["username"]
-    password = request.form["password"]
+    username = request.form.get("username")
+    password = request.form.get("password")
 
-    new_type_length = int(request.form["new_type_length"])
+    new_type_length = int(request.form.get("new_type_length"))
 
     for i in range(new_type_length):
-        new_type = request.form[f"new_type_{i}"]
-        if new_type != "":
+        new_type = request.form.get(f"new_type_{i}") or None
+        if new_type != "" and new_type is not None:
             user.add_type(new_type)
 
     if username != user.username:
@@ -188,15 +188,15 @@ def update_user():
     return redirect(url_for("index"))
 
 
-@app.route("/delete_type", methods=["get"])
+@app.route("/delete_type", methods=["post"])
 def delete_type():
     """Supprime un type de tâche"""
     user = accounts_manager.get_account(session.get("username"))
 
-    type_id = int(request.args.get("id"))
+    type_id = request.form.get("type_id")
     user.remove_type(type_id)
 
-    return redirect(url_for("index"))
+    return '', 204
 
 
 if __name__ == '__main__':
