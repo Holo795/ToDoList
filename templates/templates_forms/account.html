@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/account.css" />
 <div id="account_form_parent">
     <div id="account_form">
-        <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer">
+        <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer" onclick="clear_error()">
 
         <h2>Informations du compte</h2>
         <form method="POST" autocomplete="off">
@@ -36,6 +36,10 @@
                 <input type="submit" value="Enregistrer" formaction="{{ url_for('update_user') }}" onclick="checkpass()">
             </div>
             <script>
+
+                function clear_error() {
+                    document.getElementById("error").innerHTML = "";
+                }
 
                 function checkpass(){
                     if(document.getElementById("mdp").value.length < 3){
