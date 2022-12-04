@@ -4,6 +4,12 @@
 
 <!-- On ajoute notre propre contenu -->
 {% block contenu %}
+
+    <div id="info">
+        <h1>Accueil</h1>
+        <p>Bienvenue sur l'application <strong>ToDoList</strong> gérant vos tâches</p>
+    </div>
+
     {% if user %}
         {% include "/templates_forms/task.html" %}
     {% endif %}
