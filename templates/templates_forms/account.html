@@ -6,12 +6,10 @@
         <h2>Informations du compte</h2>
         <form method="POST" autocomplete="off">
             <div class="input_box">
-                <input type="text" name="username" id="id" value="{{ user.get_username() }}" required>
+                <input type="text" name="username" id="id" value="{{ user.get_username() }}" maxlength="20" required>
                 <label>Identifiant</label>
                 <span></span>
             </div>
-
-            <input type="hidden" name="user_id" value="{{ user.get_user_id() }}">
 
             <div class="input_box">
                 <input type="password" name="password" id="mdp" value="">
@@ -28,43 +26,30 @@
 				</ul>
             </div>
 
-            <input type="hidden" name="new_type_length">
+            <input type="hidden" name="new_type_length" value="0">
 
 			<input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()"/>
 
-
-
-
-            {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-
-                {% for category, message in messages %}
-                    {%  if category == "error" %}
-                        <p id="error">{{ message }}</p>
-                    {% elif category == "success" %}
-                        <p id="success">{{ message }}</p>
-                    {% endif %}
-                {% endfor %}
-
-            {% endif %}
-            {% endwith %}
+            <p id="error"></p>
 
             <div id="boutons">
-                <input type="submit" value="Enregistrer" formaction="{{ url_for('add_type') }}">
+                <input type="submit" value="Enregistrer" formaction="{{ url_for('update_user') }}" onclick="checkpass()">
             </div>
             <script>
 
+                function checkpass(){
+                    if(document.getElementById("mdp").value.length < 3){
+                        document.getElementById("error").innerHTML = "Le mot de passe doit contenir au moins 3 caractères";
+                        event.preventDefault();
+                    }
+                }
+
 				function nouvelle_categorie() {
 
-                    //get input nes_type_length
                     let input = document.getElementsByName("new_type_length")[0];
-
                     let list_type = document.getElementById("categories").querySelector("ul")
-
-                    // get all li elements for list_type
                     let li_elements = list_type.getElementsByTagName("li")
 
-                    // get the last li element
                     let last_li_element = li_elements[li_elements.length - 1]
 
                     if (last_li_element.innerHTML.includes("name=\"new_type_")) {
