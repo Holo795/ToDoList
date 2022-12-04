@@ -4,9 +4,9 @@
         <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer">
 
         <h2>Informations du compte</h2>
-        <form action="{ url_for('add_type') }" method="POST">
+        <form method="POST" autocomplete="off">
             <div class="input_box">
-                <input type="text" name="username" id="id" autocomplete="off" value="{{ user.get_username() }}" required>
+                <input type="text" name="username" id="id" value="{{ user.get_username() }}" required>
                 <label>Identifiant</label>
                 <span></span>
             </div>
@@ -14,7 +14,7 @@
             <input type="hidden" name="user_id" value="{{ user.get_user_id() }}">
 
             <div class="input_box">
-                <input type="password" name="password" id="mdp" autocomplete="off" value="">
+                <input type="password" name="password" id="mdp" value="">
                 <label>Mot de passe</label>
                 <span></span>
             </div>
@@ -27,15 +27,15 @@
                     {% endfor %}
 				</ul>
             </div>
-				
+
 			<input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()"/>
-				
-			
+
+
 
 
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                
+
                 {% for category, message in messages %}
                     {%  if category == "error" %}
                         <p id="error">{{ message }}</p>
@@ -43,18 +43,38 @@
                         <p id="success">{{ message }}</p>
                     {% endif %}
                 {% endfor %}
-                
+
             {% endif %}
             {% endwith %}
 
             <div id="boutons">
-                <input type="submit" value="Enregistrer"/>
+                <input type="submit" value="Enregistrer" formaction="{{ url_for('add_type') }}">
             </div>
             <script>
-                
 
 				function nouvelle_categorie() {
-					document.getElementById("categories").querySelector("ul").innerHTML += "<li><input type='text' name='new_type'></li>"
+                    let list_type = document.getElementById("categories").querySelector("ul")
+
+                    // get all li elements for list_type
+                    let li_elements = list_type.getElementsByTagName("li")
+                    let li_elements_length = li_elements.length
+
+                    // get the last li element
+                    let last_li_element = li_elements[li_elements_length - 1]
+
+                    console.log(last_li_element.innerHTML)
+                    console.log(last_li_element.innerHTML.includes("name=\"new_type_"))
+
+                    if (last_li_element.innerHTML.includes("name=\"new_type_")) {
+                        let id = parseInt(last_li_element.innerHTML.split("name=\"new_type_")[1].split("\"")[0]) + 1
+                        let new_li_element = document.createElement("li")
+                        new_li_element.innerHTML = "<input type='text' name='new_type_" + id + "'/>"
+                        list_type.appendChild(new_li_element)
+                    } else {
+                        let new_li_element = document.createElement("li")
+                        new_li_element.innerHTML = "<input type='text' name='new_type_0'/>"
+                        list_type.appendChild(new_li_element)
+                    }
 				}
             </script>
 

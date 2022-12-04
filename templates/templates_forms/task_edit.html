@@ -5,18 +5,18 @@
         <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer">
 
         <h2>Modifier une tâche</h2>
-        <form action="{{ url_for('edit_task') }}" method="POST">
+        <form action="{{ url_for('edit_task') }}" method="POST" autocomplete="off">
 
             <input type="hidden" name="task_id">
 
             <div class="input_box">
-                <input type="text" name="nom" id="nom" autocomplete="off" required>
+                <input type="text" name="nom" id="nom" required>
                 <label>Nom</label>
                 <span></span>
             </div>
 
             <div class="input_box">
-                <input type="text" name="description" id="description" maxlength="49" autocomplete="off" required>
+                <input type="text" name="description" id="description" maxlength="49" required>
                 <label>Description</label>
                 <span></span>
             </div>
@@ -32,7 +32,7 @@
             </div>
 
             <div id="datetime">
-                <input type="datetime-local" name="echeance" id="hh" autocomplete="off" required>
+                <input type="datetime-local" name="echeance" id="hh" required>
                 <label>Echéance</label>
                 <span></span>
             </div>
