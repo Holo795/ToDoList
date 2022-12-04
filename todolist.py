@@ -176,7 +176,8 @@ def update_user():
 
     for i in range(new_type_length):
         new_type = request.form[f"new_type_{i}"]
-        user.add_type(new_type)
+        if new_type != "":
+            user.add_type(new_type)
 
     if username != user.username:
         user.update_username(username)
