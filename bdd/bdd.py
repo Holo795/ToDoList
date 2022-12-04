@@ -106,7 +106,7 @@ class Accounts_Table(BddManager):
         """Crée la table Comptes"""
         self.execute("CREATE TABLE IF NOT EXISTS Accounts (idAccount INTEGER NOT NULL UNIQUE, "
                      "username TEXT NOT NULL CHECK(length(username) <= 20 AND length(username) > 3) UNIQUE, "
-                     "password	TEXT NOT NULL CHECK(length(password) > 3 AND length(password) <= 16), "
+                     "password	TEXT NOT NULL ,"
                      "PRIMARY KEY(idAccount AUTOINCREMENT));")
 
     def add_account(self, username: str, password: str) -> list:
@@ -174,6 +174,11 @@ class Priorities_Table(BddManager):
                      "name TEXT NOT NULL UNIQUE, "
                      "PRIMARY KEY(idPriority AUTOINCREMENT));")
 
+        if len(self.get_all_priorities()) == 0:
+            self.execute("INSERT INTO Priorities (name) VALUES ('Haute');")
+            self.execute("INSERT INTO Priorities (name) VALUES ('Moyenne');")
+            self.execute("INSERT INTO Priorities (name) VALUES ('Basse');")
+
     def add_priority(self, name: str) -> list:
         """Ajoute une priorité de tâche"""
         return self.execute("INSERT INTO Priorities (name) VALUES (?);", (name,))
@@ -208,6 +213,11 @@ class States_Table(BddManager):
                      "name TEXT NOT NULL UNIQUE, "
                      "PRIMARY KEY(idState AUTOINCREMENT));")
 
+        if len(self.get_all_states()) == 0:
+            self.add_state("En Cours")
+            self.add_state("Completée")
+            self.add_state("Archivée")
+
     def get_state(self, idState: int) -> list:
         """Récupère un état de tâche"""
         return self.execute("SELECT * FROM States WHERE idState = ?;", (idState,))
@@ -215,3 +225,7 @@ class States_Table(BddManager):
     def get_all_states(self) -> list:
         """Récupère tous les états de tâche"""
         return self.execute("SELECT * FROM States;")
+
+    def add_state(self, name: str) -> list:
+        """Ajoute un état de tâche"""
+        return self.execute("INSERT INTO States (name) VALUES (?);", (name,))
