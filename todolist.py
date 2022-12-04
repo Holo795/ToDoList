@@ -164,13 +164,25 @@ def priority_filter():
     return redirect(url_for("index"))
 
 
-@app.route("/add_type", methods=["post"])
-def add_type():
+@app.route("/update_user", methods=["post"])
+def update_user():
     """Ajoute un type de tâche"""
     user = accounts_manager.get_account(session.get("username"))
 
-    type_name = request.form["type_name"]
-    user.add_type(type_name)
+    username = request.form["username"]
+    password = request.form["password"]
+
+    new_type_length = int(request.form["new_type_length"])
+
+    for i in range(new_type_length):
+        new_type = request.form[f"new_type_{i}"]
+        user.add_type(new_type)
+
+    if username != user.username:
+        user.update_username(username)
+
+    if password != "":
+        user.update_password(password)
 
     return redirect(url_for("index"))
 

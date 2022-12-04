@@ -121,9 +121,16 @@ class Accounts_Table(BddManager):
         """Récupère tous les comptes"""
         return self.execute("SELECT * FROM Accounts;")
 
-    def edit_account(self, username: str, password: str) -> list:
+    def edit_account(self, userid: int, username=None, password=None) -> list:
         """Modifie un compte"""
-        return self.execute("UPDATE Accounts SET password = ? WHERE username = ?;", (password, username))
+        if username is not None and password is not None:
+            return self.execute("UPDATE Accounts SET username = ?, password = ? WHERE idAccount = ?;",
+                                (username, password, userid))
+        elif username is not None:
+            return self.execute("UPDATE Accounts SET username = ? WHERE idAccount = ?;", (username, userid))
+        elif password is not None:
+            return self.execute("UPDATE Accounts SET password = ? WHERE idAccount = ?;", (password, userid))
+        return []
 
     def delete_account(self, username: str) -> list:
         """Supprime un compte"""
