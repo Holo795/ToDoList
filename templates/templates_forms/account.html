@@ -28,6 +28,8 @@
 				</ul>
             </div>
 
+            <input type="hidden" name="new_type_length">
+
 			<input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()"/>
 
 
@@ -53,27 +55,29 @@
             <script>
 
 				function nouvelle_categorie() {
+
+                    //get input nes_type_length
+                    let input = document.getElementsByName("new_type_length")[0];
+
                     let list_type = document.getElementById("categories").querySelector("ul")
 
                     // get all li elements for list_type
                     let li_elements = list_type.getElementsByTagName("li")
-                    let li_elements_length = li_elements.length
 
                     // get the last li element
-                    let last_li_element = li_elements[li_elements_length - 1]
-
-                    console.log(last_li_element.innerHTML)
-                    console.log(last_li_element.innerHTML.includes("name=\"new_type_"))
+                    let last_li_element = li_elements[li_elements.length - 1]
 
                     if (last_li_element.innerHTML.includes("name=\"new_type_")) {
                         let id = parseInt(last_li_element.innerHTML.split("name=\"new_type_")[1].split("\"")[0]) + 1
                         let new_li_element = document.createElement("li")
                         new_li_element.innerHTML = "<input type='text' name='new_type_" + id + "'/>"
                         list_type.appendChild(new_li_element)
+                        input.value = id
                     } else {
                         let new_li_element = document.createElement("li")
                         new_li_element.innerHTML = "<input type='text' name='new_type_0'/>"
                         list_type.appendChild(new_li_element)
+                        input.value = 1
                     }
 				}
             </script>
