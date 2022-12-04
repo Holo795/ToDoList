@@ -201,6 +201,10 @@ class Account:
         """Renvoie la liste des types de l'utilisateur"""
         return self.types
 
+    def get_used_types(self) -> list:
+        """Renvoie la liste des types utilisés par l'utilisateur"""
+        return [task[6] for task in self.tasks]
+
     def add_type(self, name: str):
         """Ajoute un type à l'utilisateur"""
         types_table = Database().types
