@@ -21,7 +21,8 @@
 				<h3>Catégories :</h3>
 				<ul>
                     {% for type in user.get_types() %}
-                        <li>{{ type[1] }}</li>
+                        <li>{{ type[1] }}<img src="../../static/icons/corbeille_rouge.png" class="delete_categorie"></img></li>
+                        
                     {% endfor %}
 				</ul>
             </div>

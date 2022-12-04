@@ -33,7 +33,7 @@
 }
 
 
-#account_form img {
+#account_form #close_task {
 	position: absolute;
 	right: 6%;
 	cursor: pointer;
@@ -43,7 +43,7 @@
 	transition: transform 0.2s;
 }
 
-#account_form img:hover {
+#account_form #close_task:hover {
 	transform: scale(1.1);
 }
 
@@ -196,4 +196,13 @@
 	border-radius: 5px;
 }
 
+
+
+
+#categories .delete_categorie {
+	height: 20px;
+	width: auto;
+	cursor: pointer;
+	margin-left: 20px;
+}
 
