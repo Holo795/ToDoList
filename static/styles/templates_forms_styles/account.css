@@ -199,7 +199,7 @@
 
 
 
-#categories .delete_categorie {
+#categories .delete_categorie, #categories .delete_categorie_added{
 	height: 20px;
 	width: auto;
 	cursor: pointer;
