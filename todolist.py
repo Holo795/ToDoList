@@ -9,14 +9,14 @@ import secrets
 # Librairie(s) utilisée(s)
 from flask import *
 
-from modules import accounts_manager
+from modules.accounts_manager import AccountsManager, UserStats
 from modules.tasks_utils import *
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = secrets.token_urlsafe(16)
 
 # Initialisation du gestionnaire de comptes
-accounts_manager = accounts_manager.AccountsManager()
+accounts_manager = AccountsManager()
 
 
 @app.errorhandler(404)
@@ -38,6 +38,14 @@ def index():
     """Page d'accueil"""
     user = accounts_manager.get_account(session.get("username"))
     return render_template("accueil.html", user=user)
+
+
+@app.route("/stats")
+def stats():
+    """Page de statistiques"""
+    user = accounts_manager.get_account(session.get("username"))
+    user_stats = UserStats(user)
+    return render_template("stats.html", user_stats=user_stats)
 
 
 @app.route("/login", methods=["post"])
