@@ -322,7 +322,7 @@ nav img {
     border: 4px solid hsl(168, 100%, 30%);
     width: 74%;
     display: block;
-    max-height: 500px;
+    max-height: 570px;
     overflow-y: scroll;
     font-weight: bold;
 }
