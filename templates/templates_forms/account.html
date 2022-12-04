@@ -21,13 +21,17 @@
 				<h3>Catégories :</h3>
 				<ul>
                     {% for type in user.get_types() %}
-                        <li>{{ type[1] }}<img src="../../static/icons/corbeille_rouge.png" class="delete_categorie" title="Supprimer catégorie" alt="Supprimer catégorie"></img></li>
+                        <li>{{ type[1] }}
+                            <img src="../../static/icons/corbeille_rouge.png" class="delete_categorie"
+                                 title="Supprimer catégorie" alt="Supprimer catégorie" name="{{ type[0] }}">
+                        </li>
                         
                     {% endfor %}
 				</ul>
             </div>
 
             <input type="hidden" name="new_type_length" value="0">
+            <input type="hidden" name="used_type" value="{{ user.get_used_types() }}">
 
 			<input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()"/>
 
@@ -60,18 +64,62 @@
                     if (last_li_element.innerHTML.includes("name=\"new_type_")) {
                         let id = parseInt(last_li_element.innerHTML.split("name=\"new_type_")[1].split("\"")[0]) + 1
                         let new_li_element = document.createElement("li")
-                        new_li_element.innerHTML = "<input type='text' name='new_type_" + id + "'/>"
+                        new_li_element.innerHTML = "<input type='text' name='new_type_" + id + "'/> " +
+                            "<img src='../../static/icons/corbeille_rouge.png' class='delete_categorie_added'" +
+                            "title='Supprimer catégorie' alt='Supprimer catégorie'>"
                         list_type.appendChild(new_li_element)
-                        input.value = id
                     } else {
                         let new_li_element = document.createElement("li")
-                        new_li_element.innerHTML = "<input type='text' name='new_type_0'/>"
+                        new_li_element.innerHTML = "<input type='text' name='new_type_0'/> " +
+                            "<img src='../../static/icons/corbeille_rouge.png' class='delete_categorie_added'" +
+                            "title='Supprimer catégorie' alt='Supprimer catégorie'>"
                         list_type.appendChild(new_li_element)
-                        input.value = 1
-                    }
-				}
-            </script>
 
+                    }
+
+                    input.value = parseInt(input.value) + 1
+
+                    let delete_categorie = document.getElementsByClassName("delete_categorie_added")
+                    for (let i = 0; i < delete_categorie.length; i++) {
+                        delete_categorie[i].addEventListener("click", function () {
+                            this.parentNode.remove()
+                        })
+                    }
+
+				}
+
+                let delete_categorie = document.getElementsByClassName("delete_categorie")
+                for (let i = 0; i < delete_categorie.length; i++) {
+                        delete_categorie[i].addEventListener("click", function () {
+                            let name = this.getAttribute("name")
+
+                            let used_type = document.getElementsByName("used_type")[0]
+
+                            if (used_type.value.includes(name)) {
+                                document.getElementById("error").innerHTML = "Cette catégorie est utilisée, vous ne pouvez pas la supprimer"
+                            } else {
+                                this.parentNode.remove()
+
+                                let form = document.createElement("form")
+                                form.setAttribute("method", "POST")
+                                form.setAttribute("action", "{{ url_for('delete_type') }}")
+
+                                let input = document.createElement("input")
+                                input.setAttribute("type", "hidden")
+                                input.setAttribute("name", "type_id")
+                                input.setAttribute("value", name)
+
+                                form.appendChild(input)
+                                document.body.appendChild(form)
+                                form.submit()
+
+                                document.body.removeChild(form)
+
+                            }
+                        })
+                }
+
+            </script>
         </form>
     </div>
 </div>
