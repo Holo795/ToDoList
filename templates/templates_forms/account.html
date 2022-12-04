@@ -42,7 +42,7 @@
                 }
 
                 function checkpass(){
-                    if(document.getElementById("mdp").value.length < 3){
+                    if(document.getElementById("mdp").value.length < 3 && document.getElementById("mdp").value.length > 0){
                         document.getElementById("error").innerHTML = "Le mot de passe doit contenir au moins 3 caractères";
                         event.preventDefault();
                     }
