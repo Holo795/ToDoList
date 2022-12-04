@@ -113,12 +113,15 @@ nav li:hover .submenu {
 .menu1 .submenu {
     background-color: rgb(230, 100, 40);
 }
+
 .menu2 .submenu {
     background-color: rgb(000, 160, 240);
 }
+
 .menu3 .submenu {
     background-color: rgb(250, 215, 100);
 }
+
 .menu4 .submenu {
     background-color: rgb(140, 140, 140);
 }
@@ -137,7 +140,7 @@ nav input[type=checkbox]:checked ~ ul {
     display: block;
 }
 
-@media screen and (max-width:780px) {
+@media screen and (max-width: 780px) {
     .menu-mobile {
         display: block;
         color: #FFF;
@@ -163,39 +166,40 @@ nav input[type=checkbox]:checked ~ ul {
         display: block;
         position: static;
     }
+
     nav > ul > li:hover a {
         padding: 5px 0px 10px 0px;
     }
 
     #tableau_taches {
-        font-size: 10px !important; 
+        font-size: 10px !important;
         width: 90% !important;
     }
+
     #tableau_taches thead {
         display: none;
     }
-        
-    #tableau_taches tr:not(:first-child){
+
+    #tableau_taches tr:not(:first-child) {
         display: block;
         margin-bottom: 40px;
         border-top: 2px solid var(--bordures_interieurs);
     }
-    
-    
+
+
     #tableau_taches td {
-    display: block;
-    text-align: right;
-    border: none !important;
-    font-weight: normal !important;
+        display: block;
+        text-align: right;
+        border: none !important;
+        font-weight: normal !important;
     }
-    
-    
-    
+
+
     #tableau_taches td:before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-decoration: underline;
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-decoration: underline;
     }
 
 
@@ -205,6 +209,7 @@ nav input[type=checkbox]:checked ~ ul {
     }
 
 }
+
 /*
 nav {
     width: 100%;
@@ -275,8 +280,6 @@ nav img {
 }
 
 
-
-
 /* Bouton */
 
 #upper_buttons {
@@ -287,15 +290,15 @@ nav img {
 
 #upper_buttons #bouton_nouvelle_tache, #upper_buttons #settings {
     display: block;
-	margin-top: 20px;
-	border: none;
+    margin-top: 20px;
+    border: none;
     border-radius: 4px;
-	box-shadow: none;
-	padding: 10px 25px;
-	background: #333;
-	color: #FFF;
-	font-size: 16px;
-	cursor: pointer;
+    box-shadow: none;
+    padding: 10px 25px;
+    background: #333;
+    color: #FFF;
+    font-size: 16px;
+    cursor: pointer;
     transition: all 0.06s ease-in;
 
 }
@@ -315,7 +318,7 @@ nav img {
 /* Tableau Tâches */
 #tableau_taches {
     margin: auto;
-	margin-top: 30px;
+    margin-top: 30px;
     font-size: 17px;
     font-family: sans-serif;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
@@ -326,7 +329,8 @@ nav img {
     overflow-y: scroll;
     font-weight: bold;
 }
-    /* Head */
+
+/* Head */
 #tableau_taches thead tr {
     background-color: #009879;
     color: #ffffff;
@@ -334,42 +338,42 @@ nav img {
 }
 
 
-    /* th, td */
+/* th, td */
 #tableau_taches th,
 #tableau_taches td {
     padding: 12px 15px;
 }
 
-    /* thead */
+/* thead */
 #tableau_taches thead #tache {
-	width: 40%;
+    width: 40%;
 }
 
 #tableau_taches thead #echeance {
-	width: 28%;
+    width: 28%;
 }
 
 #tableau_taches thead #actions {
-	width: 11%;
+    width: 11%;
 }
 
-    /* thbody tr */
+/* thbody tr */
 #tableau_taches tbody tr {
     height: 100px;
 }
 
-    /* Bordures intérieurs */
+/* Bordures intérieurs */
 #tableau_taches tbody tr td:not(:first-child) {
-	border-left: 2px solid var(--bordures_interieurs);
+    border-left: 2px solid var(--bordures_interieurs);
 }
 
 #tableau_taches tbody tr:not(:last-child) td {
-	border-bottom: 2px solid var(--bordures_interieurs);
+    border-bottom: 2px solid var(--bordures_interieurs);
 
 }
 
 
-    /* Actions img */
+/* Actions img */
 #tableau_taches .div_actions {
     text-align: center;
 
@@ -380,11 +384,11 @@ nav img {
     cursor: pointer;
 }
 
-    /* Scrollbar */
+/* Scrollbar */
 #tableau_taches::-webkit-scrollbar {
     width: 12px;
 }
-  
+
 #tableau_taches::-webkit-scrollbar-track {
     background-color: #d9d9d9;
 }
@@ -394,12 +398,12 @@ nav img {
     box-shadow: inset 0 0 5px rgb(62, 162, 119);
 }
 
-    /* Echéance date */
+/* Echéance date */
 #tableau_taches txt {
     color: rgb(177, 177, 177);
 }
 
-    /* Checkbox (https://moderncss.dev/pure-css-custom-checkbox-style/) */
+/* Checkbox (https://moderncss.dev/pure-css-custom-checkbox-style/) */
 
 #tableau_taches input[type="checkbox"] {
     -webkit-appearance: none;
@@ -433,9 +437,9 @@ nav img {
 #tableau_taches input[type="checkbox"]:checked::before {
     transform: scale(1);
 }
-      
 
-    /* Priorités */
+
+/* Priorités */
 
 #tableau_taches .priority {
     float: right;
@@ -446,7 +450,7 @@ nav img {
     border-radius: 50%;
 }
 
-#tableau_taches #task_priority_1{
+#tableau_taches #task_priority_1 {
     background-color: #ff0000;
 }
 
@@ -468,15 +472,15 @@ nav img {
 }
 
 #tache #categories select {
-	width: 180px;
-	margin-left: 8px;
-	border-radius: 3px;
-	border: none;
-	padding: 7px 10px;
-	cursor: pointer;
-	outline: none;
-	background-color: #009879;
-	color: white;
-	font-size: 17px;
+    width: 180px;
+    margin-left: 8px;
+    border-radius: 3px;
+    border: none;
+    padding: 7px 10px;
+    cursor: pointer;
+    outline: none;
+    background-color: #009879;
+    color: white;
+    font-size: 17px;
 }
 

@@ -1,7 +1,8 @@
-<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/account.css" />
+<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/account.css"/>
 <div id="account_form_parent">
     <div id="account_form">
-        <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer" onclick="clear_error()">
+        <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer"
+             onclick="clear_error()">
 
         <h2>Informations du compte</h2>
         <form method="POST" autocomplete="off">
@@ -17,28 +18,29 @@
                 <span></span>
             </div>
 
-			<div id="categories">
-				<h3>Catégories :</h3>
-				<ul>
+            <div id="categories">
+                <h3>Catégories :</h3>
+                <ul>
                     {% for type in user.get_types() %}
                         <li>{{ type[1] }}
                             <img src="../../static/icons/corbeille_rouge.png" class="delete_categorie"
                                  title="Supprimer catégorie" alt="Supprimer catégorie" name="{{ type[0] }}">
                         </li>
-                        
+
                     {% endfor %}
-				</ul>
+                </ul>
             </div>
 
             <input type="hidden" name="new_type_length" value="0">
             <input type="hidden" name="used_type" value="{{ user.get_used_types() }}">
 
-			<input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()"/>
+            <input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()"/>
 
             <p id="error"></p>
 
             <div id="boutons">
-                <input type="submit" value="Enregistrer" formaction="{{ url_for('update_user') }}" onclick="checkpass()">
+                <input type="submit" value="Enregistrer" formaction="{{ url_for('update_user') }}"
+                       onclick="checkpass()">
             </div>
             <script>
 
@@ -46,14 +48,14 @@
                     document.getElementById("error").innerHTML = "";
                 }
 
-                function checkpass(){
-                    if(document.getElementById("mdp").value.length < 3 && document.getElementById("mdp").value.length > 0){
+                function checkpass() {
+                    if (document.getElementById("mdp").value.length < 3 && document.getElementById("mdp").value.length > 0) {
                         document.getElementById("error").innerHTML = "Le mot de passe doit contenir au moins 3 caractères";
                         event.preventDefault();
                     }
                 }
 
-				function nouvelle_categorie() {
+                function nouvelle_categorie() {
 
                     let input = document.getElementsByName("new_type_length")[0];
                     let list_type = document.getElementById("categories").querySelector("ul")
@@ -86,37 +88,37 @@
                         })
                     }
 
-				}
+                }
 
                 let delete_categorie = document.getElementsByClassName("delete_categorie")
                 for (let i = 0; i < delete_categorie.length; i++) {
-                        delete_categorie[i].addEventListener("click", function () {
-                            let name = this.getAttribute("name")
+                    delete_categorie[i].addEventListener("click", function () {
+                        let name = this.getAttribute("name")
 
-                            let used_type = document.getElementsByName("used_type")[0]
+                        let used_type = document.getElementsByName("used_type")[0]
 
-                            if (used_type.value.includes(name)) {
-                                document.getElementById("error").innerHTML = "Cette catégorie est utilisée, vous ne pouvez pas la supprimer"
-                            } else {
-                                this.parentNode.remove()
+                        if (used_type.value.includes(name)) {
+                            document.getElementById("error").innerHTML = "Cette catégorie est utilisée, vous ne pouvez pas la supprimer"
+                        } else {
+                            this.parentNode.remove()
 
-                                let form = document.createElement("form")
-                                form.setAttribute("method", "POST")
-                                form.setAttribute("action", "{{ url_for('delete_type') }}")
+                            let form = document.createElement("form")
+                            form.setAttribute("method", "POST")
+                            form.setAttribute("action", "{{ url_for('delete_type') }}")
 
-                                let input = document.createElement("input")
-                                input.setAttribute("type", "hidden")
-                                input.setAttribute("name", "type_id")
-                                input.setAttribute("value", name)
+                            let input = document.createElement("input")
+                            input.setAttribute("type", "hidden")
+                            input.setAttribute("name", "type_id")
+                            input.setAttribute("value", name)
 
-                                form.appendChild(input)
-                                document.body.appendChild(form)
-                                form.submit()
+                            form.appendChild(input)
+                            document.body.appendChild(form)
+                            form.submit()
 
-                                document.body.removeChild(form)
+                            document.body.removeChild(form)
 
-                            }
-                        })
+                        }
+                    })
                 }
 
             </script>

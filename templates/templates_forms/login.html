@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/login.css" />
+<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/login.css"/>
 <div id="login_form_parent">
     <div id="login_form">
         <h2>Se connecter / S'inscrire à votre liste de tâches</h2>
@@ -17,17 +17,17 @@
 
 
             {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                
-                {% for category, message in messages %}
-                    {%  if category == "error" %}
-                        <p id="error">{{ message }}</p>
-                    {% elif category == "success" %}
-                        <p id="success">{{ message }}</p>
-                    {% endif %}
-                {% endfor %}
-                
-            {% endif %}
+                {% if messages %}
+
+                    {% for category, message in messages %}
+                        {% if category == "error" %}
+                            <p id="error">{{ message }}</p>
+                        {% elif category == "success" %}
+                            <p id="success">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
             {% endwith %}
 
             <div id="boutons">

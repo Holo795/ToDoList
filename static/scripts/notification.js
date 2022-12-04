@@ -1,4 +1,4 @@
-function notifier(title="ToDo List", message, icon_image=null, bg_image=null) {
+function notifier(title = "ToDo List", message, icon_image = null, bg_image = null) {
     /* On demande la permission si les notifications ne sont pas permises */
     if (Notification.permission !== 'granted')
         Notification.requestPermission().then(r => {

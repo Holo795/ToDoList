@@ -1,9 +1,11 @@
 <div id="upper_buttons">
-    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" onclick="document.getElementById('task_add_parent').style.display = 'block'">
-    <img src="../../static/icons/settings.png" id="settings" title="Ajouter une catégorie / Paramètres" onclick="document.getElementById('account_form_parent').style.display = 'block'"></img>
+    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche"
+           onclick="document.getElementById('task_add_parent').style.display = 'block'">
+    <img src="../../static/icons/settings.png" id="settings" title="Ajouter une catégorie / Paramètres"
+         onclick="document.getElementById('account_form_parent').style.display = 'block'"></img>
 </div>
 
-    <!-- Tableau tâches à effectuer-->
+<!-- Tableau tâches à effectuer-->
 <table id="tableau_taches" cellspacing="0">
     <thead>
     <tr>
@@ -13,7 +15,7 @@
                     {% if user.get_filter_type() != -1 %}
                         {% for type in user.get_types() %}
                             {% if type[0] == user.get_filter_type() %}
-                                <option value="{{ url_for('type_filter') }}?filter={{user.get_filter_type()}}">{{ type[1] }}</option>
+                                <option value="{{ url_for('type_filter') }}?filter={{ user.get_filter_type() }}">{{ type[1] }}</option>
                             {% endif %}
                         {% endfor %}
                     {% endif %}
@@ -29,7 +31,7 @@
                     {% if user.get_filter_priority() != -1 %}
                         {% for priority in user.get_priorities() %}
                             {% if priority[0] == user.get_filter_priority() %}
-                                <option value="{{ url_for('priority_filter') }}?filter={{user.get_filter_priority()}}">{{ priority[1] }}</option>
+                                <option value="{{ url_for('priority_filter') }}?filter={{ user.get_filter_priority() }}">{{ priority[1] }}</option>
                             {% endif %}
                         {% endfor %}
                     {% endif %}
@@ -53,15 +55,23 @@
             <tr>
                 {% if task["stats"][0] == 2 %}
                     <td data-label="Tâche">
-                        <div class="priority" id="task_priority_{{ task['priority'][0] }}" title="Priorité {{ task['priority'][1] }}"></div><input type="checkbox" id="state_task" name="state_task" title="État : Terminé" value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}" onclick="location=this.value" checked>
+                        <div class="priority" id="task_priority_{{ task['priority'][0] }}"
+                             title="Priorité {{ task['priority'][1] }}"></div>
+                        <input type="checkbox" id="state_task" name="state_task" title="État : Terminé"
+                               value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}"
+                               onclick="location=this.value" checked>
                         <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
-                        
+
                     </td>
                 {% else %}
                     <td data-label="Tâche">
-                        <div class="priority" id="task_priority_{{ task['priority'][0] }}" title="Priorité : {{ task['priority'][1] }}"></div><input type="checkbox" id="state_task" name="state_task" title="État : En cours" value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True" onclick="location=this.value">
+                        <div class="priority" id="task_priority_{{ task['priority'][0] }}"
+                             title="Priorité : {{ task['priority'][1] }}"></div>
+                        <input type="checkbox" id="state_task" name="state_task" title="État : En cours"
+                               value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True"
+                               onclick="location=this.value">
                         {{ task["title"] }}, {{ task["description"] }}
-                        
+
                     </td>
                 {% endif %}
                 <td data-label="Echéance">
@@ -76,11 +86,14 @@
                 </td>
                 <td data-label="Actions">
                     <div class="div_actions">
-                        <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%" onclick="edit_task({{ task['id'] }})">
-                        <a href="{{ url_for('archive_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ?')">
+                        <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%"
+                             onclick="edit_task({{ task['id'] }})">
+                        <a href="{{ url_for('archive_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;"
+                           onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ?')">
                             <img src="./static/icons/archiver.png" width="30%" alt="Archiver" title="Archiver">
                         </a>
-                        <a href="{{ url_for('delete_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">
+                        <a href="{{ url_for('delete_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;"
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">
                             <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
                         </a>
                     </div>

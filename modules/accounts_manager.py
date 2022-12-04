@@ -1,10 +1,9 @@
 from datetime import datetime
 
+import bcrypt  # for password hashing
 from flask import *  # for flash messages
 
 from bdd.bdd import Database  # Accounts database gestion
-import bcrypt  # for password hashing
-
 from modules.tasks_utils import TasksUtils  # for tasks gestion
 
 
