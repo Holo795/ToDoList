@@ -11,8 +11,10 @@
                 <span></span>
             </div>
 
+            <input type="hidden" name="user_id" value="{{ user.get_user_id() }}">
+
             <div class="input_box">
-                <input type="password" name="password" id="mdp" autocomplete="off" value="" required>
+                <input type="password" name="password" id="mdp" autocomplete="off" value="">
                 <label>Mot de passe</label>
                 <span></span>
             </div>
@@ -52,8 +54,7 @@
                 
 
 				function nouvelle_categorie() {
-					console.log("oui")
-					document.getElementById("categories").querySelector("ul").innerHTML += "<li><input type='text' name='new_type'></li>" 
+					document.getElementById("categories").querySelector("ul").innerHTML += "<li><input type='text' name='new_type'></li>"
 				}
             </script>
 
