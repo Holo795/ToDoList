@@ -30,6 +30,16 @@
                 <span></span>
             </div>
 
+            <div id="priority">
+                <label>Type</label>
+                <select name="priority_tache" id="priority_tache" required>
+                    {% for priority in user.get_priorities() %}
+                        <option value="{{ priority[0] }}">{{ priority[1] }}</option>
+                    {% endfor %}
+                </select>
+                <span></span>
+            </div>
+
             <div id="datetime">
                 <input type="datetime-local" name="echeance" id="hh" required>
                 <label>Echéance</label>

@@ -19,7 +19,7 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
-                    <option value="{{ url_for('type_filter') }}?filter=-1">Toutes les tâches</option>
+                    <option value="{{ url_for('type_filter') }}?filter=-1">Toutes Types</option>
 
                     {% for type in user.get_types() %}
                         {% if user.get_filter_type() != type[0] %}
@@ -35,7 +35,7 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
-                    <option value="{{ url_for('priority_filter') }}?filter=-1">Toutes les tâches</option>
+                    <option value="{{ url_for('priority_filter') }}?filter=-1">Toutes Prioritées</option>
                     {% for priority in user.get_priorities() %}
                         {% if user.get_filter_priority() != priority[0] %}
                             <option value="{{ url_for('priority_filter') }}?filter={{ priority[0] }}">{{ priority[1] }}</option>
@@ -61,7 +61,6 @@
                                value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}"
                                onclick="location=this.value" checked>
                         <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
-
                     </td>
                 {% else %}
                     <td data-label="Tâche">
@@ -71,7 +70,6 @@
                                value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True"
                                onclick="location=this.value">
                         {{ task["title"] }}, {{ task["description"] }}
-
                     </td>
                 {% endif %}
                 <td data-label="Echéance">

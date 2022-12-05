@@ -72,10 +72,11 @@ def add_task():
     description = request.form.get("description")
     deadline = request.form.get("echeance")
     type_tache = request.form.get("type_tache")
+    priority_tache = request.form.get("priority_tache")
 
     deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
-    user.add_task(name_task, description, deadline_micro, type_tache, 1, 1)
+    user.add_task(name_task, description, deadline_micro, type_tache, priority_tache, 1)
     user.send_notification("Tâche ajoutée !")
 
     return redirect(url_for("index"))
