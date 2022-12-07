@@ -53,25 +53,21 @@
     {% for task in user.get_html_tasks() %}
         {% if not task["stats"][0] == 3 %}
             <tr>
-                {% if task["stats"][0] == 2 %}
-                    <td data-label="Tâche">
+                <td data-label="Tâche">
                         <div class="priority" id="task_priority_{{ task['priority'][0] }}"
                              title="Priorité {{ task['priority'][1] }}"></div>
+                {% if task["stats"][0] == 2 %}
                         <input type="checkbox" id="state_task" name="state_task" title="État : Terminé"
                                value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}"
                                onclick="location=this.value" checked>
                         <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
-                    </td>
                 {% else %}
-                    <td data-label="Tâche">
-                        <div class="priority" id="task_priority_{{ task['priority'][0] }}"
-                             title="Priorité : {{ task['priority'][1] }}"></div>
                         <input type="checkbox" id="state_task" name="state_task" title="État : En cours"
                                value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True"
                                onclick="location=this.value">
                         {{ task["title"] }}, {{ task["description"] }}
-                    </td>
                 {% endif %}
+                </td>
                 <td data-label="Echéance">
                     <div class="div_taches">
                         {% if task["stats"][0] == 2 and task["done"] %}

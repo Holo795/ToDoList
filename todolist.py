@@ -121,10 +121,11 @@ def edit_task():
     description = request.form.get("description")
     deadline = request.form.get("echeance")
     type_tache = request.form.get("type_tache")
+    priority_tache = request.form.get("priority_tache")
 
     deadline_micro = TasksTimeUtils(deadline).get_microseconds()
 
-    user.update_task(task_id, name_task, description, deadline_micro, type_tache, 1, 1)
+    user.update_task(task_id, name_task, description, deadline_micro, type_tache, priority_tache, 1)
     user.send_notification("Tâche modifiée !")
 
     return redirect(url_for("index"))
