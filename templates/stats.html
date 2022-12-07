@@ -34,14 +34,19 @@
         <canvas id="graph1" width="100" height="100"></canvas>
     </div>
     <div id="graph_2">
-        <canvas id="grahp2" width="100" height="100"></canvas>
+        <canvas id="graph2" width="100" height="100"></canvas>
     </div>
 {% endblock %}
 
 {% block script %}
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
     <script>
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
         var graph_1 = document.getElementById('graph1').getContext('2d');
         new Chart(graph_1, {
             type: 'doughnut',
@@ -71,6 +76,40 @@
                 title: {
                     display: true,
                     text: 'Tâches en cours VS terminées'
+                }
+            }
+        });
+
+
+
+        var graph_2 = document.getElementById('graph2').getContext('2d');
+        new Chart(graph_2, {
+            type: 'radar',
+            data: {
+            datasets: [{
+                data: [{% for type in user.get_types() %}
+                    {{ user.get_types() }}
+                    {% endfor %}],
+                backgroundColor: [{% for type in user.get_types() %}
+                    'rgba(console.log(getRandomInt(256));, console.log(getRandomInt(256));, console.log(getRandomInt(256));, 0.2)'
+                {% endfor %}],
+                borderColor: [{% for type in user.get_types() %}
+                    'rgba(console.log(getRandomInt(256));, console.log(getRandomInt(256));, console.log(getRandomInt(256));, 0.2)'
+                {% endfor %}],
+            }],
+            labels: [{% for type in user.get_types() %}
+                '{{ user.get_types() }}'
+            {% endfor %}],
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                    reverse: true,
+                },
+                title: {
+                    display: true,
+                    text: 'Tâches dans différentes catégories'
                 }
             }
         });

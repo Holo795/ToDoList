@@ -45,7 +45,7 @@ def stats():
     """Page de statistiques"""
     user = accounts_manager.get_account(session.get("username"))
     user_stats = UserStats(user)
-    return render_template("stats.html", user_stats=user_stats)
+    return render_template("stats.html", user_stats=user_stats, user=user)
 
 
 @app.route("/login", methods=["post"])
