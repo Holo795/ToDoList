@@ -200,3 +200,18 @@
     margin-left: 20px;
 }
 
+
+/* RESPONSIVE */
+@media screen and (max-width: 780px) {
+    #account_form {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    * {
+        font-size: 15px;
+    }
+
+
+}

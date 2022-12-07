@@ -71,9 +71,9 @@
                 <td data-label="Echéance">
                     <div class="div_taches">
                         {% if task["stats"][0] == 2 and task["done"] %}
-                            <p>Terminé le {{ task["done"] }}</p>
+                            Terminé le {{ task["done"] }}
                         {% else %}
-                            <p>{{ task["time_left"] }}</p>
+                            {{ task["time_left"] }}<br><br>
                             <txt>{{ task["date"] }}</txt>
                         {% endif %}
                     </div>

@@ -180,11 +180,7 @@ nav input[type=checkbox]:checked ~ ul {
         display: none;
     }
 
-    #tableau_taches tr:not(:first-child) {
-        display: block;
-        margin-bottom: 40px;
-        border-top: 2px solid var(--bordures_interieurs);
-    }
+
 
 
     #tableau_taches td {
@@ -192,6 +188,11 @@ nav input[type=checkbox]:checked ~ ul {
         text-align: right;
         border: none !important;
         font-weight: normal !important;
+    }
+
+    #tableau_taches td:last-child {
+        display: block;
+        border-bottom: 2px solid var(--bordures_interieurs) !important;
     }
 
 
@@ -208,6 +209,11 @@ nav input[type=checkbox]:checked ~ ul {
         height: auto;
     }
 
+    #tableau_taches input {
+        margin-left: 10px !important;
+    }
+
+    
 }
 
 /*

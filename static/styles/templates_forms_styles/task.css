@@ -173,7 +173,7 @@
     left: 0;
     display: block;
     background: var(--gris_input);
-    width: 65%;
+    width: 100%;
     height: 2px;
     margin-top: 4px;
 }
@@ -271,4 +271,21 @@
     background-color: var(--backgroundcolor);
     color: white;
     font-size: 17px;
+}
+
+
+
+/* RESPONSIVE */
+@media screen and (max-width: 780px) {
+    #task_add {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    * {
+        font-size: 15px;
+    }
+
+
 }
