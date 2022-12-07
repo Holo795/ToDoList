@@ -263,26 +263,12 @@ class UserStats:
         """Renvoie l'utilisateur"""
         return self.user
 
-    def get_tasks_count(self) -> int:
-        """Renvoie le nombre de tâches"""
-        return len(self.tasks)
-
     def get_tasks_done_count(self) -> int:
         """Renvoie le nombre de tâches terminées"""
         return sum(task[8] == 2 for task in self.tasks)
-
-    def get_tasks_late_count(self) -> int:
-        """Renvoie le nombre de tâches en retart"""
-        return sum(task[8] == 2 and task[5] < int(datetime.now().timestamp()) for task in self.tasks)
-
-    def get_tasks_archived_count(self) -> int:
-        """Renvoie le nombre de tâches archivées"""
-        return sum(task[8] == 3 for task in self.tasks)
 
     def get_tasks_in_progress_count(self) -> int:
         """Renvoie le nombre de tâches en cours"""
         return sum(task[8] == 1 for task in self.tasks)
 
-    def get_tasks_finished_not_late_count(self) -> int:
-        """Renvoie le nombre de tâches terminées à temps"""
-        return sum(task[8] == 2 and task[5] <= task[4] for task in self.tasks)
+
