@@ -16,3 +16,8 @@
 | FS5.1 | Afficher un message de notification quand une tâche a été : créée / modifiée / supprimée                                                                                              | Basse    |❌|
 | FS5.2 | Utiliser des icônes pour une meilleure compréhension                                                                                                                                    | Basse    |✔️|
 | FS5.3 | Assurer la compatibilité avec les smartphones                                                                                                                                           | Basse    |🟧|
+
+
+Gestion du front-end : https://github.com/Ashokaas
+Gestion de la BDD et du back-end: https://github.com/Holo795
+Gestion des routes : https://github.com/maxime0109
