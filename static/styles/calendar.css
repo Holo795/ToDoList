@@ -114,13 +114,12 @@ header .current-date{
     position: absolute;
     color: white;
     display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: #424558;
     padding: 10px 20px !important;
     border-radius: 10px;
     max-width: 170px;
     z-index: 3;
+    
 }
 
 .task {
@@ -133,7 +132,7 @@ header .current-date{
     position: absolute;
     background-color: #424558;
     top: -10px;
-    left: 50%;
+    left: 25px;
     transform: translateX(-50%);
     width: 20px;
     height: 20px;

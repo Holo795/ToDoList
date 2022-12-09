@@ -18,22 +18,22 @@ class Calendar:
             for month in range(len(self.months)):
                 if self.months[month] == "Février":
                     if year % 4 == 0:
-                        temp[self.months[month]] = self.set_days(29)
+                        temp[self.months[month]] = self.set_days(29, month, year)
                     else:
-                        temp[self.months[month]] = self.set_days(28)
+                        temp[self.months[month]] = self.set_days(28, month, year)
                 
                 elif month % 2 == 0:
                     if month < 7:
-                        temp[self.months[month]] = self.set_days(31)
+                        temp[self.months[month]] = self.set_days(31, month, year)
                     else:
-                        temp[self.months[month]] = self.set_days(30)
+                        temp[self.months[month]] = self.set_days(30, month, year)
 
                     
                 elif month % 2 == 1:
                     if month < 6:
-                        temp[self.months[month]] = self.set_days(30)
+                        temp[self.months[month]] = self.set_days(30, month, year)
                     else:
-                        temp[self.months[month]] = self.set_days(31)
+                        temp[self.months[month]] = self.set_days(31, month, year)
 
             self.calendar[year] = temp
         
@@ -41,7 +41,7 @@ class Calendar:
 
 
 
-    def set_days(self, nb_days_per_month:int):
+    def set_days(self, nb_days_per_month:int, month, year):
         """Set the days of the month. (Useless for the user)
 
         Args:
@@ -52,7 +52,7 @@ class Calendar:
         """
         var_temp = []
         for day in range(1, nb_days_per_month+1):
-            var_temp.append({"nb_jour": day, "jour": self.days[self.days_loop], "type": "inactive", "nb_jour_semaine": self.days_loop})
+            var_temp.append({"nb_jour": day, "jour": self.days[self.days_loop], "type": "inactive", "nb_jour_semaine": self.days_loop, "month": month, "year": year})
             self.days_loop += 1
             if self.days_loop == 7:
                 self.days_loop = 0
@@ -135,6 +135,30 @@ class Calendar:
             months = {1: "Janvier", 2: "Février", 3: "Mars", 4: "Avril", 5: "Mai", 6: "Juin", 7: "Juillet", 8: "Août", 9: "Septembre", 10: "Octobre", 11: "Novembre", 12: "Décembre"}
             return {"year": dt.datetime.now().year, "month": months[dt.datetime.now().month], "day": dt.datetime.now().day}
         return {"year": dt.datetime.now().year, "month": dt.datetime.now().month, "day": dt.datetime.now().day}
+    
+    
+    def month_to_int(self, month:str) -> int:
+        """Convert a month in str to int
+        
+        Args:
+            month (str): Month (ex: "Janvier")
+            
+        Returns:
+            month (int): Month (ex: 1)
+        """
+        return self.months.index(month)+1
+    
+    
+    def int_to_month(self, month:int) -> str:
+        """Convert a month in int to str
+        
+        Args:
+            month (int): Month (ex: 1)
+            
+        Returns:
+            month (str): Month (ex: "Janvier")
+        """
+        return self.months[month-1]
 
 
 if __name__ == "__main__":
@@ -142,7 +166,9 @@ if __name__ == "__main__":
     #print(test.get_month(2000, "Janvier"))
     #print(test.get_year(2000))
     #print(test.get_current_day(True))
-    print(test.get_day(2022, "Décembre", 9))
+    #print(test.get_day(2022, "Décembre", 9))
     #print(test.get_days_from_name(2022, "Décembre", "Lundi"))
+    #print(test.month_to_int("Janvier"))
+    print(test.int_to_month(1))
     pass
 

@@ -9,7 +9,9 @@
 {% block contenu %}
 
 {% set current_date = calendar.get_current_day(month_in_str=True) %}
+{% set shown_date = calendar.get_current_day(month_in_str=True) %}
 {% set days_in_a_week = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"] %}
+
 
 <link rel="stylesheet" href="../static/styles/calendar.css">
 
@@ -17,11 +19,11 @@
     
     <div class="wrapper">
         <header>
-            <p class="current-date">{{ current_date["month"]}} {{ current_date["year"] }}</p>
-            <!--<div class="icons">
+            <p class="current-date">{{ shown_date["month"]}} {{ shown_date["year"] }}</p>
+            <div class="icons">
                 <span id="prev" class="material-symbols-rounded"><</span>
                 <span id="next" class="material-symbols-rounded">></span>
-            </div>-->
+            </div>
         </header>
         <div class="calendar">
             
@@ -29,12 +31,12 @@
                 {% for days_in_week in days_in_a_week %}
                     <li>
                         <p>{{ days_in_week[0:3] }}</p>
-                        {% for day in calendar.get_days_from_name(current_date["year"], current_date["month"], days_in_week) %}
-                            {% if calendar.get_day(current_date["year"], current_date["month"], 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
+                        {% for day in calendar.get_days_from_name(shown_date["year"], shown_date["month"], days_in_week) %}
+                            {% if calendar.get_day(shown_date["year"], shown_date["month"], 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
                                 <div class="parent_day"><p class="null">ㅤ</p></div>
                             {% endif %}
                             
-                            {% if current_date["day"] == day["nb_jour"] %}
+                            {% if shown_date["day"] == day["nb_jour"] %}
                                 {% set class = "active_day" %}
                             {% else %}
                                 {% set class = "day" %}
@@ -43,7 +45,12 @@
                             <div class="parent_day">
                                 <p class="{{class}}">{{ day["nb_jour"] }}</p>
                                 {% for task in user.get_html_tasks() %}
-                                    {% if task["date"].split()[1] | int == day["nb_jour"] %}
+                                    <script>console.log("{{task['date'].split()[2]}}", "{{calendar.int_to_month(day['month']+1).lower()}}")</script>
+                                    {% set task_temp_day = task["date"].split()[1] %}
+                                    {% if task_temp_day[0] == "0" %}
+                                        {% set task_temp_day = task_temp_day[1] %}
+                                    {% endif %}
+                                    {% if task_temp_day | int == day["nb_jour"] and not task["done"] and task["date"].split()[2] == calendar.int_to_month(day["month"]+1).lower() %}
                                         <div class="task">{{ task["title"] }}</div>
                                         <script>document.getElementsByTagName("p")[document.getElementsByTagName("p").length -1].className = "day_task";</script>
                                     {% endif %}
