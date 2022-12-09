@@ -1,4 +1,4 @@
-| ID    | Description | Priorité | Fini ? |
+| ID    | Description | Priorité | État |
 | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ |
 | FS1   | Afficher la liste des tâches par date d’échéance croissante avec pour chaque tâche: titre, catégorie, date échéance). Seules les tâches “Encours” et “Terminée” seront affichées | Haute    |✔️|
 | FS2   | Ajouter une nouvelle tâche via un bouton dédié                                                                                                                                          | Haute    |✔️|
@@ -16,3 +16,11 @@
 | FS5.1 | Afficher un message de notification quand une tâche a été : créée / modifiée / supprimée                                                                                              | Basse    |❌|
 | FS5.2 | Utiliser des icônes pour une meilleure compréhension                                                                                                                                    | Basse    |✔️|
 | FS5.3 | Assurer la compatibilité avec les smartphones                                                                                                                                           | Basse    |🟧|
+
+✔️ : Effectué<br>
+🟧 : En cours / A vérifier<br>
+❌ : Non effectué<br>
+
+Gestion du front-end : <a href="https://github.com/Ashokaas">Ashokas</a><br>
+Gestion de la BDD et du back-end: <a href="https://github.com/Holo795">Holo795</a><br>
+Gestion des routes : <a href="https://github.com/maxime0109">Maxime0109</a><br>
