@@ -1,0 +1,46 @@
+<!-- On hérite du template de base -->
+{% extends "base.html" %}
+
+
+<!-- On ajoute notre propre contenu -->
+{% block contenu %}
+
+<div id="info">
+    <h1>À propos</h1>
+    <p>Voici la partie À propos de l'application <strong>ToDoList</strong>.</p>
+</div>
+
+<div id="about">
+    <p>Site créé par :</p>
+    <ul>
+        <li><a href="https://github.com/Ashokaas">Ashokas</a></li>
+        <li><a href="https://github.com/Holo795">ɧσℓσ</a></li>
+        <li><a href="https://github.com/maxime0109">Maxime0109</a></li>
+    </ul> 
+    <p>Le projet complet est disponible en open source sur <a href="https://github.com/Holo795/ToDoList_NSI">GitHub</a>.</p>
+</div>
+
+<style>
+    #about {
+        font-family: sans-serif;
+        margin: 50px 13% 0 13%;
+    }
+    
+    #about li {
+        margin: 7px 0;
+    }
+
+    #about a {
+        color: rgb(0, 128, 255);;
+        text-decoration: none;
+        transition: all 0.5;
+    }
+
+    #about a:hover {
+        text-decoration: underline;
+        text-decoration-color: rgb(0, 128, 255);
+    }
+</style>
+
+
+{% endblock %}

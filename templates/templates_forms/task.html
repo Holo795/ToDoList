@@ -55,7 +55,7 @@
             <tr>
                 <td data-label="Tâche">
                         <div class="priority" id="task_priority_{{ task['priority'][0] }}"
-                             title="Priorité {{ task['priority'][1] }}"></div>
+                             title="Priorité : {{ task['priority'][1] }}"></div>
                 {% if task["stats"][0] == 2 %}
                         <input type="checkbox" id="state_task" name="state_task" title="État : Terminé"
                                value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}"

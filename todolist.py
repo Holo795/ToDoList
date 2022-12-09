@@ -209,6 +209,11 @@ def calendar():
     calendar = Calendar()
     return render_template("calendar.html", user=user, calendar=calendar)
 
+@app.route("/about")
+def about():
+    """Page à propos"""
+    return render_template("about.html")
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=1664, threaded=True, debug=True)

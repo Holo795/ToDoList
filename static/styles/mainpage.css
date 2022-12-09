@@ -16,6 +16,7 @@ nav {
     width: 100%;
     background-color: #424558;
     font-family: Verdana, Calibri, sans-serif;
+    position: fixed;
 }
 
 nav > ul {
@@ -106,6 +107,15 @@ nav li:hover .submenu {
 }
 
 .menu4:hover {
+    border-top: 5px solid #11ac00;
+    background-color: rgba(0, 255, 17, 0.15);
+}
+
+.menu_deco {
+    float: right;
+}
+
+.menu_deco:hover {
     border-top: 5px solid #bbb;
     background-color: rgba(220, 220, 220, 0.15);
 }
@@ -123,6 +133,10 @@ nav li:hover .submenu {
 }
 
 .menu4 .submenu {
+    background-color: rgba(30, 142, 30, 0.15);
+}
+
+.menu_deco .submenu {
     background-color: rgb(140, 140, 140);
 }
 
@@ -283,6 +297,7 @@ nav img {
 #info {
     font-family: sans-serif;
     margin: 0 13% 0 13%;
+    margin-top: 70px;
 }
 
 

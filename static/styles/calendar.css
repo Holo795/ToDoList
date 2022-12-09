@@ -13,6 +13,7 @@
     font-weight: normal;
 }
 #calendar_parent{
+  margin-top: -150px;
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -90,8 +91,8 @@ header .current-date{
 }
 
 .weeks li .parent_day .day:hover {
-    clip-path: circle(12.5px at center);
-    background-color: #F4F4F4;
+    clip-path: circle(12.3px at center);
+    background-color: #c1c1c1;
     
 }
 
@@ -99,14 +100,14 @@ header .current-date{
 
 .weeks li .parent_day .active_day{
     color: white;
-    clip-path: circle(12.5px at center);
+    clip-path: circle(12.3px at center);
     background-color: hsl(312, 52%, 38%);
 
 }
 
 .weeks li .parent_day .day_task{
     color: white;
-    clip-path: circle(12.5px at center);
+    clip-path: circle(12.3px at center);
     background-color: hsl(168, 100%, 30%);
 }
 
@@ -128,17 +129,18 @@ header .current-date{
 }
 
 .task::before {
-    content: '^';
+    content: '';
     position: absolute;
-    background-color: #424558;
     top: -10px;
     left: 25px;
     transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
+    width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #424558 transparent;
     text-align: center;
     line-height: 20px;
-    border-radius: 4px;
     font-size: 0.8rem;
 }
 
