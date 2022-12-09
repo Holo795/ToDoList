@@ -1,4 +1,4 @@
-| ID    | Description | Priorité | Fini ? |
+| ID    | Description | Priorité | État |
 | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ |
 | FS1   | Afficher la liste des tâches par date d’échéance croissante avec pour chaque tâche: titre, catégorie, date échéance). Seules les tâches “Encours” et “Terminée” seront affichées | Haute    |✔️|
 | FS2   | Ajouter une nouvelle tâche via un bouton dédié                                                                                                                                          | Haute    |✔️|
