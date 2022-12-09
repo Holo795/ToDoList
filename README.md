@@ -17,7 +17,10 @@
 | FS5.2 | Utiliser des icônes pour une meilleure compréhension                                                                                                                                    | Basse    |✔️|
 | FS5.3 | Assurer la compatibilité avec les smartphones                                                                                                                                           | Basse    |🟧|
 
+✔️ : Effectué<br>
+🟧 : En cours / A vérifier<br>
+❌ : Non effectué<br>
 
-Gestion du front-end : https://github.com/Ashokaas
-Gestion de la BDD et du back-end: https://github.com/Holo795
-Gestion des routes : https://github.com/maxime0109
+Gestion du front-end : <a href="https://github.com/Ashokaas">Ashokas</a><br>
+Gestion de la BDD et du back-end: <a href="https://github.com/Holo795">Holo795</a><br>
+Gestion des routes : <a href="https://github.com/maxime0109">Maxime0109</a><br>
