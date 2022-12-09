@@ -11,6 +11,7 @@ from flask import *
 
 from modules.accounts_manager import AccountsManager, UserStats
 from modules.tasks_utils import *
+from modules.calendar_en import Calendar
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = secrets.token_urlsafe(16)
@@ -199,6 +200,14 @@ def delete_type():
     user.remove_type(type_id)
 
     return '', 204
+
+
+@app.route("/calendar")
+def calendar():
+    """Page du calendrier"""
+    user = accounts_manager.get_account(session.get("username"))
+    calendar = Calendar()
+    return render_template("calendar.html", user=user, calendar=calendar)
 
 
 if __name__ == '__main__':

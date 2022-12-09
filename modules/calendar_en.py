@@ -52,7 +52,7 @@ class Calendar:
         """
         var_temp = []
         for day in range(1, nb_days_per_month+1):
-            var_temp.append([day, self.days[self.days_loop], "inactive"])
+            var_temp.append({"nb_jour": day, "jour": self.days[self.days_loop], "type": "inactive", "nb_jour_semaine": self.days_loop})
             self.days_loop += 1
             if self.days_loop == 7:
                 self.days_loop = 0
@@ -108,6 +108,24 @@ class Calendar:
         return self.calendar[year][month][day-1]
     
     
+    def get_days_from_name(self, year, month, day_name) -> list:
+        """Get all days from a specific month form a year with the same name
+
+        Args:
+            year (_type_): Year (ex: 2000)
+            month (_type_): Month (ex: "Janvier")
+            day_name (_type_): Day (ex: "Lundi")
+
+        Returns:
+            list: All days
+        """
+        all_days = []
+        for day in self.get_month(year, month):
+            if day["jour"] == day_name:
+                all_days.append(day)
+        return all_days
+    
+    
     def get_current_day(self) -> dict:
         """Get the current day
         
@@ -122,4 +140,5 @@ if __name__ == "__main__":
     #print(test.get_year(2000))
     #print(test.get_current_day())
     #print(test.get_day(2022, "Décembre", 5))
+    print(test.get_days_from_name(2022, "Décembre", "Lundi"))
     pass

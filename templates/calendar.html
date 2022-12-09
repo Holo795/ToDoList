@@ -1,0 +1,220 @@
+<!-- On hérite du template de base -->
+{% extends "base.html" %}
+
+
+<!-- On ajoute notre propre contenu -->
+{% block contenu %}
+
+<div id="calendar_parent">
+    {% set annee, mois = 2022, "Décembre" %}
+    
+    <div class="wrapper">
+        <header>
+            <p class="current-date">{{ mois }} {{ annee }}</p>
+            <div class="icons">
+                <span id="prev" class="material-symbols-rounded"><</span>
+                <span id="next" class="material-symbols-rounded">></span>
+            </div>
+        </header>
+        <div class="calendar">
+            
+            <ul class="weeks">
+                <li>
+                    <p>Lun</p>
+                    {% for day in calendar.get_days_from_name(annee, mois, "Lundi") %}
+                        {% if not calendar.get_day(annee, mois, 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
+                            
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% else %}
+                            <p class="null">ㅤ</p>
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+
+
+                <li>
+                    <p>Mar</p>
+                    {% for day in calendar.get_days_from_name(annee, mois, "Mardi") %}
+                        {% if not calendar.get_day(annee, mois, 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
+                            
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% else %}
+                            <p class="null">ㅤ</p>
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+
+
+                <li>
+                    <p>Mer</p>
+                    {% for day in calendar.get_days_from_name(annee, mois, "Mercredi") %}
+                        {% if not calendar.get_day(annee, mois, 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
+                            
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% else %}
+                            <p class="null">ㅤ</p>
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+
+
+                <li>
+                    <p>Jed</p>
+                    {% for day in calendar.get_days_from_name(annee, mois, "Jeudi") %}
+                        {% if not calendar.get_day(annee, mois, 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
+                            
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% else %}
+                            <p class="null">ㅤ</p>
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+
+
+                <li>
+                    <p>Ven</p>
+                    {% for day in calendar.get_days_from_name(annee, mois, "Vendredi") %}
+                        {% if not calendar.get_day(annee, mois, 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
+                            
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% else %}
+                            <p class="null">ㅤ</p>
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+
+
+                <li>
+                    <p>Sam</p>
+                    {% for day in calendar.get_days_from_name(annee, mois, "Samedi") %}
+                        {% if not calendar.get_day(annee, mois, 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
+                            
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% else %}
+                            <p class="null">ㅤ</p>
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+
+
+                <li>
+                    <p>Dim</p>
+                    {% for day in calendar.get_days_from_name(annee, mois, "Dimanche") %}
+                        {% if not calendar.get_day(annee, mois, 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
+                            
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% else %}
+                            <p class="null">ㅤ</p>
+                            <p class="day">{{ day["nb_jour"] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+
+
+            </ul>
+            <ul class="days"></ul>
+        </div>
+    </div>
+  
+</div id="calendar_parent">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+#calendar_parent *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+#calendar_parent{
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  justify-content: center;
+  min-height: 100vh;
+}
+.wrapper{
+  width: 450px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+.wrapper header{
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+}
+header .icons{
+  display: flex;
+}
+header .icons span{
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+.icons span:last-child{
+  margin-right: -10px;
+}
+header .icons span:hover{
+  background: #f2f2f2;
+}
+header .current-date{
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+.calendar{
+  padding: 20px;
+}
+.calendar ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+.calendar li {
+  color: #333;
+  width: calc(100% / 7);
+  font-size: 1.07rem;
+}
+.calendar .weeks li{
+  font-weight: 500;
+  cursor: default;
+}
+
+
+.days li::before{
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.day:hover {
+    background: #f2f2f2;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+</style>
+
+{% endblock %}
