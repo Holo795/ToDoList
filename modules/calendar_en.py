@@ -100,7 +100,7 @@ class Calendar:
         Args:
             year (int): Year (ex: 2000)
             month (str): Month (ex: "Janvier")
-            day (int): Day (ex: 1)
+            day (int): Day (ex: 1), (ex: 0 for the last day of the month)
             
         Returns:
             self.calendar[year][month][day-1] (dict): Day
@@ -126,11 +126,14 @@ class Calendar:
         return all_days
     
     
-    def get_current_day(self) -> dict:
+    def get_current_day(self, month_in_str=False) -> dict:
         """Get the current day
         
         Returns:
             Dict with the current day, month and year (dict): Current day"""
+        if month_in_str:
+            months = {1: "Janvier", 2: "Février", 3: "Mars", 4: "Avril", 5: "Mai", 6: "Juin", 7: "Juillet", 8: "Août", 9: "Septembre", 10: "Octobre", 11: "Novembre", 12: "Décembre"}
+            return {"year": dt.datetime.now().year, "month": months[dt.datetime.now().month], "day": dt.datetime.now().day}
         return {"year": dt.datetime.now().year, "month": dt.datetime.now().month, "day": dt.datetime.now().day}
 
 
@@ -138,7 +141,8 @@ if __name__ == "__main__":
     test = Calendar()
     #print(test.get_month(2000, "Janvier"))
     #print(test.get_year(2000))
-    #print(test.get_current_day())
-    #print(test.get_day(2022, "Décembre", 5))
-    print(test.get_days_from_name(2022, "Décembre", "Lundi"))
+    #print(test.get_current_day(True))
+    print(test.get_day(2022, "Décembre", 9))
+    #print(test.get_days_from_name(2022, "Décembre", "Lundi"))
     pass
+

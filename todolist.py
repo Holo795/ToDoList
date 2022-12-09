@@ -207,6 +207,9 @@ def calendar():
     """Page du calendrier"""
     user = accounts_manager.get_account(session.get("username"))
     calendar = Calendar()
+    import os
+    os.system("cls")
+    [print(task) for task in user.get_html_tasks()]
     return render_template("calendar.html", user=user, calendar=calendar)
 
 

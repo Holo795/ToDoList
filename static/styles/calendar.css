@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+#calendar_parent *{
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+#calendar_parent li {
+    margin: 0 10px;
+}
+
+.parent_day p {
+    padding: 20px;
+    font-weight: normal;
+}
+#calendar_parent{
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  justify-content: center;
+  min-height: 100vh;
+}
+.wrapper{
+  width: 600px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+.wrapper header{
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+  margin: 0 40px -20px 40px;
+
+}
+header .icons{
+  display: flex;
+}
+header .icons span{
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+.icons span:last-child{
+  margin-right: -10px;
+}
+header .icons span:hover{
+  background: #f2f2f2;
+}
+header .current-date{
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+.calendar{
+  padding: 20px;
+}
+.calendar ul{
+  display: flex;
+
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  text-align: center;
+}
+
+.calendar li{
+  color: #333;
+  width: calc(100% / 12);
+  font-size: 1.07rem;
+  
+}
+.calendar .weeks li{
+  font-weight: 500;
+  cursor: default;
+}
+
+
+.weeks li .parent_day .day, .weeks li .parent_day .null{
+    
+    color: black;
+    
+    
+}
+
+.weeks li .parent_day .day:hover {
+    clip-path: circle(12.5px at center);
+    background-color: #F4F4F4;
+    
+}
+
+
+
+.weeks li .parent_day .active_day{
+    color: white;
+    clip-path: circle(12.5px at center);
+    background-color: hsl(312, 52%, 38%);
+
+}
+
+.weeks li .parent_day .day_task{
+    color: white;
+    clip-path: circle(12.5px at center);
+    background-color: hsl(168, 100%, 30%);
+}
+
+.parent_day p:hover ~ .task {
+    position: absolute;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #424558;
+    padding: 10px 20px !important;
+    border-radius: 10px;
+    max-width: 170px;
+    z-index: 3;
+}
+
+.task {
+    display: none;
+    
+}
+
+.task::before {
+    content: '^';
+    position: absolute;
+    background-color: #424558;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
