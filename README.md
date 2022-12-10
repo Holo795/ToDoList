@@ -13,7 +13,7 @@
 | FS1.3 | Préciser le temps restant avant la date d’échéance de la tâche dont un signalement si la tâche est en retard                                                                         | Basse    |✔️|
 | FS1.4 | Filtrer l’affichage des tâches par catégorie : un bouton = une catégorie. Un bouton “Toutes” affichera toute les tâches de toutes les catégories                                  | Basse    |✔️|
 | FS4.1 | Mettre à jour la date de fin d’une tâche lorsque celle-ci est réellement terminée par l’utilisateur et doit alors passer de l’état “En cours” à l’état “Terminée”                 | Basse    |✔️|
-| FS5.1 | Afficher un message de notification quand une tâche a été : créée / modifiée / supprimée                                                                                              | Basse    |❌|
+| FS5.1 | Afficher un message de notification quand une tâche a été : créée / modifiée / supprimée                                                                                              | Basse    |✔️|
 | FS5.2 | Utiliser des icônes pour une meilleure compréhension                                                                                                                                    | Basse    |✔️|
 | FS5.3 | Assurer la compatibilité avec les smartphones                                                                                                                                           | Basse    |🟧|
 
