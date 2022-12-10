@@ -17,6 +17,8 @@
 
 {% block script %}
     <script>
+        Notification.requestPermission();
+        
         window.onclick = function (event) {
             if (event.target.id === "close_task") {
                 document.getElementById("task_add_parent").style.display = "none";
