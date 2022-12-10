@@ -83,11 +83,11 @@
                         <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%"
                              onclick="edit_task({{ task['id'] }})">
                         <a href="{{ url_for('archive_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;"
-                           onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ?')">
+                           onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ? Cette action est définitive.')">
                             <img src="./static/icons/archiver.png" width="30%" alt="Archiver" title="Archiver">
                         </a>
                         <a href="{{ url_for('delete_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;"
-                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ? Cette action est définitive.')">
                             <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
                         </a>
                     </div>

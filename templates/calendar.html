@@ -21,13 +21,13 @@
 
 <div id="calendar_parent">
     
-    <div class="wrapper">
+    <div id="wrapper">
         <header>
             <p class="current-date">{{ shown_date["month"]}} {{ shown_date["year"] }}</p>
-            <div class="icons">
+            <!--<div class="icons">
                 <span id="prev" class="material-symbols-rounded"><</span>
                 <span id="next" class="material-symbols-rounded">></span>
-            </div>
+            </div>-->
         </header>
         <div class="calendar">
             
@@ -48,28 +48,41 @@
                             
                             <div class="parent_day">
                                 <p class="{{class}}">{{ day["nb_jour"] }}</p>
+                                
                                 {% for task in user.get_html_tasks() %}
-                                    <script>console.log("{{task['date'].split()[2]}}", "{{calendar.int_to_month(day['month']+1).lower()}}")</script>
                                     {% set task_temp_day = task["date"].split()[1] %}
                                     {% if task_temp_day[0] == "0" %}
                                         {% set task_temp_day = task_temp_day[1] %}
                                     {% endif %}
                                     {% if task_temp_day | int == day["nb_jour"] and not task["done"] and task["date"].split()[2] == calendar.int_to_month(day["month"]+1).lower() %}
-                                        <div class="task">{{ task["title"] }}</div>
+                                        <div class="task">{{ task["title"] }}, {{ task["description"] }}</div>
                                         <script>document.getElementsByTagName("p")[document.getElementsByTagName("p").length -1].className = "day_task";</script>
                                     {% endif %}
                                 {% endfor %}
                             </div>
+                            <script>
+                                // On regroupe les tâches du même jour dans un seul div pour pouvoir les afficher en un seul clic sans créer d'erreurs d'affichage
+                                var parent = document.getElementsByClassName("parent_day")[document.getElementsByClassName("parent_day").length -1];
+                                var all_tasks = parent.getElementsByClassName("task");
+                                var msg_task = ""
+                                if (all_tasks.length > 1) {
+                                    var l = 1
+                                    for (let i = 0; i < parent.getElementsByClassName("task").length; i=i) {
+                                        console.log(parent.getElementsByClassName("task")[i])
+                                        msg_task += `Tâche ${l} : ${parent.getElementsByClassName("task")[i].innerHTML}<br>`;
+                                        parent.getElementsByClassName("task")[i].remove();
+                                        l += 1
+                                    }
+                                    parent.innerHTML += "<div class='task'>" + msg_task + "</div>";
+                                }
+                            </script>
+
                             
                         {% endfor %}
                     </li>
                 {% endfor %}
                 
                 
-
-
-            </ul>
-            <ul class="days"></ul>
         </div>
     </div>
   
