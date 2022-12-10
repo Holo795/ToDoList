@@ -115,6 +115,7 @@ class Account:
         account_table = Database().accounts
         account_table.edit_account(self.user_id, username=new_username)
         self.username = new_username
+        session["username"] = self.username
 
     def update_password(self, new_password):
         """Change le mot de passe de l'utilisateur"""
