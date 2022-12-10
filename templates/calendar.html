@@ -60,8 +60,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                            <script>
-                                // On regroupe les tâches du même jour dans un seul div pour pouvoir les afficher en un seul clic sans créer d'erreurs d'affichage
+                            <script>// On regroupe les tâches du même jour dans un seul div pour pouvoir les afficher en un seul clic sans créer d'erreurs d'affichage
                                 var parent = document.getElementsByClassName("parent_day")[document.getElementsByClassName("parent_day").length -1];
                                 var all_tasks = parent.getElementsByClassName("task");
                                 var msg_task = ""
@@ -76,16 +75,12 @@
                                     parent.innerHTML += "<div class='task'>" + msg_task + "</div>";
                                 }
                             </script>
-
-                            
                         {% endfor %}
                     </li>
                 {% endfor %}
-                
-                
+            </ul>
         </div>
     </div>
-  
 </div>
 
 
