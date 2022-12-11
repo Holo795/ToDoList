@@ -1,3 +1,6 @@
+Lien : http://todolist-nsi.tk/<br>
+Lien miroir : http://ashokas.pythonanywhere.com/
+
 | ID    | Description | Priorité | État |
 | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ |
 | FS1   | Afficher la liste des tâches par date d’échéance croissante avec pour chaque tâche: titre, catégorie, date échéance). Seules les tâches “Encours” et “Terminée” seront affichées | Haute    |✔️|
@@ -5,7 +8,7 @@
 | FS3   | Supprimer une tâche via un bouton dédié                                                                                                                                                 | Haute    |✔️|
 | FS4   | Modifier une tâche via un bouton dédié                                                                                                                                                  | Haute    |✔️|
 | FS5   | L’IHM doit être ergonomique, professionnelle et s’adapter à tous les écrans                                                                                                          | Basse    |🟧|
-| FS6   | Héberger l’application en ligne                                                                                                                                                         | Basse    |❌|
+| FS6   | Héberger l’application en ligne                                                                                                                                                         | Basse    |🟧|
 | FS7   | Proposer des statistiques sur les tâches : tâches en cours VS terminée, par catégorie, % terminées avant échéance                                                                       | Basse    |🟧|
 | FS2.1 | Proposer un calendrier pour saisir la date d’échéance de la tâche                                                                                                                       | Basse    |✔️|
 | FS1.1 | Adapter la couleur à la priorité de la tâche(rouge=haute, jaune=moyenne,vert=basse)                                                                                                  | Basse    |✔️|
@@ -24,3 +27,4 @@
 Gestion du front-end : <a href="https://github.com/Ashokaas">Ashokas</a><br>
 Gestion de la BDD et du back-end: <a href="https://github.com/Holo795">Holo795</a><br>
 Gestion des routes : <a href="https://github.com/maxime0109">Maxime0109</a><br>
+
