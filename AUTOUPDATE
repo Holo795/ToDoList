@@ -2,9 +2,9 @@
 
 cd $(dirname ${BASH_SOURCE[0]})
 
-if [[ -n $(git fetch) ]]; then
-    echo "Changes found. Updating..."
-    git merge origin/master
-else
-    echo "No changes found. Skip updating."
+# auto update git and restart flask on changes
+git pull
+if [ $? -eq 0 ]; then
+    echo "Restarting flask"
+    systemctl restart flask
 fi
