@@ -1,3 +1,4 @@
+import os
 import sqlite3  # Import the SQLite3 module
 
 # abc library for abstract base classes
@@ -10,7 +11,8 @@ class Database:
     def __init__(self):
         """Constructeur"""
 
-        self.path = "./bdd/todo.sqlite"
+        folder = os.path.dirname(os.path.abspath(__file__))
+        self.path = os.path.join(folder, "todo.sqlite")
 
         self.accounts = Accounts_Table(self.path)
         self.tasks = Tasks_Table(self.path)
