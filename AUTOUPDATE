@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cd $(dirname ${BASH_SOURCE[0]})
+
+if [[ -n $(git fetch) ]]; then
+    echo "Changes found. Updating..."
+    git merge origin/master
+else
+    echo "No changes found. Skip updating."
+fi
