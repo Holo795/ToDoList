@@ -10,7 +10,7 @@ class Database:
     def __init__(self):
         """Constructeur"""
 
-        self.path = "bdd/todo.sqlite"
+        self.path = "./bdd/todo.sqlite"
 
         self.accounts = Accounts_Table(self.path)
         self.tasks = Tasks_Table(self.path)
