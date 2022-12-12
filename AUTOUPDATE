@@ -15,7 +15,7 @@ while true; do
         echo "Restarting TodoList"
 
         # remove read only flag
-        chmod 666 bdd/todo.sqlite
+        chmod 777 bdd/todo.sqlite
 
         systemctl restart todolist_nsi.service
     fi
