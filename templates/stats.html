@@ -36,6 +36,7 @@
     <div id="graph_2">
         <canvas id="graph2" width="100" height="100"></canvas>
     </div>
+    </div>
 {% endblock %}
 
 {% block script %}
@@ -85,22 +86,7 @@
         var graph_2 = document.getElementById('graph2').getContext('2d');
         new Chart(graph_2, {
             type: 'radar',
-            data: {
-            datasets: [{
-                data: [{% for type in user.get_types() %}
-                    {{ user.get_types() }}
-                    {% endfor %}],
-                backgroundColor: [{% for type in user.get_types() %}
-                    'rgba(console.log(getRandomInt(256));, console.log(getRandomInt(256));, console.log(getRandomInt(256));, 0.2)'
-                {% endfor %}],
-                borderColor: [{% for type in user.get_types() %}
-                    'rgba(console.log(getRandomInt(256));, console.log(getRandomInt(256));, console.log(getRandomInt(256));, 0.2)'
-                {% endfor %}],
-            }],
-            labels: [{% for type in user.get_types() %}
-                '{{ user.get_types() }}'
-            {% endfor %}],
-            },
+            data: {{ user_stats.get_json_radar_chart() | safe }},
             options: {
                 responsive: true,
                 legend: {
