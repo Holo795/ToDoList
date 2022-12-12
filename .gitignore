@@ -2,6 +2,6 @@
 /.idea
 __pycache__/
 
-bdd/
-
 wsgi.py
+bdd/todo.sqlite
+*.sqlite
