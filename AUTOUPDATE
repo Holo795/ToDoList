@@ -7,11 +7,13 @@ cd $(dirname "${BASH_SOURCE[0]}")
 # auto update git and restart flask on changes
 
 while true; do
-    git pull
-    # shellcheck disable=SC2181
-    if [ $? -eq 0 ]; then
-        echo "Restarting flask"
+    git fetch
+    # shellcheck disable=SC1083
+    if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
+        git reset --hard
+        git pull
+        echo "Restarting TodoList"
         systemctl restart todolist_nsi.service
     fi
-    sleep 30 # check every 30 seconds
+    sleep 10
 done
