@@ -1,5 +1,5 @@
-Lien : http://todolist-nsi.tk/<br>
-Lien miroir : http://ashokas.pythonanywhere.com/
+Lien : https://todolist.holo795.ovh/<br>
+Lien 2 : http://ashokas.pythonanywhere.com/
 
 | ID    | Description | Priorité | État |
 | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ |
@@ -8,7 +8,7 @@ Lien miroir : http://ashokas.pythonanywhere.com/
 | FS3   | Supprimer une tâche via un bouton dédié                                                                                                                                                 | Haute    |✔️|
 | FS4   | Modifier une tâche via un bouton dédié                                                                                                                                                  | Haute    |✔️|
 | FS5   | L’IHM doit être ergonomique, professionnelle et s’adapter à tous les écrans                                                                                                          | Basse    |🟧|
-| FS6   | Héberger l’application en ligne                                                                                                                                                         | Basse    |🟧|
+| FS6   | Héberger l’application en ligne                                                                                                                                                         | Basse    |✔️|
 | FS7   | Proposer des statistiques sur les tâches : tâches en cours VS terminée, par catégorie, % terminées avant échéance                                                                       | Basse    |🟧|
 | FS2.1 | Proposer un calendrier pour saisir la date d’échéance de la tâche                                                                                                                       | Basse    |✔️|
 | FS1.1 | Adapter la couleur à la priorité de la tâche(rouge=haute, jaune=moyenne,vert=basse)                                                                                                  | Basse    |✔️|
