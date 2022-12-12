@@ -13,6 +13,10 @@ while true; do
         git reset --hard
         git pull
         echo "Restarting TodoList"
+
+        # remove read only flag
+        chmod +w /bdd/todo.sqlite
+
         systemctl restart todolist_nsi.service
     fi
     sleep 10
