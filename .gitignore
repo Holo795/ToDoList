@@ -1,3 +1,4 @@
 /venv/
 /.idea
 __pycache__/
+wsgi.py # this is the entry point for the app
