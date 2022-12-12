@@ -86,7 +86,7 @@
         var graph_2 = document.getElementById('graph2').getContext('2d');
         new Chart(graph_2, {
             type: 'radar',
-            data: {{ user_stats.get_json_radar_chart() | safe }},
+            data: {{ radars_json | safe }},
             options: {
                 responsive: true,
                 legend: {
