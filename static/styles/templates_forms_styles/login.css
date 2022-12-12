@@ -130,6 +130,24 @@
 }
 
 
+/* Afficher/cacher mdp */
+
+#eye, #eye_off {
+    opacity: 70%;
+    float: right;
+    transform: all 0.2s ease-in;
+}
+
+#eye:hover, #eye_off:hover {
+    cursor: pointer;
+    filter: invert(100%);
+}
+
+#eye_off {
+    display: none;
+}
+
+
 
 /* RESPONSIVE */
 @media screen and (max-width: 780px) {
@@ -145,3 +163,4 @@
 
 
 }
+
