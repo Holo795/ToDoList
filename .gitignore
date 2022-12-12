@@ -1,6 +1,10 @@
 /venv/
 /.idea
 __pycache__/
-/bdd/todo.sqlite
+
 wsgi.py # this is the entry point for the app
 todolist.sock # this is the socket file for the app
+
+# add database file
+todo.sqlite
+/bdd/todo.sqlite
