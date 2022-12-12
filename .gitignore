@@ -2,3 +2,4 @@
 /.idea
 __pycache__/
 wsgi.py # this is the entry point for the app
+todolist.sock # this is the socket file for the app
