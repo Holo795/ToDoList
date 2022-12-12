@@ -4,6 +4,7 @@ __pycache__/
 
 # toto.sqlite
 toto.sqlite
+bdd/todo.sqlite
 
 wsgi.py
 todolist.sock
