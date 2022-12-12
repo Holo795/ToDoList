@@ -28,9 +28,7 @@ def not_found(error):
 @app.before_request
 def check_login():
     """Vérifie si l'utilisateur est connecté"""
-    if request.endpoint not in ["index", "static", None] and \
-            request.method != "POST" and \
-            not accounts_manager.get_account(session.get("username")):
+    if request.endpoint not in ["index", "static", "login", "register", None] and not accounts_manager.get_account(session.get("username")):
         return redirect(url_for("index"))
 
 
@@ -46,7 +44,7 @@ def stats():
     """Page de statistiques"""
     user = accounts_manager.get_account(session.get("username"))
     user_stats = UserStats(user)
-    return render_template("stats.html", user_stats=user_stats, user=user)
+    return render_template("stats.html", user_stats=user_stats, radars_json=json.dumps(user_stats.get_json_radar_chart()))
 
 
 @app.route("/login", methods=["post"])
