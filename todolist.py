@@ -27,7 +27,6 @@ def not_found(error):
 
 @app.before_request
 def check_login():
-    session.permanent = True
     """Vérifie si l'utilisateur est connecté"""
     if request.endpoint not in ["index", "static", None] and \
             request.method != "POST" and \
