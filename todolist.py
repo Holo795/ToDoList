@@ -14,7 +14,7 @@ from modules.tasks_utils import *
 from modules.calendar_en import Calendar
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
-app.secret_key = secrets.token_urlsafe(16)
+app.config['SECRET_KEY'] = b'6hc/_gsh,./;2ZZx3c6_s,1//'
 
 # Initialisation du gestionnaire de comptes
 accounts_manager = AccountsManager()
