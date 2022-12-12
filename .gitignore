@@ -5,3 +5,5 @@ __pycache__/
 wsgi.py
 todolist.sock
 
+bdd/*
+!bdd/bdd.py
