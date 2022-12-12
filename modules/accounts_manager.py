@@ -264,12 +264,57 @@ class UserStats:
         """Renvoie l'utilisateur"""
         return self.user
 
-    def get_tasks_done_count(self) -> int:
-        """Renvoie le nombre de tâches terminées"""
-        return sum(task[8] == 2 for task in self.tasks)
+    def get_tasks_done_count(self, idType=None) -> int:
+        """Renvoie le nombre de tâches terminées par catégorie"""
+        if idType is None:
+            return len([task for task in self.tasks if task[8] == 2])
+        return len([task for task in self.tasks if task[8] == 2 and task[6] == idType])
 
-    def get_tasks_in_progress_count(self) -> int:
-        """Renvoie le nombre de tâches en cours"""
-        return sum(task[8] == 1 for task in self.tasks)
+    def get_tasks_in_progress_count(self, idType=None) -> int:
+        """Renvoie le nombre de tâches en cours par catégorie"""
+        if idType is None:
+            return len([task for task in self.tasks if task[8] == 1])
+        return len([task for task in self.tasks if task[8] == 1 and task[6] == idType])
 
+    def get_tasks_done_on_time_count(self, idType=None) -> int:
+        """Renvoie le nombre de tâches terminées à temps par catégorie"""
+        print(self.tasks)
+        if idType is None:
+            return len([task for task in self.tasks if task[8] == 2 and task[4] <= task[5]])
+        return len([task for task in self.tasks if task[8] == 2 and task[4] <= task[5] and task[6] == idType])
+
+    def get_json_radar_chart(self) -> dict:
+        """Renvoie les données pour le graphique radar"""
+        types = self.user.get_types()
+
+        tasks_done = [self.get_tasks_done_count(idType=type[0]) for type in types]
+        tasks_in_progress = [self.get_tasks_in_progress_count(idType=type[0]) for type in types]
+        tasks_done_on_time = [self.get_tasks_done_on_time_count(idType=type[0]) for type in types]
+
+        return {
+            "labels": [type[1] for type in types],
+            "datasets": [
+                {
+                    "label": "Tâches terminées",
+                    "data": tasks_done,
+                    "backgroundColor": "rgba(255, 99, 132, 0.2)",
+                    "borderColor": "rgba(255, 99, 132, 1)",
+                    "borderWidth": 1
+                },
+                {
+                    "label": "Tâches en cours",
+                    "data": tasks_in_progress,
+                    "backgroundColor": "rgba(54, 162, 235, 0.2)",
+                    "borderColor": "rgba(54, 162, 235, 1)",
+                    "borderWidth": 1
+                },
+                {
+                    "label": "Tâches terminées à temps",
+                    "data": tasks_done_on_time,
+                    "backgroundColor": "rgba(75, 192, 192, 0.2)",
+                    "borderColor": "rgba(75, 192, 192, 1)",
+                    "borderWidth": 1
+                }
+            ]
+        }
 
