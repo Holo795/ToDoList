@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
-cd $(dirname ${BASH_SOURCE[0]})
+# shellcheck disable=SC2046
+# shellcheck disable=SC2164
+cd $(dirname "${BASH_SOURCE[0]}")
 
 # auto update git and restart flask on changes
-git pull
-if [ $? -eq 0 ]; then
-    echo "Restarting flask"
-    systemctl restart todolist_nsi.service
-fi
+
+while true; do
+    git pull
+    # shellcheck disable=SC2181
+    if [ $? -eq 0 ]; then
+        echo "Restarting flask"
+        systemctl restart todolist_nsi.service
+    fi
+    sleep 30 # check every 30 seconds
+done
