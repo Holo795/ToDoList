@@ -298,6 +298,7 @@ class UserStats:
                     "data": tasks_done,
                     "backgroundColor": "rgba(255, 99, 132, 0.2)",
                     "borderColor": "rgba(255, 99, 132, 1)",
+                    "pointBackgroundColor": "rgba(255, 99, 132, 1)",
                     "borderWidth": 2
                 },
                 {
@@ -305,6 +306,7 @@ class UserStats:
                     "data": tasks_in_progress,
                     "backgroundColor": "rgba(54, 162, 235, 0.2)",
                     "borderColor": "rgba(54, 162, 235, 1)",
+                    "pointBackgroundColor": "rgba(54, 162, 235, 1)",
                     "borderWidth": 2
                 },
                 {
@@ -312,6 +314,7 @@ class UserStats:
                     "data": tasks_done_on_time,
                     "backgroundColor": "rgba(75, 192, 192, 0.2)",
                     "borderColor": "rgba(75, 192, 192, 1)",
+                    "pointBackgroundColor": "rgba(75, 192, 192, 1)",
                     "borderWidth": 2
                 }
             ]

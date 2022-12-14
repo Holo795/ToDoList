@@ -78,6 +78,19 @@
                 title: {
                     display: true,
                     text: 'Tâches dans différentes catégories'
+                },
+                scale: {
+                    ticks: {
+                        beginAtZero: true,
+                        showLabelBackdrop: false,
+                    }
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel;
+                        }
+                    }
                 }
             }
         });
