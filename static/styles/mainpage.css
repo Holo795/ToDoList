@@ -107,6 +107,11 @@ nav li:hover .submenu {
 }
 
 .menu4:hover {
+    border-top: 5px solid #4fdbf1;
+    background-color: rgba(79, 128, 241, 0.15);
+}
+
+.menu5:hover {
     border-top: 5px solid #11ac00;
     background-color: rgba(124, 255, 133, 0.15);
 }
@@ -133,6 +138,10 @@ nav li:hover .submenu {
 }
 
 .menu4 .submenu {
+    background-color: rgb(100, 160, 255);
+}
+
+.menu5 .submenu {
     background-color: rgba(30, 142, 30, 0.1);
 }
 
@@ -165,7 +174,7 @@ nav input[type=checkbox]:checked ~ ul {
     }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 950px) {
     .menu-mobile {
         display: block;
         color: #FFF;
