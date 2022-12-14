@@ -280,7 +280,7 @@ class UserStats:
         """Renvoie le nombre de tâches terminées à temps par catégorie"""
         if idType is None:
             return len([task for task in self.tasks if task[8] == 2 and task[4] <= task[5]])
-        print([task for task in self.tasks if task[8] == 2 and task[6] == idType])
+        print(self.tasks)
         return len([task for task in self.tasks if task[8] == 2 and task[4] <= task[5] and task[6] == idType])
 
     def get_json_radar_chart(self) -> dict:
