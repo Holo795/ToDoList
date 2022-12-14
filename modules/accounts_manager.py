@@ -278,7 +278,6 @@ class UserStats:
 
     def get_tasks_done_on_time_count(self, idType=None) -> int:
         """Renvoie le nombre de tâches terminées à temps par catégorie"""
-        print(self.tasks)
         if idType is None:
             return len([task for task in self.tasks if task[8] == 2 and task[4] <= task[5]])
         return len([task for task in self.tasks if task[8] == 2 and task[4] <= task[5] and task[6] == idType])
@@ -317,4 +316,3 @@ class UserStats:
                 }
             ]
         }
-

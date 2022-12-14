@@ -1,11 +1,11 @@
 #main_stats {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            margin: 0 auto;
-            width: 100%;
-            height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
 }
 
 #graph_1 {
@@ -24,10 +24,12 @@
         justify-content: center;
         align-items: center;
     }
+
     #graph_1 {
         width: 80%;
         height: auto;
     }
+
     #graph_2 {
         width: 100%;
         height: auto;

@@ -14,8 +14,8 @@
                 <label>Mot de passe</label>
                 <span></span>
 
-                <img id="eye"src="../../static/icons/eye-off.svg" onclick="click_eye()">
-                <img id="eye_off"src="../../static/icons/eye.svg" onclick="click_eye_off()">
+                <img id="eye" src="../../static/icons/eye-off.svg" onclick="click_eye()">
+                <img id="eye_off" src="../../static/icons/eye.svg" onclick="click_eye_off()">
             </div>
 
             {% with messages = get_flashed_messages(with_categories=true) %}
@@ -52,7 +52,7 @@
                     document.getElementById("eye_off").style.display = "inline-block";
                     document.getElementById("mdp").type = "text";
                 }
-            
+
                 function click_eye_off() {
                     document.getElementById("eye_off").style.display = "none";
                     document.getElementById("eye").style.display = "inline-block";

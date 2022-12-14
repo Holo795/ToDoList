@@ -195,8 +195,6 @@ nav input[type=checkbox]:checked ~ ul {
     }
 
 
-
-
     #tableau_taches td {
         display: block;
         text-align: right;
@@ -227,7 +225,7 @@ nav input[type=checkbox]:checked ~ ul {
         margin-left: 10px !important;
     }
 
-    
+
 }
 
 /*
@@ -406,7 +404,7 @@ nav img {
     transition: transform 0.2s ease-in;
 }
 
-#tableau_taches .div_actions img:hover  {
+#tableau_taches .div_actions img:hover {
     transform: scale(1.1);
 
 }

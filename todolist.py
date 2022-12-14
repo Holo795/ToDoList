@@ -2,6 +2,8 @@
 
 Ce mini-projet en terminale NSI consiste à créer une application web dynamique
 gérant une liste de tâches à faire
+
+Antonin, Paulin et Maxime
 """
 
 import secrets
@@ -9,10 +11,12 @@ import secrets
 # Librairie(s) utilisée(s)
 from flask import *
 
+# Module(s) utilisé(s)
 from modules.accounts_manager import AccountsManager, UserStats
-from modules.tasks_utils import *
 from modules.calendar_en import Calendar
+from modules.tasks_utils import *
 
+# Initialisation de l'application Flask
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = secrets.token_urlsafe(16)
 
@@ -22,6 +26,8 @@ accounts_manager = AccountsManager()
 
 @app.errorhandler(404)
 def not_found(error):
+    """Gestionnaire d'erreur 404"""
+    """ -> REDIRECTION VERS LA PAGE D'ACCUEIL"""
     return redirect(url_for("index"))
 
 
@@ -51,16 +57,19 @@ def stats():
 
 @app.route("/login", methods=["post"])
 def login():
+    """Request de connexion"""
     return accounts_manager.login(request)
 
 
 @app.route("/logout")
 def logout():
+    """Request de déconnexion"""
     return accounts_manager.logout()
 
 
 @app.route("/register", methods=["post"])
 def register():
+    """Request d'inscription"""
     return accounts_manager.register(request)
 
 

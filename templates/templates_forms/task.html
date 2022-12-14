@@ -54,19 +54,19 @@
         {% if not task["stats"][0] == 3 %}
             <tr>
                 <td data-label="Tâche">
-                        <div class="priority" id="task_priority_{{ task['priority'][0] }}"
-                             title="Priorité : {{ task['priority'][1] }}"></div>
-                {% if task["stats"][0] == 2 %}
+                    <div class="priority" id="task_priority_{{ task['priority'][0] }}"
+                         title="Priorité : {{ task['priority'][1] }}"></div>
+                    {% if task["stats"][0] == 2 %}
                         <input type="checkbox" id="state_task" name="state_task" title="État : Terminé"
                                value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}"
                                onclick="location=this.value" checked>
                         <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
-                {% else %}
+                    {% else %}
                         <input type="checkbox" id="state_task" name="state_task" title="État : En cours"
                                value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True"
                                onclick="location=this.value">
                         {{ task["title"] }}, {{ task["description"] }}
-                {% endif %}
+                    {% endif %}
                 </td>
                 <td data-label="Echéance">
                     <div class="div_taches">

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-#calendar_parent *{
+#calendar_parent * {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
@@ -15,7 +15,7 @@
     font-weight: normal;
 }
 
-#calendar_parent{
+#calendar_parent {
     margin-top: -150px;
     display: flex;
     align-items: center;
@@ -24,14 +24,14 @@
     min-height: 100vh;
 }
 
-#wrapper{
+#wrapper {
     width: 600px;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
-#wrapper header{
+#wrapper header {
     display: flex;
     align-items: center;
     padding: 25px 30px 10px;
@@ -40,11 +40,11 @@
 
 }
 
-header .icons{
+header .icons {
     display: flex;
 }
 
-header .icons span{
+header .icons span {
     height: 38px;
     width: 38px;
     margin: 0 1px;
@@ -57,24 +57,24 @@ header .icons span{
     border-radius: 50%;
 }
 
-.icons span:last-child{
+.icons span:last-child {
     margin-right: -10px;
 }
 
-header .icons span:hover{
+header .icons span:hover {
     background: #f2f2f2;
 }
 
-header .current-date{
+header .current-date {
     font-size: 1.45rem;
-    font-weight: 500; 
+    font-weight: 500;
 }
 
-.calendar{
+.calendar {
     padding: 20px;
 }
 
-.calendar ul{
+.calendar ul {
     display: flex;
 
     flex-wrap: wrap;
@@ -83,36 +83,36 @@ header .current-date{
     text-align: center;
 }
 
-.calendar li{
+.calendar li {
     color: #333;
     width: calc(100% / 12);
     font-size: 1.07rem;
-  
+
 }
 
-.calendar .weeks li{
+.calendar .weeks li {
     font-weight: 500;
     cursor: default;
 }
 
-.weeks li .parent_day .day, .weeks li .parent_day .null{
+.weeks li .parent_day .day, .weeks li .parent_day .null {
     color: black;
 }
 
 .weeks li .parent_day .day:hover {
     clip-path: circle(12.3px at center);
     background-color: #c1c1c1;
-    
+
 }
 
-.weeks li .parent_day .active_day{
+.weeks li .parent_day .active_day {
     color: white;
     clip-path: circle(12.3px at center);
     background-color: hsl(312, 52%, 38%);
 
 }
 
-.weeks li .parent_day .day_task{
+.weeks li .parent_day .day_task {
     color: white;
     clip-path: circle(12.3px at center);
     background-color: hsl(168, 100%, 30%);
@@ -127,7 +127,7 @@ header .current-date{
     border-radius: 10px;
     max-width: 200px;
     z-index: 3;
-    
+
 }
 
 .task {

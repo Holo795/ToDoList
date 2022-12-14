@@ -1,0 +1,19 @@
+#about {
+    font-family: sans-serif;
+    margin: 50px 13% 0 13%;
+}
+
+#about li {
+    margin: 7px 0;
+}
+
+#about a {
+    color: rgb(0, 128, 255);;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+#about a:hover {
+    text-decoration: underline;
+    text-decoration-color: rgb(0, 128, 255);
+}

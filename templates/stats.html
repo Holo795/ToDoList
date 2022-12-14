@@ -13,12 +13,12 @@
     </div>
 
     <div id="main_stats">
-    <div id="graph_1">
-        <canvas id="graph1" width="100" height="100"></canvas>
-    </div>
-    <div id="graph_2">
-        <canvas id="graph2" width="100" height="100"></canvas>
-    </div>
+        <div id="graph_1">
+            <canvas id="graph1" width="100" height="100"></canvas>
+        </div>
+        <div id="graph_2">
+            <canvas id="graph2" width="100" height="100"></canvas>
+        </div>
     </div>
 {% endblock %}
 
@@ -27,29 +27,25 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
     <script>
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * max);
-        }
-
-        var graph_1 = document.getElementById('graph1').getContext('2d');
+        const graph_1 = document.getElementById('graph1').getContext('2d');
         new Chart(graph_1, {
             type: 'doughnut',
             data: {
-            datasets: [{
-                data: [{{ user_stats.get_tasks_in_progress_count() }}, {{ user_stats.get_tasks_done_count() }}],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
+                datasets: [{
+                    data: [{{ user_stats.get_tasks_in_progress_count() }}, {{ user_stats.get_tasks_done_count() }}],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                }],
+                labels: [
+                    'Tâches en cours',
+                    'Tâches terminées'
                 ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)',
-                ],
-            }],
-            labels: [
-                'Tâches en cours',
-                'Tâches terminées'
-            ],
             },
             options: {
                 responsive: true,
@@ -65,8 +61,7 @@
         });
 
 
-
-        var graph_2 = document.getElementById('graph2').getContext('2d');
+        const graph_2 = document.getElementById('graph2').getContext('2d');
         new Chart(graph_2, {
             type: 'radar',
             data: {{ radars_json | safe }},
