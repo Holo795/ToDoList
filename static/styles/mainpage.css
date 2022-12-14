@@ -154,6 +154,17 @@ nav input[type=checkbox]:checked ~ ul {
     display: block;
 }
 
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000000;
+        color: #fefefe;
+    }
+
+    img {
+        filter: grayscale(20%);
+    }
+}
+
 @media screen and (max-width: 780px) {
     .menu-mobile {
         display: block;

@@ -150,3 +150,21 @@ header .current-date {
     font-size: 0.8rem;
 }
 
+
+@media (prefers-color-scheme: dark) {
+
+    #wrapper * {
+        color: white;
+    }
+
+    #wrapper {
+        background-color: rgb(0, 0, 0);
+    }
+
+    .weeks li .parent_day .day:hover {
+        clip-path: circle(12.3px at center);
+        background-color: #434343;
+    
+    }
+}
+
