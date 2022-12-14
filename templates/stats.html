@@ -28,20 +28,8 @@
 
     <script>
         // Changement de la couleur du texte en fonction du thème
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches === true) {
-            Chart.defaults.global.defaultFontColor = "#fff";
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches == false) {
-            Chart.defaults.global.defaultFontColor = "#000000";
-        }
-        window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
-           location.reload();
-            if (e.matches === true) {
-                Chart.defaults.global.defaultFontColor = "#fff";
-            } else if (e.matches == false) {
-                Chart.defaults.global.defaultFontColor = "#000000";
-            }
-        });
-        
+        Chart.defaults.global.defaultFontColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#fff" : "#000";
+
         // Création des graphiques
         const graph_1 = document.getElementById('graph1').getContext('2d');
         new Chart(graph_1, {
