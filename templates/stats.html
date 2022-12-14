@@ -27,6 +27,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
     <script>
+        // Changement de la couleur du texte en fonction du thème
         if (window.matchMedia('(prefers-color-scheme: dark)').matches === true) {
             Chart.defaults.global.defaultFontColor = "#fff";
         } else if (window.matchMedia('(prefers-color-scheme: dark)').matches == false) {
@@ -41,6 +42,7 @@
             }
         });
         
+        // Création des graphiques
         const graph_1 = document.getElementById('graph1').getContext('2d');
         new Chart(graph_1, {
             type: 'doughnut',
