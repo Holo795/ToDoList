@@ -175,7 +175,7 @@ nav input[type=checkbox]:checked ~ ul {
     }
 
     nav {
-        z-index: 10;
+        z-index: 1;
     }
 
     nav ul {
