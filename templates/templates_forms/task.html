@@ -1,48 +1,51 @@
 <div id="upper_buttons">
-    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche"
+    <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" title="Ajouter une nouvelle tâche"
            onclick="document.getElementById('task_add_parent').style.display = 'block'">
     <img src="../../static/icons/settings.png" id="settings" title="Ajouter une catégorie / Paramètres"
          onclick="document.getElementById('account_form_parent').style.display = 'block'"></img>
+    
+    <select name="categories" id="type_tache" onchange="location=this.value" title="Trier en fonction du type">
+        {% if user.get_filter_type() != -1 %}
+            {% for type in user.get_types() %}
+                {% if type[0] == user.get_filter_type() %}
+                    <option value="{{ url_for('type_filter') }}?filter={{ user.get_filter_type() }}">{{ type[1] }}</option>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <option value="{{ url_for('type_filter') }}?filter=-1">Tout Types</option>
+
+        {% for type in user.get_types() %}
+            {% if user.get_filter_type() != type[0] %}
+                <option value="{{ url_for('type_filter') }}?filter={{ type[0] }}">{{ type[1] }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <select name="priority" id="priority_tache" onchange="location=this.value" title="Trier en fonction de la catégorie">
+        {% if user.get_filter_priority() != -1 %}
+            {% for priority in user.get_priorities() %}
+                {% if priority[0] == user.get_filter_priority() %}
+                    <option value="{{ url_for('priority_filter') }}?filter={{ user.get_filter_priority() }}">{{ priority[1] }}</option>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <option value="{{ url_for('priority_filter') }}?filter=-1">Toutes Prioritées</option>
+        {% for priority in user.get_priorities() %}
+            {% if user.get_filter_priority() != priority[0] %}
+                <option value="{{ url_for('priority_filter') }}?filter={{ priority[0] }}">{{ priority[1] }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+
 </div>
 
 <!-- Tableau tâches à effectuer-->
+
+
 <table id="tableau_taches" cellspacing="0">
     <thead>
     <tr>
         <td id="tache"><p>Tâche</p>
-            <div id="categories">
-                <select name="categories" id="type_tache" onchange="location=this.value">
-                    {% if user.get_filter_type() != -1 %}
-                        {% for type in user.get_types() %}
-                            {% if type[0] == user.get_filter_type() %}
-                                <option value="{{ url_for('type_filter') }}?filter={{ user.get_filter_type() }}">{{ type[1] }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    <option value="{{ url_for('type_filter') }}?filter=-1">Toutes Types</option>
-
-                    {% for type in user.get_types() %}
-                        {% if user.get_filter_type() != type[0] %}
-                            <option value="{{ url_for('type_filter') }}?filter={{ type[0] }}">{{ type[1] }}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-                <select name="priority" id="priority_tache" onchange="location=this.value">
-                    {% if user.get_filter_priority() != -1 %}
-                        {% for priority in user.get_priorities() %}
-                            {% if priority[0] == user.get_filter_priority() %}
-                                <option value="{{ url_for('priority_filter') }}?filter={{ user.get_filter_priority() }}">{{ priority[1] }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    <option value="{{ url_for('priority_filter') }}?filter=-1">Toutes Prioritées</option>
-                    {% for priority in user.get_priorities() %}
-                        {% if user.get_filter_priority() != priority[0] %}
-                            <option value="{{ url_for('priority_filter') }}?filter={{ priority[0] }}">{{ priority[1] }}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-            </div>
+            
         </td>
         <td id="echeance">Echéance</td>
         <td id="actions">Actions</td>
@@ -79,9 +82,9 @@
                     </div>
                 </td>
                 <td data-label="Actions">
-                    <div class="div_actions">
+                    <div id="div_actions">
                         <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%"
-                             onclick="edit_task({{ task['id'] }})">
+                             onclick="edit_task({{ task['id'] }})" data-label="Modifier">
                         <a href="{{ url_for('archive_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;"
                            onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ? Cette action est définitive.')">
                             <img src="./static/icons/archiver.png" width="30%" alt="Archiver" title="Archiver">

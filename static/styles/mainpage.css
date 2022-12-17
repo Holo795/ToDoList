@@ -240,7 +240,7 @@ nav input[type=checkbox]:checked ~ ul {
     }
 
 
-    #tableau_taches img {
+    #tableau_taches #div_actions img {
         width: 3% !important;
         height: auto;
     }
@@ -329,11 +329,15 @@ nav img {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
+
+#upper_buttons > * {
+    margin: 10px;
+} 
 
 #upper_buttons #bouton_nouvelle_tache, #upper_buttons #settings {
     display: block;
-    margin-top: 20px;
     border: none;
     border-radius: 4px;
     box-shadow: none;
@@ -350,12 +354,43 @@ nav img {
     width: 30px;
     height: auto;
     padding: 4px 7px !important;
-    margin-left: 20px;
 }
 
 #upper_buttons #bouton_nouvelle_tache:hover, #upper_buttons #settings:hover {
     background: #00BCD4;
 }
+
+    /* Trier catégories */
+
+#upper_buttons select {
+    padding: 9px 10px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-color: #009879;
+    color: white;
+    font-size: 17px;
+}
+
+#upper_buttons select[id=type_tache] {
+    width: 125px;
+}
+
+#upper_buttons select[id=priority_tache] {
+    width: 180px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Tableau Tâches */
@@ -417,18 +452,18 @@ nav img {
 
 
 /* Actions img */
-#tableau_taches .div_actions {
+#tableau_taches #div_actions {
     text-align: center;
 
 }
 
-#tableau_taches .div_actions img {
-    margin: 0px 8px;
+#tableau_taches #div_actions img {
+    margin: 4px 8px;
     cursor: pointer;
     transition: transform 0.2s ease-in;
 }
 
-#tableau_taches .div_actions img:hover {
+#tableau_taches #div_actions img:hover {
     transform: scale(1.1);
 
 }
@@ -510,26 +545,3 @@ nav img {
 #tableau_taches #task_priority_3 {
     background-color: #00ff00;
 }
-
-
-/* Trier catégories */
-
-#tache #categories {
-    position: static;
-    margin-left: 70px;
-    margin-top: -45px;
-}
-
-#tache #categories select {
-    width: 180px;
-    margin-left: 8px;
-    border-radius: 3px;
-    border: none;
-    padding: 7px 10px;
-    cursor: pointer;
-    outline: none;
-    background-color: #009879;
-    color: white;
-    font-size: 17px;
-}
-
