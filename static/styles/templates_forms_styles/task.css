@@ -276,7 +276,7 @@
 
 /* RESPONSIVE */
 @media screen and (max-width: 780px) {
-    #task_add {
+    #task_add, #task_edit {
         position: absolute;
         width: 100%;
         height: 100%;

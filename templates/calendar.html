@@ -23,15 +23,15 @@
 
         <div id="wrapper">
             <header>
-                <p class="current-date">{{ shown_date["month"] }} {{ shown_date["year"] }}</p>
+                <p id="current_date">{{ shown_date["month"] }} {{ shown_date["year"] }}</p>
                 <!--<div class="icons">
                     <span id="prev" class="material-symbols-rounded"><</span>
                     <span id="next" class="material-symbols-rounded">></span>
                 </div>-->
             </header>
-            <div class="calendar">
+            <div id="calendar">
 
-                <ul class="weeks">
+                <ul id="weeks">
                     {% for days_in_week in days_in_a_week %}
                         <li>
                             <p>{{ days_in_week[0:3] }}</p>
