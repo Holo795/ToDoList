@@ -2,13 +2,18 @@
 <div id="login_form_parent">
     <div id="login_form">
         <h2>Se connecter / S'inscrire à votre liste de tâches</h2>
+
+        <!-- Formulaire de connexion -->
         <form action="/" method="POST" autocomplete="off">
+
+            <!-- Pseudo -->
             <div class="input_box">
                 <input type="text" name="username" id="id" maxlength="20" required>
                 <label>Identifiant</label>
                 <span></span>
             </div>
 
+            <!-- Mot de passe -->
             <div class="input_box">
                 <input type="password" name="password" id="mdp" required>
                 <label>Mot de passe</label>
@@ -18,6 +23,7 @@
                 <img id="eye_off" src="../../static/icons/eye.svg" onclick="click_eye_off()">
             </div>
 
+            <!-- Message d'erreur -->
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
 
@@ -32,19 +38,20 @@
                 {% endif %}
             {% endwith %}
 
+            <!-- Connexion / S'inscrire -->
             <div id="boutons">
-                <input type="submit" value="Connexion" onclick="login_fx()"/>
-                <input type="submit" value="S'inscrire" onclick="register_fx()"/>
+                <input type="submit" value="Connexion" onclick="login_fx()" />
+                <input type="submit" value="S'inscrire" onclick="register_fx()" />
             </div>
 
 
             <script>
                 function login_fx() {
-                    document.querySelector("form").action = "{{ url_for('login') }}"
+                    document.querySelector("form").action = "{{ url_for('login') }}";
                 }
 
                 function register_fx() {
-                    document.querySelector("form").action = "{{ url_for('register') }}"
+                    document.querySelector("form").action = "{{ url_for('register') }}";
                 }
 
                 function click_eye() {

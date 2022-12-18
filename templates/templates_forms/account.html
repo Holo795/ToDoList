@@ -1,32 +1,37 @@
-<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/account.css"/>
+<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/account.css" />
 <div id="account_form_parent">
     <div id="account_form">
+        <!-- Bouton annuler fermer la popup -->
         <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer"
-             onclick="clear_error()">
+            onclick="clear_error()">
 
         <h2>Informations du compte</h2>
+
+        <!-- Formulaire de gestion de comtpe -->
         <form method="POST" autocomplete="off">
+            <!-- Pseudo -->
             <div class="input_box">
                 <input type="text" name="username" id="id" value="{{ user.get_username() }}" maxlength="20" required>
                 <label>Identifiant</label>
                 <span></span>
             </div>
 
+            <!-- Mot de passe -->
             <div class="input_box">
                 <input type="password" name="password" id="mdp" value="">
                 <label>Mot de passe</label>
                 <span></span>
             </div>
 
+            <!-- Catégories -->
             <div id="categories">
                 <h3>Catégories :</h3>
                 <ul>
                     {% for type in user.get_types() %}
                         <li>{{ type[1] }}
                             <img src="../../static/icons/corbeille_rouge.png" class="delete_categorie"
-                                 title="Supprimer catégorie" alt="Supprimer catégorie" name="{{ type[0] }}">
+                                title="Supprimer catégorie" alt="Supprimer catégorie" name="{{ type[0] }}">
                         </li>
-
                     {% endfor %}
                 </ul>
             </div>
@@ -34,14 +39,18 @@
             <input type="hidden" name="new_type_length" value="0">
             <input type="hidden" name="used_type" value="{{ user.get_used_types() }}">
 
-            <input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()"/>
-
+            <!-- Bouton nouvelle catégorie -->
+            <input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()" />
+            
+            <!-- Message d'erreur -->
             <p id="error"></p>
 
+            <!-- Bouton enregistrer -->
             <div id="boutons">
                 <input type="submit" value="Enregistrer" formaction="{{ url_for('update_user') }}"
-                       onclick="checkpass()">
+                    onclick="checkpass()">
             </div>
+
             <script>
 
                 function clear_error() {
@@ -125,4 +134,3 @@
         </form>
     </div>
 </div>
-

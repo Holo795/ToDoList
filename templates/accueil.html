@@ -5,6 +5,7 @@
 <!-- On ajoute notre propre contenu -->
 {% block contenu %}
 
+    <!-- Informations -->
     <div id="info">
         <h1>Accueil</h1>
         <p>Bienvenue sur l'application <strong>ToDoList</strong> gérant vos tâches.</p>
@@ -13,28 +14,30 @@
     {% if user %}
         {% include "/templates_forms/task.html" %}
     {% endif %}
+
 {% endblock %}
 
 {% block script %}
     <script>
+        // Demande la permission nécessaire pour afficher des notifications
         Notification.requestPermission();
 
+        // Fonction permettant de cacher les popups
         window.onclick = function (event) {
             if (event.target.id === "close_task") {
                 document.getElementById("task_add_parent").style.display = "none";
                 document.getElementById("task_edit_parent").style.display = "none";
                 document.getElementById("account_form_parent").style.display = "none";
-
             }
         }
     </script>
 {% endblock %}
 
 
+<!-- Inclusion des templates si l'utilisateur est connecté -->
 {% if not user %}
     {% include "/templates_forms/login.html" %}
 {% else %}
-
     {% include "/templates_forms/account.html" %}
     {% include "/templates_forms/task_add.html" %}
     {% include "/templates_forms/task_edit.html" %}

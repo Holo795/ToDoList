@@ -2,8 +2,6 @@
 
 
 /* Form */
-
-
 #login_form {
     top: 50%;
     left: 50%;
@@ -97,8 +95,8 @@
 }
 
 
-/* Bouton */
 
+/* Boutons */
 #login_form #boutons input {
     border: none;
     box-shadow: none;
@@ -116,12 +114,12 @@
     right: 8%;
 }
 
-
 #login_form #boutons input:hover {
     background: #00BCD4;
 }
 
-/* Error */
+
+/* Erreur */
 #login_form #error {
     position: absolute;
     color: red;
@@ -131,7 +129,6 @@
 
 
 /* Afficher/cacher mdp */
-
 #eye, #eye_off {
     opacity: 70%;
     float: right;
@@ -146,6 +143,7 @@
 #eye_off {
     display: none;
 }
+
 
 
 /* RESPONSIVE */

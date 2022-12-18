@@ -69,7 +69,7 @@ class TasksTimeUtils:
         if date is None:
             date = datetime.now()
         difference = self.get_difference(date)
-        text = "" + ("Il y a " if self.date.timestamp() <= date.timestamp() else "Dans ")
+        text = "" + ("⚠️ Il y a " if self.date.timestamp() <= date.timestamp() else "Dans ")
         difference = abs(difference)
         if difference.days > 0:
             text += f"{difference.days} jour(s) "

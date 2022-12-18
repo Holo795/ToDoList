@@ -10,58 +10,63 @@
     <title>ToDoList</title>
 </head>
 <body>
-<!-- Barre de navigation -->
-<nav id="header">
-    <label for="menu-mobile" class="menu-mobile" title="Dérouler le menu">Menu ⬇</label>
-    <input type="checkbox" id="menu-mobile" role="button" title="Dérouler le menu">
-    <ul>
-        <li class="menu1">
-            <a href="{{ url_for('index') }}">{ ToDo List }</a>
-        </li>
-        <li class="menu2">
-            <a href="{{ url_for('calendar') }}">Calendrier</a>
-        </li>
-        <li class="menu3">
-            <a href="{{ url_for('stats') }}">Statistiques</a>
-        </li>
-        <li class="menu5">
-            <a href="{{ url_for('about') }}">À propos</a>
-        </li>
-        <li class="menu_deco">
-            <a href="{{ url_for('logout') }}">Se déconnecter</a>
-        </li>
-    </ul>
-</nav>
+
+    <!-- Barre de navigation -->
+    <nav id="header">
+        <!-- Dérouler le menu pour le responsive -->
+        <label for="menu-mobile" class="menu-mobile" title="Dérouler le menu">Menu ⬇</label>
+        <input type="checkbox" id="menu-mobile" role="button" title="Dérouler le menu">
+
+        <!-- Menu -->
+        <ul>
+            <li id="menu1">
+                <a href="{{ url_for('index') }}">{ ToDo List }</a>
+            </li>
+            <li id="menu2">
+                <a href="{{ url_for('calendar') }}">Calendrier</a>
+            </li>
+            <li id="menu3">
+                <a href="{{ url_for('stats') }}">Statistiques</a>
+            </li>
+            <li id="menu5">
+                <a href="{{ url_for('about') }}">À propos</a>
+            </li>
+            <li id="menu_deco">
+                <a href="{{ url_for('logout') }}">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
 
 
-<!-- Zone centrale de la page -->
-<div class="container">
+    <!-- Zone centrale de la page -->
+    <div class="container">
 
-    <!-- Message(s) de notification (si il y en a) -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <script src="../static/scripts/notification.js"></script>
-            {% for category, message in messages %}
-                {% if user and category == 'notifier-' + user.get_username() %}
-                    <script>
-                        notifier('{{ message }}');
-                    </script>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+        <!-- Message(s) de notification (si il y en a) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <script src="../static/scripts/notification.js"></script>
+                {% for category, message in messages %}
+                    {% if user and category == 'notifier-' + user.get_username() %}
+                        <script>
+                            notifier('{{ message }}');
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-    <!-- Bloc de contenu géré par les pages héritant de cette page "mère" -->
-    <br/>
+        <!-- Bloc de contenu géré par les pages héritant de cette page "mère" -->
+        <br/>
 
 
-</div><!-- /.container -->
+    </div>
 
-{% block contenu %}
-{% endblock %}
+    {% block contenu %}
+    {% endblock %}
 
-{% block script %}
-{% endblock %}
-<br><br>
+    {% block script %}
+    {% endblock %}
+    
+    <br><br>
 </body>
 </html>

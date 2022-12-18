@@ -18,6 +18,9 @@
     height: auto;
 }
 
+
+
+/* RESPONSIVE */
 @media only screen and (max-width: 780px) {
     #main_stats {
         flex-direction: column;

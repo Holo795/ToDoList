@@ -11,7 +11,7 @@ body {
     padding: 0;
 }
 
-/* Menu */
+/* Menu / header */
 nav {
     width: 100%;
     background-color: #424558;
@@ -71,6 +71,7 @@ nav > ul > li:hover a {
     padding: 15px 30px 20px 30px;
 }
 
+    /* Implantation d'un système de sous-menu (fonctionnel mais non utilisé) */
 nav li:hover .submenu {
     display: inline-block;
     position: absolute;
@@ -91,61 +92,63 @@ nav li:hover .submenu {
     border-bottom: 1px solid #CCC;
 }
 
-.menu1:hover {
+    /* Couleur de chaque menu */
+#menu1:hover {
     border-top: 5px solid #E44d26;
     background-color: rgba(228, 77, 38, 0.15);
 }
 
-.menu2:hover {
+#menu2:hover {
     border-top: 5px solid #0070bb;
     background-color: rgba(000, 112, 192, 0.15);
 }
 
-.menu3:hover {
+#menu3:hover {
     border-top: 5px solid #f1dc4f;
     background-color: rgba(241, 211, 79, 0.15);
 }
 
-.menu4:hover {
+#menu4:hover {
     border-top: 5px solid #4fdbf1;
     background-color: rgba(79, 128, 241, 0.15);
 }
 
-.menu5:hover {
+#menu5:hover {
     border-top: 5px solid #11ac00;
     background-color: rgba(124, 255, 133, 0.15);
 }
 
-.menu_deco {
+#menu_deco {
     float: right;
 }
 
-.menu_deco:hover {
+#menu_deco:hover {
     border-top: 5px solid #bbb;
     background-color: rgba(220, 220, 220, 0.15);
 }
 
-.menu1 .submenu {
+    /* Couleur des sous-menus */
+#menu1 .submenu {
     background-color: rgb(230, 100, 40);
 }
 
-.menu2 .submenu {
+#menu2 .submenu {
     background-color: rgb(000, 160, 240);
 }
 
-.menu3 .submenu {
+#menu3 .submenu {
     background-color: rgb(250, 215, 100);
 }
 
-.menu4 .submenu {
+#menu4 .submenu {
     background-color: rgb(100, 160, 255);
 }
 
-.menu5 .submenu {
+#menu5 .submenu {
     background-color: rgba(30, 142, 30, 0.1);
 }
 
-.menu_deco .submenu {
+#menu_deco .submenu {
     background-color: rgb(140, 140, 140);
 }
 
@@ -155,7 +158,7 @@ nav li:hover .submenu {
     font-weight: bold;
 }
 
-.menu1 .submenu li:hover {
+#menu1 .submenu li:hover {
     background-color: rgb(210, 77, 60)
 }
 
@@ -163,6 +166,9 @@ nav input[type=checkbox]:checked ~ ul {
     display: block;
 }
 
+
+
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #222222;
@@ -174,6 +180,9 @@ nav input[type=checkbox]:checked ~ ul {
     }
 }
 
+
+
+/* RESPONSIVE */
 @media screen and (max-width: 950px) {
     .menu-mobile {
         display: block;
@@ -249,54 +258,10 @@ nav input[type=checkbox]:checked ~ ul {
         margin-left: 10px !important;
     }
 
-
 }
-
-/*
-nav {
-    width: 100%;
-    background-color: #424558;
-    height: 64px;
-    font-family: 'Poppins', sans-serif;
-}
-
-nav > ul {
-    margin: 0;
-    padding: 0;
-}
-
-nav > ul > li {
-    float: left;
-    position: relative;
-}
-
-nav > ul > li > a {
-    padding: 20px 30px;
-    color: white;
-}
-
-nav li {
-    list-style-type: none;
-}
-
-nav a {
-    display: inline-block;
-    text-decoration: none;
-}
-
-nav a:hover {
-    background-color: #5f647f;
-}
-
-nav img {
-    margin-left: 10px;
-    margin-top: 3px;
-    position: absolute;
-}*/
 
 
 /* Alertes Flask */
-
 #alert {
     font-family: sans-serif;
     margin: auto;
@@ -315,7 +280,6 @@ nav img {
 
 
 /* Info */
-
 #info {
     font-family: sans-serif;
     margin: 0 13% 0 13%;
@@ -323,8 +287,7 @@ nav img {
 }
 
 
-/* Bouton */
-
+/* Boutons */
 #upper_buttons {
     display: flex;
     justify-content: center;
@@ -360,8 +323,8 @@ nav img {
     background: #00BCD4;
 }
 
-    /* Trier catégories */
 
+/* Trier catégories */
 #upper_buttons select {
     padding: 9px 10px;
     border-radius: 3px;
@@ -539,9 +502,56 @@ nav img {
 }
 
 #tableau_taches #task_priority_2 {
-    background-color: #ff9900;
+    background-color: rgb(233, 233, 0);
 }
 
 #tableau_taches #task_priority_3 {
     background-color: #00ff00;
+}
+
+.archived {
+    background-color: rgb(231, 231, 231);
+    
+}
+
+
+
+
+/* Checkbox (https://moderncss.dev/pure-css-custom-checkbox-style/) */
+
+#checkbox_archive {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+#checkbox_archive::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    background-color: CanvasText;
+}
+
+#checkbox_archive:checked::before {
+    transform: scale(1);
+}
+
+#checkbox_archive_label {
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
 }

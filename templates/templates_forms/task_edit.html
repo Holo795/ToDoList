@@ -2,25 +2,32 @@
 
 <div id="task_edit_parent">
     <div id="task_edit">
+
+        <!-- Bouton annuler fermer la popup -->
         <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer">
 
         <h2>Modifier une tâche</h2>
+
+        <!-- Formulaire d'édition de tâche -->
         <form action="{{ url_for('edit_task') }}" method="POST" autocomplete="off">
 
             <input type="hidden" name="task_id">
 
+            <!-- Nom de la tâche -->
             <div class="input_box">
                 <input type="text" name="nom" id="nom" required>
                 <label>Nom</label>
                 <span></span>
             </div>
 
+            <!-- Description de la tâche -->
             <div class="input_box">
                 <input type="text" name="description" id="description" maxlength="49" required>
                 <label>Description</label>
                 <span></span>
             </div>
 
+            <!-- Type de la tâche -->
             <div id="type">
                 <label>Type</label>
                 <select name="type_tache" id="type_tache" required>
@@ -31,6 +38,7 @@
                 <span></span>
             </div>
 
+            <!-- Priorité de la tâche -->
             <div id="priority">
                 <label>Priorité</label>
                 <select name="priority_tache" id="priority_tache" required>
@@ -41,12 +49,14 @@
                 <span></span>
             </div>
 
+            <!-- Echéance de la tâche -->
             <div id="datetime">
                 <input type="datetime-local" name="echeance" id="hh" max="2100-12-31T23:59" required>
                 <label>Echéance</label>
                 <span></span>
             </div>
 
+            <!-- Bouton de validation -->
             <input type="submit" id="btn" value="Modifier">
 
         </form>

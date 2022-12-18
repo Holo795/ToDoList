@@ -6,7 +6,7 @@ Lien : https://todolist.holo795.ovh/<br>
 | FS2   | Ajouter une nouvelle tâche via un bouton dédié                                                                                                                                          | Haute    |✔️|
 | FS3   | Supprimer une tâche via un bouton dédié                                                                                                                                                 | Haute    |✔️|
 | FS4   | Modifier une tâche via un bouton dédié                                                                                                                                                  | Haute    |✔️|
-| FS5   | L’IHM doit être ergonomique, professionnelle et s’adapter à tous les écrans                                                                                                          | Basse    |🟧|
+| FS5   | L’IHM doit être ergonomique, professionnelle et s’adapter à tous les écrans                                                                                                          | Basse    |✔️|
 | FS6   | Héberger l’application en ligne                                                                                                                                                         | Basse    |✔️|
 | FS7   | Proposer des statistiques sur les tâches : tâches en cours VS terminée, par catégorie, % terminées avant échéance                                                                       | Basse    |✔️|
 | FS2.1 | Proposer un calendrier pour saisir la date d’échéance de la tâche                                                                                                                       | Basse    |✔️|
@@ -17,7 +17,7 @@ Lien : https://todolist.holo795.ovh/<br>
 | FS4.1 | Mettre à jour la date de fin d’une tâche lorsque celle-ci est réellement terminée par l’utilisateur et doit alors passer de l’état “En cours” à l’état “Terminée”                 | Basse    |✔️|
 | FS5.1 | Afficher un message de notification quand une tâche a été : créée / modifiée / supprimée                                                                                              | Basse    |✔️|
 | FS5.2 | Utiliser des icônes pour une meilleure compréhension                                                                                                                                    | Basse    |✔️|
-| FS5.3 | Assurer la compatibilité avec les smartphones                                                                                                                                           | Basse    |🟧|
+| FS5.3 | Assurer la compatibilité avec les smartphones                                                                                                                                           | Basse    |✔️|
 
 ✔️ : Effectué<br>
 🟧 : En cours / A vérifier<br>

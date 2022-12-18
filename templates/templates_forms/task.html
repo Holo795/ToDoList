@@ -1,9 +1,15 @@
+<!-- Boutons du haut -->
 <div id="upper_buttons">
+
+    <!-- Bouton de nouvelle tâche -->
     <input type="submit" id="bouton_nouvelle_tache" value="Nouvelle tâche" title="Ajouter une nouvelle tâche"
            onclick="document.getElementById('task_add_parent').style.display = 'block'">
+
+    <!-- Bouton des paramètres -->
     <img src="../../static/icons/settings.png" id="settings" title="Ajouter une catégorie / Paramètres"
          onclick="document.getElementById('account_form_parent').style.display = 'block'"></img>
     
+    <!-- Bouton de tri par type -->
     <select name="categories" id="type_tache" onchange="location=this.value" title="Trier en fonction du type">
         {% if user.get_filter_type() != -1 %}
             {% for type in user.get_types() %}
@@ -20,6 +26,8 @@
             {% endif %}
         {% endfor %}
     </select>
+
+    <!-- Bouton de tri par priorité -->
     <select name="priority" id="priority_tache" onchange="location=this.value" title="Trier en fonction de la catégorie">
         {% if user.get_filter_priority() != -1 %}
             {% for priority in user.get_priorities() %}
@@ -36,67 +44,157 @@
         {% endfor %}
     </select>
 
+    <!-- Checkbox pour afficher les tâches archivées -->
+    <input type="checkbox" onclick="state()" id="checkbox_archive">
+    <label for="checkbox_archive" id="checkbox_archive_label">Afficher les<br>tâches archivées</label>
 </div>
 
+
+
 <!-- Tableau tâches à effectuer-->
-
-
 <table id="tableau_taches" cellspacing="0">
+
+    <!-- Head -->
     <thead>
-    <tr>
-        <td id="tache"><p>Tâche</p>
-            
-        </td>
-        <td id="echeance">Echéance</td>
-        <td id="actions">Actions</td>
-    </tr>
+        <tr>
+            <td id="tache">Tâche</td>
+            <td id="echeance">Echéance</td>
+            <td id="actions">Actions</td>
+        </tr>
     </thead>
+
+    <!-- Body -->
     <tbody>
 
-    {% for task in user.get_html_tasks() %}
-        {% if not task["stats"][0] == 3 %}
-            <tr>
-                <td data-label="Tâche">
-                    <div class="priority" id="task_priority_{{ task['priority'][0] }}"
-                         title="Priorité : {{ task['priority'][1] }}"></div>
-                    {% if task["stats"][0] == 2 %}
-                        <input type="checkbox" id="state_task" name="state_task" title="État : Terminé"
-                               value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}"
-                               onclick="location=this.value" checked>
-                        <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
-                    {% else %}
-                        <input type="checkbox" id="state_task" name="state_task" title="État : En cours"
-                               value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True"
-                               onclick="location=this.value">
-                        {{ task["title"] }}, {{ task["description"] }}
-                    {% endif %}
-                </td>
-                <td data-label="Echéance">
-                    <div class="div_taches">
-                        {% if task["stats"][0] == 2 and task["done"] %}
-                            Terminé le {{ task["done"] }}
+        <!-- Pour chaque tâche -->
+        {% for task in user.get_html_tasks() %}
+
+            <!-- Si la tâche est archivée -->
+            {% if not task["stats"][0] == 3 %}
+                <tr class="normal">
+            {% else %}
+                <tr class="archived">
+            {% endif %}
+                    
+                    <!-- Nom, description, priorité, catégorie, état -->
+                    <td data-label="Tâche">
+
+                        <!-- Priorité -->
+                        <div class="priority" id="task_priority_{{ task['priority'][0] }}"
+                            title="Priorité : {{ task['priority'][1] }}">
+                        </div>
+
+                        
+                        <!-- Si la tâche est terminiée -->
+                        {% if task["stats"][0] == 2 %}
+
+                            <!-- Checkbox état -->
+                            <input type="checkbox" id="state_task" name="state_task" title="État : Terminé"
+                                value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}"
+                                onclick="location=this.value" checked>
+
+                            <!-- Nom, description -->
+                            <s>{{ task["title"] }}</s>, <s>{{ task["description"] }}</s>
+
+
                         {% else %}
-                            {{ task["time_left"] }}<br><br>
-                            <txt>{{ task["date"] }}</txt>
+
+                            <!-- Si la tâche est archivée -->
+                            {% if not task["stats"][0] == 3 %}
+
+                            <!-- Checkbox état -->
+                            <input type="checkbox" id="state_task" name="state_task" title="État : En cours"
+                                value="{{ url_for('validate_task') }}?task_id={{ task['id'] }}&validate=True"
+                                onclick="location=this.value">
+                            {% endif %}
+
+                            <!-- Nom, description -->
+                            <!-- Affichage d'un titre si la tâche est archivée -->
+                            {% if task["stats"][0] == 3 %}Tâche archivée : {% endif %} {{ task["title"] }}, {{ task["description"] }}
+                        
                         {% endif %}
-                    </div>
-                </td>
-                <td data-label="Actions">
-                    <div id="div_actions">
-                        <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%"
-                             onclick="edit_task({{ task['id'] }})" data-label="Modifier">
-                        <a href="{{ url_for('archive_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;"
-                           onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ? Cette action est définitive.')">
-                            <img src="./static/icons/archiver.png" width="30%" alt="Archiver" title="Archiver">
-                        </a>
-                        <a href="{{ url_for('delete_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;"
-                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ? Cette action est définitive.')">
-                            <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        {% endif %}
-    {% endfor %}
+                    </td>
+
+                    <!-- Echéance -->
+                    <td data-label="Echéance">
+                        <div class="div_taches">
+                            {% if task["stats"][0] == 2 and task["done"] %}
+                                Terminé le {{ task["done"] }}
+                            {% else %}
+                                {{ task["time_left"] }}<br><br>
+                                <txt>{{ task["date"] }}</txt>
+                            {% endif %}
+                        </div>
+                    </td>
+                    
+                    <!-- Actions -->
+                    <td data-label="Actions">
+                        <div id="div_actions">
+
+                            <!-- Si la tâche est archivée -->
+                            {% if not task["stats"][0] == 3 %}
+
+                                <!-- Bouton de modification -->
+                                <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%"
+                                    onclick="edit_task({{ task['id'] }})" data-label="Modifier">
+                                
+                                <!-- Bouton d'archivage -->
+                                <a href="{{ url_for('archive_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;"
+                                onclick="return confirm('Êtes-vous sûr d\'archiver cette tâche ? Cette action est définitive.')">
+                                    <img src="./static/icons/archiver.png" width="30%" alt="Archiver" title="Archiver">
+                                </a>
+                            
+                        <!-- Si la tâche n'est pas archivée -->
+                            {% else %}
+
+                                <!-- Bouton de modification -->
+                                <img src="./static/icons/crayon_couleur.png" alt="Modifier" title="Modifier" width="30%"
+                                    onclick="alert('Vous ne pouvez pas modifier une tâche archivée !')" data-label="Modifier">
+                                
+                                <!-- Bouton d'archivage -->
+                                <a href="#" style="text-decoration:none;"
+                                    onclick="alert('Cette tâche est déjà archivée !')">
+                                    <img src="./static/icons/archiver.png" width="30%" alt="Archiver" title="Archiver">
+                                </a>
+                            {% endif %}
+
+                            <!-- Bouton de suppression -->
+                            <a href="{{ url_for('delete_task') }}?task_id={{ task['id'] }}" style="text-decoration:none;"
+                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ? Cette action est définitive.')">
+                                <img src="./static/icons/corbeille_rouge.png" width="30%" alt="Supprimer" title="Supprimer">
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+
+        {% endfor %}
+
     </tbody>
 </table>
+
+
+<script>
+
+    function state() {
+        all_archived = document.getElementsByClassName("archived");
+        all_normal = document.getElementsByClassName("normal");
+        if (document.getElementById("checkbox_archive").checked) {
+            for (let i = 0; i < all_normal.length; i++) {
+                all_normal[i].style.display = "none";
+            }
+            for (let i = 0; i < all_archived.length; i++) {
+                all_archived[i].style.display = "";
+            }
+        } else {
+            for (let i = 0; i < all_normal.length; i++) {
+                all_normal[i].style.display = "";
+            }
+            for (let i = 0; i < all_archived.length; i++) {
+                all_archived[i].style.display = "none";
+            }
+        }
+    }
+    state();
+
+</script>

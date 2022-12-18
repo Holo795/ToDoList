@@ -7,7 +7,6 @@
 
 
 /* Form */
-
 #task_add img, #task_edit img {
     position: absolute;
     right: 6%;
@@ -21,7 +20,6 @@
 #task_add img:hover, #task_edit img:hover {
     transform: scale(1.1);
 }
-
 
 #task_add, #task_edit {
     top: 50%;
@@ -117,8 +115,7 @@
 }
 
 
-/* Bouton */
-
+/* Boutons */
 #task_add #btn, #task_edit #btn {
     margin-top: 80px;
     border: none;
@@ -135,7 +132,8 @@
     background: #00BCD4;
 }
 
-/* Error */
+
+/* Erreurs */
 #task_add #error, #task_edit #error {
     position: absolute;
     color: red;
@@ -144,7 +142,7 @@
 }
 
 
-/* Echeance */
+/* Echéance */
 #datetime {
     position: relative;
     margin-top: 42px;
@@ -274,6 +272,7 @@
 }
 
 
+
 /* RESPONSIVE */
 @media screen and (max-width: 780px) {
     #task_add, #task_edit {
@@ -285,6 +284,5 @@
     * {
         font-size: 15px;
     }
-
 
 }

@@ -7,79 +7,100 @@
 <!-- On ajoute notre propre contenu -->
 {% block contenu %}
 
-    {% set current_date = calendar.get_current_day(month_in_str=True) %}
     {% set shown_date = calendar.get_current_day(month_in_str=True) %}
     {% set days_in_a_week = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"] %}
 
-
     <link rel="stylesheet" href="../static/styles/calendar.css">
 
+    <!-- Informations -->
     <div id="info">
         <h1>Calendrier</h1>
         <p>Voici le calendrier de l'application <strong>ToDoList</strong>.</p>
     </div>
 
+    <!-- Parent du calendrier -->
     <div id="calendar_parent">
 
+        <!-- Wrapper -->
         <div id="wrapper">
+
+            <!-- Header -->
             <header>
                 <p id="current_date">{{ shown_date["month"] }} {{ shown_date["year"] }}</p>
-                <!--<div class="icons">
-                    <span id="prev" class="material-symbols-rounded"><</span>
-                    <span id="next" class="material-symbols-rounded">></span>
-                </div>-->
             </header>
+
+            <!-- Calendrier -->
             <div id="calendar">
 
                 <ul id="weeks">
+
+                    <!-- Pour chaque jour de la semaine -->
                     {% for days_in_week in days_in_a_week %}
                         <li>
+                            <!-- Affichage des trois premières lettres du jour -->
                             <p>{{ days_in_week[0:3] }}</p>
+
+                            <!-- Pour chaque jour du mois -->
                             {% for day in calendar.get_days_from_name(shown_date["year"], shown_date["month"], days_in_week) %}
+                                
+                                <!-- Si le jour fait parti des premiers et n'est pas dans le mois il n'est pas affiché -->
                                 {% if calendar.get_day(shown_date["year"], shown_date["month"], 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
                                     <div class="parent_day"><p class="null">ㅤ</p></div>
                                 {% endif %}
 
+                                <!-- Si le jour est le jour actuel il est afiché en violet -->
                                 {% if shown_date["day"] == day["nb_jour"] %}
                                     {% set class = "active_day" %}
                                 {% else %}
                                     {% set class = "day" %}
                                 {% endif %}
 
+                                <!-- Affichage du jour -->
                                 <div class="parent_day">
+
+                                    <!-- Jour en nombre/chiffre -->
                                     <p class="{{ class }}">{{ day["nb_jour"] }}</p>
 
+                                    <!-- Pour chaque tâche -->
                                     {% for task in user.get_html_tasks() %}
+
+                                        <!-- On récupère le jour de la tâche -->
                                         {% set task_temp_day = task["date"].split()[1] %}
                                         {% if task_temp_day[0] == "0" %}
                                             {% set task_temp_day = task_temp_day[1] %}
                                         {% endif %}
+
+                                        <!-- Si le jour de la tâche correspond à celui du mois la tâche est affichée -->
                                         {% if task_temp_day | int == day["nb_jour"] and not task["done"] and task["date"].split()[2] == calendar.int_to_month(day["month"] + 1).lower() %}
                                             <div class="task">{{ task["title"] }}, {{ task["description"] }}</div>
                                             <script>document.getElementsByTagName("p")[document.getElementsByTagName("p").length - 1].className = "day_task";</script>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
-                                <script>// On regroupe les tâches du même jour dans un seul div pour pouvoir les afficher en un seul clic sans créer d'erreurs d'affichage
-                                var parent = document.getElementsByClassName("parent_day")[document.getElementsByClassName("parent_day").length - 1];
-                                var all_tasks = parent.getElementsByClassName("task");
-                                var msg_task = ""
-                                if (all_tasks.length > 1) {
-                                    var l = 1
-                                    for (let i = 0; i < parent.getElementsByClassName("task").length; i = i) {
-                                        console.log(parent.getElementsByClassName("task")[i])
-                                        msg_task += `Tâche ${l} : ${parent.getElementsByClassName("task")[i].innerHTML}<br>`;
-                                        parent.getElementsByClassName("task")[i].remove();
-                                        l += 1
+
+                                <script>
+                                // On regroupe les tâches du même jour dans un seul div pour pouvoir les afficher en un seul clic sans créer d'erreurs d'affichage
+                                    var parent = document.getElementsByClassName("parent_day")[document.getElementsByClassName("parent_day").length - 1];
+                                    var all_tasks = parent.getElementsByClassName("task");
+                                    var msg_task = ""
+                                    if (all_tasks.length > 1) {
+                                        var l = 1
+                                        for (let i = 0; i < parent.getElementsByClassName("task").length; i = i) {
+                                            console.log(parent.getElementsByClassName("task")[i])
+                                            msg_task += `Tâche ${l} : ${parent.getElementsByClassName("task")[i].innerHTML}<br>`;
+                                            parent.getElementsByClassName("task")[i].remove();
+                                            l += 1
+                                        }
+                                        parent.innerHTML += "<div class='task'>" + msg_task + "</div>";
                                     }
-                                    parent.innerHTML += "<div class='task'>" + msg_task + "</div>";
-                                }
                                 </script>
                             {% endfor %}
                         </li>
                     {% endfor %}
                 </ul>
+
             </div>
+
         </div>
     </div>
 
