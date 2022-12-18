@@ -151,7 +151,6 @@ header #current_date {
 }
 
 
-
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
 
@@ -166,7 +165,7 @@ header #current_date {
     #weeks li .parent_day .day:hover {
         clip-path: circle(12.3px at center);
         background-color: #c1c1c1;
-    
+
     }
 }
 

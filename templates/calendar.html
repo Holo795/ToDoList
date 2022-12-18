@@ -42,7 +42,7 @@
 
                             <!-- Pour chaque jour du mois -->
                             {% for day in calendar.get_days_from_name(shown_date["year"], shown_date["month"], days_in_week) %}
-                                
+
                                 <!-- Si le jour fait parti des premiers et n'est pas dans le mois il n'est pas affiché -->
                                 {% if calendar.get_day(shown_date["year"], shown_date["month"], 1)["nb_jour_semaine"] <= day["nb_jour"] <= 7 %}
                                     <div class="parent_day"><p class="null">ㅤ</p></div>
@@ -79,7 +79,7 @@
                                 </div>
 
                                 <script>
-                                // On regroupe les tâches du même jour dans un seul div pour pouvoir les afficher en un seul clic sans créer d'erreurs d'affichage
+                                    // On regroupe les tâches du même jour dans un seul div pour pouvoir les afficher en un seul clic sans créer d'erreurs d'affichage
                                     var parent = document.getElementsByClassName("parent_day")[document.getElementsByClassName("parent_day").length - 1];
                                     var all_tasks = parent.getElementsByClassName("task");
                                     var msg_task = ""

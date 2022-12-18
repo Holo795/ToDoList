@@ -1,9 +1,9 @@
-<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/account.css" />
+<link rel="stylesheet" type="text/css" href="../../static/styles/templates_forms_styles/account.css"/>
 <div id="account_form_parent">
     <div id="account_form">
         <!-- Bouton annuler fermer la popup -->
         <img src="../../static/icons/close_blanc.png" id="close_task" alt="Fermer" title="Fermer"
-            onclick="clear_error()">
+             onclick="clear_error()">
 
         <h2>Informations du compte</h2>
 
@@ -30,7 +30,7 @@
                     {% for type in user.get_types() %}
                         <li>{{ type[1] }}
                             <img src="../../static/icons/corbeille_rouge.png" class="delete_categorie"
-                                title="Supprimer catégorie" alt="Supprimer catégorie" name="{{ type[0] }}">
+                                 title="Supprimer catégorie" alt="Supprimer catégorie" name="{{ type[0] }}">
                         </li>
                     {% endfor %}
                 </ul>
@@ -40,15 +40,15 @@
             <input type="hidden" name="used_type" value="{{ user.get_used_types() }}">
 
             <!-- Bouton nouvelle catégorie -->
-            <input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()" />
-            
+            <input type="button" value="Nouvelle catégorie" onclick="nouvelle_categorie()"/>
+
             <!-- Message d'erreur -->
             <p id="error"></p>
 
             <!-- Bouton enregistrer -->
             <div id="boutons">
                 <input type="submit" value="Enregistrer" formaction="{{ url_for('update_user') }}"
-                    onclick="checkpass()">
+                       onclick="checkpass()">
             </div>
 
             <script>

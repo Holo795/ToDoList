@@ -71,7 +71,7 @@ nav > ul > li:hover a {
     padding: 15px 30px 20px 30px;
 }
 
-    /* Implantation d'un système de sous-menu (fonctionnel mais non utilisé) */
+/* Implantation d'un système de sous-menu (fonctionnel mais non utilisé) */
 nav li:hover .submenu {
     display: inline-block;
     position: absolute;
@@ -92,7 +92,7 @@ nav li:hover .submenu {
     border-bottom: 1px solid #CCC;
 }
 
-    /* Couleur de chaque menu */
+/* Couleur de chaque menu */
 #menu1:hover {
     border-top: 5px solid #E44d26;
     background-color: rgba(228, 77, 38, 0.15);
@@ -127,7 +127,7 @@ nav li:hover .submenu {
     background-color: rgba(220, 220, 220, 0.15);
 }
 
-    /* Couleur des sous-menus */
+/* Couleur des sous-menus */
 #menu1 .submenu {
     background-color: rgb(230, 100, 40);
 }
@@ -167,7 +167,6 @@ nav input[type=checkbox]:checked ~ ul {
 }
 
 
-
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
     body {
@@ -179,7 +178,6 @@ nav input[type=checkbox]:checked ~ ul {
         filter: grayscale(20%);
     }
 }
-
 
 
 /* RESPONSIVE */
@@ -297,7 +295,7 @@ nav input[type=checkbox]:checked ~ ul {
 
 #upper_buttons > * {
     margin: 10px;
-} 
+}
 
 #upper_buttons #bouton_nouvelle_tache, #upper_buttons #settings {
     display: block;
@@ -343,17 +341,6 @@ nav input[type=checkbox]:checked ~ ul {
 #upper_buttons select[id=priority_tache] {
     width: 180px;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* Tableau Tâches */
@@ -511,10 +498,8 @@ nav input[type=checkbox]:checked ~ ul {
 
 .archived {
     background-color: rgb(231, 231, 231);
-    
+
 }
-
-
 
 
 /* Checkbox (https://moderncss.dev/pure-css-custom-checkbox-style/) */
