@@ -26,4 +26,15 @@ Lien : https://todolist.holo795.ovh/<br>
 Gestion du front-end : <a href="https://github.com/Ashokaas">Ashokas</a><br>
 Gestion de la BDD et du back-end: <a href="https://github.com/Holo795">Holo795</a><br>
 Gestion des routes : <a href="https://github.com/maxime0109">Maxime0109</a><br>
+<br><br>
+Connexion : <br>
+<br><img src="https://user-images.githubusercontent.com/99681959/213922514-22d32b67-c18f-40a3-8797-f56556b42103.png" height="55%" width="55%"><br><br>
+Ajouter une tâche :<br>
+<br><img src="https://user-images.githubusercontent.com/99681959/213922858-ff9cc12a-94e2-46a7-9461-292e936fc611.png" height="55%" width="55%"><br><br>
+Stats :<br>
+<br><img src="https://user-images.githubusercontent.com/99681959/213922887-c174b91e-fbb6-4b36-af07-f7aff3ba3138.png" height="55%" width="55%"><br><br>
+Calendrier :<br>
+<br><img src="https://user-images.githubusercontent.com/99681959/213923015-9f52a654-c332-43dd-a510-0c22116ee627.png" height="55%" width="55%"><br><br>
+Tâches :<br>
+<br><img src="https://user-images.githubusercontent.com/99681959/213923170-ac3c419c-294f-4b6b-9075-743f70019155.png" height="55%" width="55%">
 
