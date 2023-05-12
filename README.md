@@ -23,9 +23,7 @@ Lien : https://todolist.holo795.ovh/<br>
 🟧 : En cours / A vérifier<br>
 ❌ : Non effectué<br>
 
-Gestion du front-end : <a href="https://github.com/Ashokaas">Ashokas</a><br>
-Gestion de la BDD et du back-end: <a href="https://github.com/Holo795">Holo795</a><br>
-Gestion des routes : <a href="https://github.com/maxime0109">Maxime0109</a><br>
+<br>
 <br><br>
 Connexion : <br>
 <br><img src="https://user-images.githubusercontent.com/99681959/213922514-22d32b67-c18f-40a3-8797-f56556b42103.png" height="55%" width="55%"><br><br>
